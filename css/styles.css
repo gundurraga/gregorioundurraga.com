@@ -1325,6 +1325,11 @@ a:active i {
 
   .info {
     margin: auto 120px 7px 0;
+    padding: 15px 20px 30px 15px;
+  }
+
+  .info-text {
+    width: 12rem;
   }
 
   footer {
