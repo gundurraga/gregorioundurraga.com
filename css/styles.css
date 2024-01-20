@@ -616,7 +616,7 @@ nav.scrollUp {
 }
 
 #menu .languages li {
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 #menu .languages h4 {
