@@ -1,7 +1,7 @@
 let en = {
   languageSelector: "Language: EN",
   themeSelector: "Night Mode",
-  cv: "cv",
+  cv: "CV",
   sayHello: "Say hello to",
   download: "Download",
   available: "Available",
@@ -102,7 +102,7 @@ let en = {
 let es = {
   languageSelector: "Idioma: ES",
   themeSelector: "Modo Noche",
-  cv: "cv",
+  cv: "CV",
   sayHello: "Saluda a",
   download: "Descargar",
   available: "Disponible",
@@ -203,7 +203,7 @@ let es = {
 let fr = {
   languageSelector: "Langue: FR",
   themeSelector: "Mode Nuit",
-  cv: "cv",
+  cv: "CV",
   sayHello: "Dire salut à",
   download: "Télécharger",
   available: "Disponible",
@@ -303,7 +303,7 @@ let fr = {
 let pt = {
   languageSelector: "Idioma: PT",
   themeSelector: "Modo Noite",
-  cv: "cv",
+  cv: "CV",
   sayHello: "Diga oi para",
   download: "Baixar",
   available: "Disponível",
@@ -404,7 +404,7 @@ let pt = {
 let it = {
   languageSelector: "Lingua: IT",
   themeSelector: "Notte",
-  cv: "cv",
+  cv: "CV",
   sayHello: "Saluta",
   download: "Scarica",
   available: "Disponibile",
