@@ -1,6 +1,7 @@
 let en = {
   languageSelector: "Language: EN",
   themeSelector: "Night Mode",
+  cv: "cv",
   sayHello: "Say hello to",
   download: "Download",
   available: "Available",
@@ -101,6 +102,7 @@ let en = {
 let es = {
   languageSelector: "Idioma: ES",
   themeSelector: "Modo Noche",
+  cv: "cv",
   sayHello: "Saluda a",
   download: "Descargar",
   available: "Disponible",
@@ -201,6 +203,7 @@ let es = {
 let fr = {
   languageSelector: "Langue: FR",
   themeSelector: "Mode Nuit",
+  cv: "cv",
   sayHello: "Dire salut à",
   download: "Télécharger",
   available: "Disponible",
@@ -300,6 +303,7 @@ let fr = {
 let pt = {
   languageSelector: "Idioma: PT",
   themeSelector: "Modo Noite",
+  cv: "cv",
   sayHello: "Diga oi para",
   download: "Baixar",
   available: "Disponível",
@@ -400,6 +404,7 @@ let pt = {
 let it = {
   languageSelector: "Lingua: IT",
   themeSelector: "Notte",
+  cv: "cv",
   sayHello: "Saluta",
   download: "Scarica",
   available: "Disponibile",
@@ -500,6 +505,7 @@ let it = {
 let de = {
   languageSelector: "Sprache: DE",
   themeSelector: "Nachtmodus",
+  cv: "Lebenslauf",
   sayHello: "Sag Hallo zu",
   download: "Herunterladen",
   available: "Verfügbar",
@@ -600,6 +606,7 @@ let de = {
 let ja = {
   languageSelector: "言語：JA",
   themeSelector: "夜間モード",
+  cv: "履歴書",
   sayHello: "こんにちは、",
   download: "ダウンロード",
   available: "利用可能",
@@ -709,6 +716,7 @@ if (localLanguage) {
 function translate(lang) {
   document.getElementById("languageSelector").innerHTML = lang.languageSelector;
   document.getElementById("themeSelector").innerHTML = lang.themeSelector;
+  document.getElementById("cv").innerHTML = lang.cv;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
   document.getElementById("wapping-on-thames-(whistler)-2023").innerHTML =

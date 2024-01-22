@@ -1386,10 +1386,10 @@ function postUserTemplate(post) {
   <div class="boxDatePainting">
   <h5 class="date"></h5>
   <div class="frame ${post.onSale ? "on-sale" : ""}">
-    <a href="images/${post.UserID}/700p/${post.ID}.jpg"
+    <a href="images/${post.UserID}/900p/${post.ID}.jpg"
       data-srcset="images/${post.UserID}/500p/${post.ID}.jpg 500w,
-                   images/${post.UserID}/600p/${post.ID}.jpg 600w,
-                   images/${post.UserID}/700p/${post.ID}.jpg 700w" 
+                   images/${post.UserID}/700p/${post.ID}.jpg 700w,
+                   images/${post.UserID}/900p/${post.ID}.jpg 900w" 
       data-sizes="90vw" class="progressive replace"
       onclick="showZoomImage('${post.ID}')">
       <img src="images/${post.UserID}/preview/${post.ID}.jpg" class="preview"

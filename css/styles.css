@@ -1280,7 +1280,7 @@ a:active i {
 }
 
 /*Media queries (desktop) */
-@media screen and (min-width: 870px) {
+@media screen and (min-width: 1000px) {
   * {
     --frame-widthIn: 7px;
     --frame-width: 10px;
@@ -1315,16 +1315,16 @@ a:active i {
 
   .progressive img {
     max-height: 85vh;
-    max-width: 85vw;
+    max-width: calc(85vw - 200px);
   }
 
   .progressive img.preview {
     max-height: 85vh;
-    max-width: 85vw;
+    max-width: calc(85vw - 200px);
   }
 
   .info {
-    margin: auto 120px 7px 0;
+    margin: auto auto 7px;
     padding: 15px 20px 30px 15px;
   }
 
