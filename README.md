@@ -20,6 +20,15 @@ Visitors can easily switch between these languages, ensuring a seamless browsing
 
 At the heart of gregorioundurraga.com is the artwork of Gregorio Undurraga. The website is a comprehensive digital gallery, featuring all the oil paintings from Undurraga's career. Each piece is presented with high-resolution images and detailed descriptions, offering visitors an in-depth exploration of his artistic journey and creative evolution.
 
+![The Temptations of Saint Anthony (Bravo), 2023](<images/gundurraga/download/the-temptations-of-saint-anthony-(bravo)-2023.jpg>)
+_The Temptations of Saint Anthony (Bravo), 2023_
+
+![The Hunter (Lorca), 2023](<images/gundurraga/download/the-hunter-(lorca)-2023.jpg>)
+_The Hunter (Lorca), 2023_
+
+![The Virgin and Child with Saint Anne (Da Vinci), 2023](<images/gundurraga/download/the-virgin-and-child-with-saint-anne-(davinci)-2023.jpg>)
+_The Virgin and Child with Saint Anne (Da Vinci), 2023_
+
 ### Downloadable Artworks
 
 In a unique offering, gregorioundurraga.com allows users to download high-resolution images of Gregorio Undurraga's artworks. This feature is a testament to our commitment to making art more accessible and personal. Art lovers can now appreciate and immerse themselves in Undurraga's work in their own personal space, fostering a deeper connection with the art.
