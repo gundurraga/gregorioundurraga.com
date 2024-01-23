@@ -1694,3 +1694,11 @@ function scrollSmoothTo(elementId) {
     behavior: "smooth",
   });
 }
+
+// This block of code checks if the current URL contains the parameter 'fbclid'.
+// The 'fbclid' parameter is typically added by Facebook to URLs when they are shared on its platform.
+
+if (window.location.href.indexOf("fbclid") > -1) {
+  const cleanUri = window.location.href.split("?")[0];
+  window.history.replaceState({}, document.title, cleanUri);
+}
