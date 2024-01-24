@@ -1311,6 +1311,7 @@ a:active i {
 
   .boxDatePainting {
     padding: 0 calc(2 * var(--frame-width));
+    margin: 0 20px 0 auto;
   }
 
   .progressive img {
@@ -1324,7 +1325,7 @@ a:active i {
   }
 
   .info {
-    margin: auto auto 7px;
+    margin: auto auto 7px 20px;
     padding: 15px 20px 30px 15px;
   }
 
