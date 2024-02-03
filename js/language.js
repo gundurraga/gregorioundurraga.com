@@ -19,6 +19,8 @@ let en = {
   mixed: "Mixed Media",
 
   //artworks
+  the_cardsharps_caravaggio: "The Cardsharps (Caravaggio)",
+  the_straw_manikin_goya: "The Straw Manikin (Goya)",
   wapping_on_thames_whistler: "Wapping on Thames (Whistler)",
   house_of_cards_serebriakova: "House of Cards (Serebriakova)",
   the_giraffes: "The Giraffes",
@@ -108,7 +110,7 @@ let es = {
   available: "Disponible",
 
   //locations
-  arles: "Arles, Francia",
+  arles: "Arlés, Francia",
   argentonnay: "Argentonnay, Francia",
   montezuma: "Montezuma, Costa Rica",
   santiago: "Santiago, Chile",
@@ -119,6 +121,8 @@ let es = {
   oilpaper: "Óleo sobre papel",
   mixed: "Técnica mixta",
 
+  the_cardsharps_caravaggio: "Los Jugadores de Cartas (Caravaggio)",
+  the_straw_manikin_goya: "El Maniquí de Paja (Goya)",
   wapping_on_thames_whistler: "Wapping en el Támesis (Whistler)",
   house_of_cards_serebriakova: "Castillo de Naipes (Serebriakova)",
   the_giraffes: "Las Jirafas",
@@ -220,6 +224,8 @@ let fr = {
   oilpaper: "Huile sur papier",
   mixed: "Technique mixte",
 
+  the_cardsharps_caravaggio: "Les Tricheurs (Caravage)",
+  the_straw_manikin_goya: "Le Mannequin de Paille (Goya)",
   wapping_on_thames_whistler: "Wapping sur la Tamise (Whistler)",
   house_of_cards_serebriakova: "Château de Cartes (Serebriakova)",
   the_giraffes: "Les Girafes",
@@ -320,6 +326,8 @@ let pt = {
   oilpaper: "Óleo sobre papel",
   mixed: "Mídia mista",
 
+  the_cardsharps_caravaggio: "Os Batoteiros (Caravaggio)",
+  the_straw_manikin_goya: "O Manequim de Palha (Goya)",
   wapping_on_thames_whistler: "Wapping no Tâmisa (Whistler)",
   house_of_cards_serebriakova: "Casa de Cartas (Serebriakova)",
   the_giraffes: "As Girafas",
@@ -422,6 +430,8 @@ let it = {
   mixed: "Tecnica mista",
 
   // Opere d'arte
+  the_cardsharps_caravaggio: "Bari (Caravaggio)",
+  the_straw_manikin_goya: "Il Manichino di Paglia (Goya)",
   wapping_on_thames_whistler: "Wapping sul Tamigi (Whistler)",
   house_of_cards_serebriakova: "Castello di Carte (Serebriakova)",
   the_giraffes: "Le Giraffe",
@@ -523,6 +533,8 @@ let de = {
   mixed: "Mischtechnik",
 
   // Kunstwerke
+  the_cardsharps_caravaggio: "Die Falschspieler (Caravaggio)",
+  the_straw_manikin_goya: "Die Strohpuppe (Goya)",
   wapping_on_thames_whistler: "Wapping an der Themse (Whistler)",
   house_of_cards_serebriakova: "Kartenhaus (Serebriakova)",
   the_giraffes: "Die Giraffen",
@@ -624,6 +636,8 @@ let ja = {
   mixed: "ミクストメディア",
 
   // アートワーク
+  the_cardsharps_caravaggio: "カードを切る者たち (カラヴァッジョ)",
+  the_straw_manikin_goya: "藁のマネキン (ゴヤ)",
   wapping_on_thames_whistler: "テムズ川のワッピング (ウィスラー)",
   house_of_cards_serebriakova: "カードの家 (セレブリャコワ)",
   the_giraffes: "キリン",
