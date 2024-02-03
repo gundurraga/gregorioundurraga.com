@@ -733,6 +733,10 @@ function translate(lang) {
   document.getElementById("cv").innerHTML = lang.cv;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
+  document.getElementById("the-cardsharps-(caravaggio)-2024").innerHTML =
+    lang.the_cardsharps_caravaggio;
+  document.getElementById("the-straw-manikin-(goya)-2024").innerHTML =
+    lang.the_straw_manikin_goya;
   document.getElementById("wapping-on-thames-(whistler)-2023").innerHTML =
     lang.wapping_on_thames_whistler;
   document.getElementById("house-of-cards-(serebriakova)-2023").innerHTML =
@@ -746,7 +750,6 @@ function translate(lang) {
   document.getElementById(
     "the-temptations-of-saint-anthony-(bravo)-2023"
   ).innerHTML = lang.the_temptations_of_saint_anthony_bravo;
-
   document.getElementById("the-flock-2023").innerHTML = lang.the_flock;
   document.getElementById("the-flamingos-2023").innerHTML = lang.the_flamingos;
   document.getElementById("luma-park-2023").innerHTML = lang.luma_park;
