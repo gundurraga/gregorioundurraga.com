@@ -282,7 +282,7 @@ textarea {
   --light-background-color: rgb(240, 240, 240);
   --light-postBackground-color: rgb(235, 235, 235);
   --lightMobile-postBorder-color: rgb(209, 209, 209);
-  --lightDesktop-postBorder-color: rgb(221, 221, 221);
+  --lightDesktop-postBorder-color: rgb(228, 228, 228);
   --light-header-color: rgb(245, 245, 245, 0.65);
   --light-headerShadow-color: rgb(200, 200, 200);
   --light-lineHeadFooter-color: var(--lightMobile-postBorder-color);
@@ -292,12 +292,12 @@ textarea {
   --light-menuBorder-color: var(--lightDesktop-postBorder-color);
   --light-btnMenu-color: rgb(200, 200, 200);
   --light-font-firstColor: rgb(70, 70, 70);
-  --light-font-secondColor: rgb(60, 60, 60);
+  --light-font-secondColor: rgb(80, 80, 80);
   --light-font-thirdColor: rgb(60, 60, 60);
   --light-frame-secondColor: rgb(199, 199, 199);
   --light-frame-firstColor: rgb(220, 220, 220);
   --light-frameShadow-color: rgb(180, 180, 180);
-  --light-infoBackground-color: rgb(230, 230, 230);
+  --light-infoBackground-color: rgb(238, 238, 238);
   --light-infoBorder-color: rgb(220, 220, 220);
   --night-logo-firstColor: rgb(226, 219, 193);
   --night-logo-secondColor: var(--light-logo-firstColor);
@@ -315,7 +315,7 @@ textarea {
   --night-menuBorder-color: var(--nightDesktop-postBorder-color);
   --night-btnMenu-color: var(--light-btnMenu-color);
   --night-font-firstColor: rgb(222, 220, 220);
-  --night-font-secondColor: rgb(235, 235, 235);
+  --night-font-secondColor: rgb(210, 210, 210);
   --night-font-thirdColor: rgb(236, 228, 220);
   --night-frame-secondColor: rgb(80 60 21);
   --night-frame-firstColor: rgb(85, 78, 65);
@@ -1012,7 +1012,7 @@ nav.scrollUp {
 
 .info h4 {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 300;
   line-height: 1.2rem;
   width: max-content;
@@ -1021,7 +1021,6 @@ nav.scrollUp {
 
 .info h5 {
   margin: 0;
-  margin-top: 2px;
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 1.2rem;
