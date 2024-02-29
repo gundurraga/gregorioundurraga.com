@@ -314,14 +314,14 @@ textarea {
   --night-menuBackground-color: rgb(25, 24, 37, 0.97);
   --night-menuBorder-color: var(--nightDesktop-postBorder-color);
   --night-btnMenu-color: var(--light-btnMenu-color);
-  --night-font-firstColor: rgb(222, 220, 220);
+  --night-font-firstColor: rgb(212, 210, 210);
   --night-font-secondColor: rgb(210, 210, 210);
   --night-font-thirdColor: rgb(236, 228, 220);
   --night-frame-secondColor: rgb(28, 28, 48);
   --night-frame-firstColor: rgb(25, 25, 48);
   --night-frameShadow-color: var(--night-header-color);
-  --night-infoBackground-color: rgb(55, 54, 67);
-  --night-infoBorder-color: rgb(71, 71, 73);
+  --night-infoBackground-color: rgb(35, 34, 47);
+  --night-infoBorder-color: rgb(51, 51, 73);
   --light-frame-secondColor-onSale: rgb(195 161 13);
   --light-frame-firstColor-onSale: rgb(224, 202, 100);
   --night-frame-secondColor-onSale: rgb(195 161 13);
