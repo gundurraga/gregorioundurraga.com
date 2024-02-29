@@ -1675,11 +1675,11 @@ document.querySelector("footer").innerHTML = `
 </div>
 `;
 
-//Hides nav bar
 window.onload = function () {
   var c,
     currentScrollTop = 0,
     navbar = document.querySelector("#header");
+
   window.onscroll = function () {
     var a = window.pageYOffset;
     var b = 56;
@@ -1696,15 +1696,35 @@ window.onload = function () {
     }
     c = currentScrollTop;
   };
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (event) {
+    var isClickInsideMenu = document
+      .querySelector("#menu")
+      .contains(event.target);
+    var isClickInsideHamburger = document
+      .querySelector(".menuHamburguer")
+      .contains(event.target);
+
+    if (!isClickInsideMenu && !isClickInsideHamburger) {
+      document.querySelector("#menu").classList.remove("in-view");
+      document.querySelector(".menuHamburguer").classList.remove("in-view");
+      document.querySelector(".languages").classList.remove("lang-in-view");
+    }
+  });
+
+  //Menu
+  function showMenu(x) {
+    x.classList.toggle("in-view");
+    document.querySelector("#menu").classList.toggle("in-view");
+    document.querySelector(".languages").classList.remove("lang-in-view");
+  }
+
+  // Expose showMenu to global scope if needed outside
+  window.showMenu = showMenu;
 };
 
 document.querySelector("#header").classList.remove("scrollUp");
-//Menu
-function showMenu(x) {
-  x.classList.toggle("in-view");
-  document.querySelector("#menu").classList.toggle("in-view");
-  document.querySelector(".languages").classList.remove("lang-in-view");
-}
 
 //Night theme
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
