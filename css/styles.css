@@ -317,8 +317,8 @@ textarea {
   --night-font-firstColor: rgb(222, 220, 220);
   --night-font-secondColor: rgb(210, 210, 210);
   --night-font-thirdColor: rgb(236, 228, 220);
-  --night-frame-secondColor: rgb(80 60 21);
-  --night-frame-firstColor: rgb(85, 78, 65);
+  --night-frame-secondColor: rgb(28, 28, 48);
+  --night-frame-firstColor: rgb(25, 25, 48);
   --night-frameShadow-color: var(--night-header-color);
   --night-infoBackground-color: rgb(55, 54, 67);
   --night-infoBorder-color: rgb(71, 71, 73);

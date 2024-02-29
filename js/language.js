@@ -19,6 +19,9 @@ let en = {
   mixed: "Mixed Media",
 
   //artworks
+  the_victory_of_samothrace: "The Victory of Samothrace",
+  air: "Air",
+  venus_de_milo: "Venus de Milo",
   the_cardsharps_caravaggio: "The Cardsharps (Caravaggio)",
   the_straw_manikin_goya: "The Straw Manikin (Goya)",
   wapping_on_thames_whistler: "Wapping on Thames (Whistler)",
@@ -121,6 +124,9 @@ let es = {
   oilpaper: "Óleo sobre papel",
   mixed: "Técnica mixta",
 
+  the_victory_of_samothrace: "La Victoria de Samotracia",
+  air: "Aire",
+  venus_de_milo: "Venus de Milo",
   the_cardsharps_caravaggio: "Los Jugadores de Cartas (Caravaggio)",
   the_straw_manikin_goya: "El Maniquí de Paja (Goya)",
   wapping_on_thames_whistler: "Wapping en el Támesis (Whistler)",
@@ -224,6 +230,9 @@ let fr = {
   oilpaper: "Huile sur papier",
   mixed: "Technique mixte",
 
+  the_victory_of_samothrace: "La Victoire de Samothrace",
+  air: "Air",
+  venus_de_milo: "Vénus de Milo",
   the_cardsharps_caravaggio: "Les Tricheurs (Caravage)",
   the_straw_manikin_goya: "Le Mannequin de Paille (Goya)",
   wapping_on_thames_whistler: "Wapping sur la Tamise (Whistler)",
@@ -326,6 +335,9 @@ let pt = {
   oilpaper: "Óleo sobre papel",
   mixed: "Mídia mista",
 
+  the_victory_of_samothrace: "A Vitória de Samotrácia",
+  air: "Ar",
+  venus_de_milo: "Vênus de Milo",
   the_cardsharps_caravaggio: "Os Batoteiros (Caravaggio)",
   the_straw_manikin_goya: "O Manequim de Palha (Goya)",
   wapping_on_thames_whistler: "Wapping no Tâmisa (Whistler)",
@@ -430,6 +442,9 @@ let it = {
   mixed: "Tecnica mista",
 
   // Opere d'arte
+  the_victory_of_samothrace: "La Vittoria di Samotracia",
+  air: "Aria",
+  venus_de_milo: "Venere di Milo",
   the_cardsharps_caravaggio: "Bari (Caravaggio)",
   the_straw_manikin_goya: "Il Manichino di Paglia (Goya)",
   wapping_on_thames_whistler: "Wapping sul Tamigi (Whistler)",
@@ -533,6 +548,9 @@ let de = {
   mixed: "Mischtechnik",
 
   // Kunstwerke
+  the_victory_of_samothrace: "Der Sieg von Samothrake",
+  air: "Luft",
+  venus_de_milo: "Venus von Milo",
   the_cardsharps_caravaggio: "Die Falschspieler (Caravaggio)",
   the_straw_manikin_goya: "Die Strohpuppe (Goya)",
   wapping_on_thames_whistler: "Wapping an der Themse (Whistler)",
@@ -636,6 +654,9 @@ let ja = {
   mixed: "ミクストメディア",
 
   // アートワーク
+  the_victory_of_samothrace: "サモトラケの勝利",
+  air: "空気",
+  venus_de_milo: "ミロのヴィーナス",
   the_cardsharps_caravaggio: "カードを切る者たち (カラヴァッジョ)",
   the_straw_manikin_goya: "藁のマネキン (ゴヤ)",
   wapping_on_thames_whistler: "テムズ川のワッピング (ウィスラー)",
