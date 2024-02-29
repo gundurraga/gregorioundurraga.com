@@ -12,7 +12,8 @@ package.json
 
 images/users/gundurraga/compress/
 
-image-data.js
-resizeImages.js
-compressImages.js
-compressImages2.js
+js/utils
+
+allPaintings.html
+
+project-root/

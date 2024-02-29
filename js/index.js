@@ -1439,7 +1439,6 @@ function postUserTemplate(post) {
           <strong><span id="${post.ID}" class="uppercase">${
     post.ArtworkTitle
   }</span>, ${post.ArtworkYear}</strong>
-  <br />
         </h4>
         <h5>
 <span class="${post.ArtworkMediaID}">${post.ArtworkMedia}</span>
@@ -1447,24 +1446,8 @@ function postUserTemplate(post) {
  ${post.DimensionCm}
         <br />
        <span class="${post.Location}">${post.ArtworkLocation}</span>
-        <br />   
-        <div class="downloadIcon" id="${
-          post.ID
-        }-click" onclick="downloadClicked(this.id)">
-<span class="download">Download</span>
-        </div>
-        <br />   
+        <br />    
           </h5>
-      </div>
-      <div class="iconClicked">
-        <div class="downloadClicked" >
-          <a href="images/${post.UserID}/download/${post.ID}.jpg"
-          download="${post.ArtworkTitle}, ${post.ArtworkYear} - ${
-    post.Artist
-  }"><h5><strong><span class="download">Descargar</span> (${
-    post.ImageSize
-  } MB)</strong><br>${post.ImageDimension} px</h5></a>
-        </div>
       </div>
   </article>
   `;
@@ -1535,6 +1518,7 @@ document.querySelector("#header").innerHTML = `
 </div>
 
 <ul id="menu">
+
   <li>
     <div class="switchTheme">
       <h4 id="themeSelector">Night Mode</h4>
@@ -1571,7 +1555,22 @@ document.querySelector("#header").innerHTML = `
       <div class="menuLink" id="ja"><h4>日本語</h4></div>
     </li>
   </div>
-
+  ${
+    /*   <li>
+    <a href="#" onclick="loadPage('about')">
+        <div class="menuLink">
+          <h4 id='about'>About</h4>
+        </div>
+      </a>
+  </li> */ ""
+    /*   <li>
+    <a href="#" onclick="loadPage('3D-gallery')">
+        <div class="menuLink">
+          <h4 id='3d-gallery'>3D Gallery</h4>
+        </div>
+      </a>
+  </li> */
+  }
   <li>
     <a href="/cv.pdf" download="Undurraga_Gregorio_Resume">
       <div class="menuLink">
@@ -1596,7 +1595,7 @@ document.querySelector("#header").innerHTML = `
 </ul>
 `;
 
-document.querySelector(".container").innerHTML = `
+document.querySelector("#container").innerHTML = `
 <div class="slider"><div class="sliderIn"></div></div>
 ${gundurraga.map(postUserTemplate).join("")}
 `;
@@ -1738,3 +1737,20 @@ if (window.location.href.indexOf("fbclid") > -1) {
   const cleanUri = window.location.href.split("?")[0];
   window.history.replaceState({}, document.title, cleanUri);
 }
+
+/* function loadPage(page) {
+  const contentDiv = document.getElementById("container");
+  let content = "";
+
+  if (page === "home") {
+    content = "This is the home page content";
+    history.pushState({ page: "home" }, "Home", "#home");
+  } else if (page === "about") {
+    content =
+      "This is the about page content. Here you can add more details about Gregorio Undurraga.";
+    history.pushState({ page: "about" }, "About", "#about");
+  }
+
+  contentDiv.innerHTML = content;
+  document.title = page.charAt(0).toUpperCase() + page.slice(1); // Update the document title based on the page
+} */

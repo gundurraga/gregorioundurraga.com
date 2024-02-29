@@ -709,7 +709,7 @@ nav.scrollUp {
   color: var(--night-font-secondColor);
 }
 
-.container {
+#container {
   display: grid;
   grid-template-columns: 1fr [center-start] max-content [center-end] 1fr;
   grid-template-rows: repeat(auto-fit, max-content);
@@ -1012,7 +1012,7 @@ nav.scrollUp {
 
 .info h4 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 300;
   line-height: 1.2rem;
   width: max-content;
@@ -1021,7 +1021,7 @@ nav.scrollUp {
 
 .info h5 {
   margin: 0;
-  margin-top: 8px;
+  margin-top: 2px;
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 1.2rem;
@@ -1304,7 +1304,7 @@ a:active i {
     opacity: 0.85;
   }
 
-  .container {
+  #container {
     grid-template-columns: 1fr [center-start] max-content [center-end] 1fr;
     padding-top: calc(2 * var(--frame-width));
   }
