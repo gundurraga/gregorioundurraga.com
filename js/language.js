@@ -19,7 +19,7 @@ let en = {
   mixed: "Mixed Media",
 
   //artworks
-  the_victory_of_samothrace: "The Victory of Samothrace",
+  the_winged_victory_of_samothrace: "The Winged Victory of Samothrace",
   air: "Air",
   venus_de_milo: "Venus de Milo",
   the_cardsharps_caravaggio: "The Cardsharps (Caravaggio)",
@@ -124,7 +124,7 @@ let es = {
   oilpaper: "Óleo sobre papel",
   mixed: "Técnica mixta",
 
-  the_victory_of_samothrace: "La Victoria de Samotracia",
+  the_winged_victory_of_samothrace: "La Victoria de Samotracia",
   air: "Aire",
   venus_de_milo: "Venus de Milo",
   the_cardsharps_caravaggio: "Los Jugadores de Cartas (Caravaggio)",
@@ -230,7 +230,7 @@ let fr = {
   oilpaper: "Huile sur papier",
   mixed: "Technique mixte",
 
-  the_victory_of_samothrace: "La Victoire de Samothrace",
+  the_winged_victory_of_samothrace: "La Victoire de Samothrace",
   air: "Air",
   venus_de_milo: "Vénus de Milo",
   the_cardsharps_caravaggio: "Les Tricheurs (Caravage)",
@@ -335,7 +335,7 @@ let pt = {
   oilpaper: "Óleo sobre papel",
   mixed: "Mídia mista",
 
-  the_victory_of_samothrace: "A Vitória de Samotrácia",
+  the_winged_victory_of_samothrace: "A Vitória de Samotrácia",
   air: "Ar",
   venus_de_milo: "Vênus de Milo",
   the_cardsharps_caravaggio: "Os Batoteiros (Caravaggio)",
@@ -442,7 +442,7 @@ let it = {
   mixed: "Tecnica mista",
 
   // Opere d'arte
-  the_victory_of_samothrace: "La Vittoria di Samotracia",
+  the_winged_victory_of_samothrace: "La Vittoria di Samotracia",
   air: "Aria",
   venus_de_milo: "Venere di Milo",
   the_cardsharps_caravaggio: "Bari (Caravaggio)",
@@ -548,7 +548,7 @@ let de = {
   mixed: "Mischtechnik",
 
   // Kunstwerke
-  the_victory_of_samothrace: "Der Sieg von Samothrake",
+  the_winged_victory_of_samothrace: "Der Sieg von Samothrake",
   air: "Luft",
   venus_de_milo: "Venus von Milo",
   the_cardsharps_caravaggio: "Die Falschspieler (Caravaggio)",
@@ -654,7 +654,7 @@ let ja = {
   mixed: "ミクストメディア",
 
   // アートワーク
-  the_victory_of_samothrace: "サモトラケの勝利",
+  the_winged_victory_of_samothrace: "サモトラケの勝利",
   air: "空気",
   venus_de_milo: "ミロのヴィーナス",
   the_cardsharps_caravaggio: "カードを切る者たち (カラヴァッジョ)",
@@ -754,6 +754,10 @@ function translate(lang) {
   document.getElementById("cv").innerHTML = lang.cv;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
+  document.getElementById("the-winged-victory-of-samothrace-2024").innerHTML =
+    lang.the_winged_victory_of_samothrace;
+  document.getElementById("air-2024").innerHTML = lang.air;
+  document.getElementById("venus-de-milo-2024").innerHTML = lang.venus_de_milo;
   document.getElementById("the-cardsharps-(caravaggio)-2024").innerHTML =
     lang.the_cardsharps_caravaggio;
   document.getElementById("the-straw-manikin-(goya)-2024").innerHTML =
