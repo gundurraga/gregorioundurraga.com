@@ -1658,7 +1658,7 @@ ${gundurraga
   .map(function (post) {
     return `<div class="sliderPainting">
   <a onclick="scrollSmoothTo('${post.ID}-post')">
-  <img ${post.onSale ? "class='on-sale'" : ""}
+  <img
   src="images/${post.UserID}/300p/${post.ID}.jpg"></a>
   </div>`;
   })
