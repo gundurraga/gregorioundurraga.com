@@ -710,6 +710,7 @@ nav.scrollUp {
 /* Information */
 
 .info {
+  display: flex;
   cursor: default;
   margin: auto;
   margin-top: 15px;
@@ -718,6 +719,7 @@ nav.scrollUp {
   padding: 15px 20px 15px 15px;
   text-align: start;
   border: 1px solid var(--light-infoBorder-color);
+  flex-direction: row;
 }
 
 .night-mode .info {
@@ -750,126 +752,20 @@ nav.scrollUp {
   width: max-content;
 }
 
-#available {
-  background-color: var(--light-frame-firstColor-onSale);
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 4px;
+.dot-available,
+.dot-sold {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  margin-left: 10px;
 }
 
-.night-mode #available {
-  color: var(--light-font-firstColor);
+.dot-available {
+  background-color: rgb(19, 113, 19);
 }
 
-.artworkYear:hover {
-  text-decoration: underline;
-  cursor: default;
-}
-
-.iconClicked h5 {
-  width: auto;
-}
-
-.info-icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  padding-top: 5px;
-  color: var(--light-font-thirdColor);
-}
-
-.night-mode .info-icons {
-  color: var(--night-font-thirdColor);
-}
-
-.info-icons ion-icon {
-  margin: 10px;
-  font-size: 24px;
-  pointer-events: none;
-}
-
-.icon {
-  font-size: 1rem;
-  margin-right: 0.2rem;
-  margin-bottom: 0.125rem;
-  margin-left: 5px;
-  display: inline-block;
-  vertical-align: middle;
-  pointer-events: none;
-}
-
-.downloadIcon {
-  cursor: pointer;
-  display: inline-block;
-}
-
-.downloadIcon:hover {
-  color: rgb(0, 0, 0);
-}
-.night-mode .downloadIcon:hover {
-  color: rgb(255, 255, 255);
-}
-
-.downloadClicked {
-  display: none;
-  margin: auto;
-  margin-top: 15px;
-  text-align: center;
-  border: 1px solid var(--light-infoBorder-color);
-  background-color: rgb(220, 220, 220);
-}
-
-.downloadClicked h5 {
-  margin: 0;
-  padding: 10px 15px;
-}
-
-.night-mode .downloadClicked {
-  background-color: rgb(73, 76, 121);
-  border: 1px solid var(--night-infoBorder-color);
-}
-
-.downloadClicked:hover {
-  background-color: var(--lightMobile-postBorder-color);
-  border: 1px solid var(--light-infoBorder-color);
-}
-.night-mode .downloadClicked:hover {
-  background-color: rgb(52, 54, 99);
-  border: 1px solid var(--night-infoBorder-color);
-}
-
-.iconClicked a:link,
-.iconClicked a:visited {
-  text-decoration: none;
-  color: var(--light-font-thirdColor);
-}
-
-.iconClicked a:hover,
-.iconClicked a:active {
-  text-decoration: none;
-  color: rgb(60, 60, 71);
-}
-
-.iconClicked .copyrightClicked a:hover,
-.iconClicked .copyrightClicked a:active {
-  text-decoration: underline;
-}
-
-.night-mode .iconClicked a:link,
-.night-mode .iconClicked a:visited {
-  text-decoration: none;
-  color: var(--night-font-thirdColor);
-}
-
-.night-mode .iconClicked a:hover,
-.night-mode .iconClicked a:active {
-  color: rgb(240, 240, 240);
-}
-
-.night-mode .iconClicked .copyrightClicked a:hover,
-.night-mode .iconClicked .copyrightClicked a:active {
-  text-decoration: underline;
+.dot-sold {
+  background-color: rgb(210, 27, 27);
 }
 
 /* FOOTER */

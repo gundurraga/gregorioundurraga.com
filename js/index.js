@@ -17,7 +17,7 @@ const gundurraga = [
     DimensionCm: "40 x 30 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "air-2024",
@@ -35,7 +35,7 @@ const gundurraga = [
     DimensionCm: "30 x 40 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-winged-victory-of-samothrace-2024",
@@ -53,7 +53,7 @@ const gundurraga = [
     DimensionCm: "30 x 40 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-cardsharps-(caravaggio)-2024",
@@ -71,7 +71,7 @@ const gundurraga = [
     DimensionCm: "104 x 145 cm",
     ImageSize: "10.9",
     ImageDimension: "7931 x 5678",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-straw-manikin-(goya)-2024",
@@ -89,7 +89,7 @@ const gundurraga = [
     DimensionCm: "83 x 49 cm",
     ImageSize: "6.5",
     ImageDimension: "4745 x 7897",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "wapping-on-thames-(whistler)-2023",
@@ -107,7 +107,7 @@ const gundurraga = [
     DimensionCm: "53 x 76 cm",
     ImageSize: "5.9",
     ImageDimension: "3810 x 2682",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "house-of-cards-(serebriakova)-2023",
@@ -125,7 +125,7 @@ const gundurraga = [
     DimensionCm: "59 x 68 cm",
     ImageSize: "4.7",
     ImageDimension: "3412 x 2949",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-giraffes-2023",
@@ -143,7 +143,7 @@ const gundurraga = [
     DimensionCm: "80 x 125 cm",
     ImageSize: "5.0",
     ImageDimension: "3847 x 2466",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-virgin-and-child-with-saint-anne-(davinci)-2023",
@@ -161,7 +161,7 @@ const gundurraga = [
     DimensionCm: "151 x 95 cm",
     ImageSize: "3.5",
     ImageDimension: "2510 x 3911",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-hunter-(lorca)-2023",
@@ -179,7 +179,7 @@ const gundurraga = [
     DimensionCm: "114 x 132 cm",
     ImageSize: "4.9",
     ImageDimension: "3412 x 2953",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-temptations-of-saint-anthony-(bravo)-2023",
@@ -197,7 +197,7 @@ const gundurraga = [
     DimensionCm: "147 x 103 cm",
     ImageSize: "4.4",
     ImageDimension: "2777 x 3894",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-flock-2023",
@@ -1007,7 +1007,7 @@ const gundurraga = [
     DimensionCm: "41 x 33 cm",
     ImageSize: "3.8",
     ImageDimension: "2960 x 3680",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "window-2022",
@@ -1079,7 +1079,7 @@ const gundurraga = [
     DimensionCm: "38.5 x 28 cm",
     ImageSize: "2.1",
     ImageDimension: "2895 x 3942",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "space-xploration-2022",
@@ -1439,7 +1439,7 @@ const gundurraga = [
     DimensionCm: "80 x 100 cm",
     ImageSize: "5.4",
     ImageDimension: "3644 x 2899",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "untitled-i-2015",
@@ -1461,21 +1461,13 @@ const gundurraga = [
   },
 ];
 
-gundurraga.sort(function (a, b) {
-  if (a.onSale === true && b.onSale === true) {
-    return 0;
-  } else if (a.onSale === true && b.onSale === false) {
-    return -1;
-  }
-});
-
 // javascript template literals https://www.youtube.com/watch?v=DG4obitDvUA&ab_channel=LearnWebCode
 function postUserTemplate(post) {
   return `
   <article class="post" id="${post.ID}-post">
   <div class="boxDatePainting">
   <h5 class="date"></h5>
-  <div class="frame ${post.onSale ? "on-sale" : ""}">
+  <div class="frame">
     <a href="images/${post.UserID}/900p/${post.ID}.jpg"
       data-srcset="images/${post.UserID}/500p/${post.ID}.jpg 500w,
                    images/${post.UserID}/700p/${post.ID}.jpg 700w,
@@ -1500,9 +1492,16 @@ function postUserTemplate(post) {
  ${post.DimensionCm}
         <br />
        <span class="${post.Location}">${post.ArtworkLocation}</span>
-        <br />    
+        <br />  
           </h5>
       </div>
+      ${
+        post.onSale
+          ? '<div class="dot-available"></div>'
+          : '<div class="dot-sold"></div>'
+      }
+      
+    </div>
   </article>
   `;
 }
