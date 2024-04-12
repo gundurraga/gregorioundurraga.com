@@ -593,30 +593,6 @@ nav.scrollUp {
     0px 0px 0px var(--frame-width) var(--night-frame-secondColor) inset;
 }
 
-.on-sale {
-  box-shadow: 0px 1px 4px 1px var(--light-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--light-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--light-frame-secondColor-onSale) inset;
-  -moz-box-shadow: 0px 1px 4px 1px var(--light-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--light-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--light-frame-secondColor-onSale) inset;
-  -webkit-box-shadow: 0px 1px 4px 1px var(--light-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--light-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--light-frame-secondColor-onSale) inset;
-}
-
-.night-mode .on-sale {
-  box-shadow: 0px 1px 4px 1px var(--night-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--night-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--night-frame-secondColor-onSale) inset;
-  -moz-box-shadow: 0px 1px 4px 1px var(--night-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--night-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--night-frame-secondColor-onSale) inset;
-  -webkit-box-shadow: 0px 1px 4px 1px var(--night-frameShadow-color),
-    0px 0px 2px var(--frame-widthIn) var(--night-frame-firstColor-onSale) inset,
-    0px 0px 0px var(--frame-width) var(--night-frame-secondColor-onSale) inset;
-}
-
 .progressive {
   position: relative;
   display: block;
@@ -730,7 +706,7 @@ nav.scrollUp {
 }
 
 .info-text {
-  width: min-content;
+  display: inline-block; /* Allows element to shrink around the content */
   margin: auto;
   max-width: 12rem;
 }

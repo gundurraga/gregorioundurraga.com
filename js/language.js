@@ -128,7 +128,7 @@ let es = {
   air: "Aire",
   venus_de_milo: "Venus de Milo",
   the_cardsharps_caravaggio: "Los Jugadores de Cartas (Caravaggio)",
-  the_straw_manikin_goya: "El Maniquí de Paja (Goya)",
+  the_straw_manikin_goya: "El Pelele (Goya)",
   wapping_on_thames_whistler: "Wapping en el Támesis (Whistler)",
   house_of_cards_serebriakova: "Castillo de Naipes (Serebriakova)",
   the_giraffes: "Las Jirafas",
