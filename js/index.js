@@ -215,7 +215,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "6.2",
     ImageDimension: "3923 x 2910",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-flamingos-2023",
@@ -233,7 +233,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "7.1",
     ImageDimension: "3871 x 2851",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "luma-park-2023",
@@ -251,7 +251,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "5.6",
     ImageDimension: "3899 x 2869",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "underwater-museum-of-conceptual-art-2023",
@@ -269,7 +269,7 @@ const gundurraga = [
     DimensionCm: "54 x 65 cm",
     ImageSize: "7.4",
     ImageDimension: "3500 x 2904",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-fruitful-life-of-dogs-2023",
@@ -287,7 +287,7 @@ const gundurraga = [
     DimensionCm: "40 x 50 cm",
     ImageSize: "2.1",
     ImageDimension: "2711 x 2168",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "sunflower-bull-2023",
@@ -305,7 +305,7 @@ const gundurraga = [
     DimensionCm: "60 x 81 cm",
     ImageSize: "8.8",
     ImageDimension: "3905 x 2892",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "electric-dreams-2023",
@@ -323,7 +323,7 @@ const gundurraga = [
     DimensionCm: "54 x 65 cm",
     ImageSize: "7.8",
     ImageDimension: "3544 x 2918",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "formal-and-polite-2023",
@@ -341,7 +341,7 @@ const gundurraga = [
     DimensionCm: "30 x 40 cm",
     ImageSize: "7.8",
     ImageDimension: "3783 x 2809",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "family-holidays-in-the-caribbean-2023",
@@ -359,7 +359,7 @@ const gundurraga = [
     DimensionCm: "54 x 65 cm",
     ImageSize: "5.7",
     ImageDimension: "2891 x 3484",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-peace-of-wild-things-2023",
@@ -395,7 +395,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "5.6",
     ImageDimension: "3835 x 2841",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-origin-of-species-2023",
@@ -413,7 +413,7 @@ const gundurraga = [
     DimensionCm: "60 x 30 cm",
     ImageSize: "3.9",
     ImageDimension: "1958 x 3892",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-sadness-of-gods-2023",
@@ -431,7 +431,7 @@ const gundurraga = [
     DimensionCm: "35 x 26 cm",
     ImageSize: "5.9",
     ImageDimension: "2924 x 3772",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "piggy-bank-2023",
@@ -449,7 +449,7 @@ const gundurraga = [
     DimensionCm: "46 x 38 cm",
     ImageSize: "4.3",
     ImageDimension: "2724 x 3320",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-milkmaid-2023",
@@ -467,7 +467,7 @@ const gundurraga = [
     DimensionCm: "40 x 30 cm",
     ImageSize: "6.3",
     ImageDimension: "2851 x 3834",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-grandmaster-2023",
@@ -575,7 +575,7 @@ const gundurraga = [
     DimensionCm: "60 x 73 cm",
     ImageSize: "7.2",
     ImageDimension: "3585 x 2921",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "thats-cool-2023",
@@ -593,7 +593,7 @@ const gundurraga = [
     DimensionCm: "60 x 73 cm",
     ImageSize: "6.9",
     ImageDimension: "3577 x 2918",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-yellow-rider-2023",
@@ -683,7 +683,7 @@ const gundurraga = [
     DimensionCm: "70 x 70 cm",
     ImageSize: "3.7",
     ImageDimension: "2934 x 2930",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-jungle-2023",
@@ -719,7 +719,7 @@ const gundurraga = [
     DimensionCm: "65 x 81 cm",
     ImageSize: "4.6",
     ImageDimension: "3603 x 2885",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-football-team-2023",
@@ -737,7 +737,7 @@ const gundurraga = [
     DimensionCm: "46 x 55 cm",
     ImageSize: "5.1",
     ImageDimension: "3531 x 2920",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-elephants-2023",
@@ -791,7 +791,7 @@ const gundurraga = [
     DimensionCm: "81 x 60 cm",
     ImageSize: "4.4",
     ImageDimension: "2904 x 3912",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-sleeping-backhoe-2022",
@@ -809,7 +809,7 @@ const gundurraga = [
     DimensionCm: "60 x 81 cm",
     ImageSize: "4.2",
     ImageDimension: "3900 x 2880",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "public-works-2022",
@@ -845,7 +845,7 @@ const gundurraga = [
     DimensionCm: "80 x 80 cm",
     ImageSize: "5.0",
     ImageDimension: "2915 x 2934",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "the-train-station-2022",
@@ -917,7 +917,7 @@ const gundurraga = [
     DimensionCm: "65 x 92 cm",
     ImageSize: "3.5",
     ImageDimension: "3921 x 2759",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "pythagoras-2022",
@@ -971,7 +971,7 @@ const gundurraga = [
     DimensionCm: "55 x 46 cm",
     ImageSize: "5.2",
     ImageDimension: "2944 x 3496",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "creme-brulee-2022",
@@ -989,7 +989,7 @@ const gundurraga = [
     DimensionCm: "46 x 38 cm",
     ImageSize: "6.0",
     ImageDimension: "2904 x 3520",
-    onSale: false,
+    onSale: true,
   },
   {
     ID: "spheres-2022",
