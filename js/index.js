@@ -1625,6 +1625,13 @@ document.querySelector("#header").innerHTML = `
   </li> */
   }
   <li>
+    <a href="/catalogo-arles.html">
+      <div class="menuLink">
+        <h4>Catálogo Arlés</h4>
+      </div>
+    </a>
+  </li>
+  <li>
     <a href="/cv.pdf" download="Undurraga_Gregorio_Resume">
       <div class="menuLink">
         <h4 id="cv">CV</h4>
