@@ -40,17 +40,9 @@
     </style>
   </head>
   <body>
-    <!-- Enlace directo para dispositivos móviles -->
-    <a href="catalogo-arles.pdf" style="display: none" id="pdfLink"
-      >Descargar Catálogo Arlés</a
-    >
-    <!-- IFrame para escritorio -->
-    <iframe src="catalogo-arles.pdf" frameborder="0"></iframe>
-    <script>
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        document.querySelector("iframe").style.display = "none";
-        document.getElementById("pdfLink").style.display = "block";
-      }
-    </script>
+    <iframe src="catalogo-arles.pdf" frameborder="0">
+      Este navegador no admite PDFs. Por favor, descarga el PDF para verlo:
+      <a href="catalogo-arles.pdf">Descargar Catálogo Arlés</a>.
+    </iframe>
   </body>
 </html>
