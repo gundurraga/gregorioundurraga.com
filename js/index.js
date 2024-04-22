@@ -1625,7 +1625,7 @@ document.querySelector("#header").innerHTML = `
   </li> */
   }
   <li>
-    <a href="/cv.pdf" download="Undurraga_Gregorio_Resume">
+    <a href="/cv.pdf">
       <div class="menuLink">
         <h4 id="cv">CV</h4>
       </div>
