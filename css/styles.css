@@ -422,13 +422,25 @@ nav.scrollUp {
 }
 
 /*  Main */
-
-.exhibition {
-  margin: 20px;
-  color: var(--light-font-secondColor);
+#catalogo {
+  display: block;
+  margin: 20px auto;
+  background-color: rgb(229, 193, 193);
+  border-radius: 3px;
+  max-width: max-content;
 }
 
-.night-mode .exhibition {
+.night-mode #catalogo {
+  background-color: rgb(56, 52, 38);
+}
+
+#catalogo span {
+  color: var(--light-logo-firstColor);
+  display: block;
+  padding: 20px;
+}
+
+.night-mode #catalogo span {
   color: var(--night-font-secondColor);
 }
 
