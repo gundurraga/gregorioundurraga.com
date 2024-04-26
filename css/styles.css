@@ -426,18 +426,26 @@ nav.scrollUp {
   display: block;
   margin: 20px auto;
   background-color: rgb(229, 193, 193);
-  border-radius: 3px;
+  border-radius: 1px;
   max-width: max-content;
+}
+
+#catalogo :hover {
+  background-color: rgb(218, 171, 171);
 }
 
 .night-mode #catalogo {
   background-color: rgb(56, 52, 38);
 }
 
+.night-mode #catalogo :hover {
+  background-color: rgb(64, 60, 46);
+}
+
 #catalogo span {
   color: var(--light-logo-firstColor);
   display: block;
-  padding: 20px;
+  padding: 15px;
 }
 
 .night-mode #catalogo span {
