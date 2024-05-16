@@ -17,8 +17,13 @@ let en = {
   oilpanel: "Oil on panel",
   oilpaper: "Oil on paper",
   mixed: "Mixed Media",
+  diptych_oilcanvas: "Diptych, oil on canvas",
 
   //artworks
+  meringue_and_lemon: "Meringue and Lemon",
+  the_onions_smile: "The Onions Smile",
+  the_natural_order_of_things: "The Natural Order of Things",
+  blue_night_hopper: "Blue Night (Hopper)",
   the_winged_victory_of_samothrace: "The Winged Victory of Samothrace",
   air: "Air",
   venus_de_milo: "Venus de Milo",
@@ -123,7 +128,12 @@ let es = {
   oilpanel: "Óleo sobre madera",
   oilpaper: "Óleo sobre papel",
   mixed: "Técnica mixta",
+  diptych_oilcanvas: "Díptico, óleo sobre tela",
 
+  meringue_and_lemon: "Merengue y Limón",
+  the_onions_smile: "Las Cebollas Sonríen",
+  the_natural_order_of_things: "El Orden Natural de las Cosas",
+  blue_night_hopper: "Tarde Azul (Hopper)",
   the_winged_victory_of_samothrace: "La Victoria de Samotracia",
   air: "Aire",
   venus_de_milo: "Venus de Milo",
@@ -229,7 +239,12 @@ let fr = {
   oilpanel: "Huile sur panneau",
   oilpaper: "Huile sur papier",
   mixed: "Technique mixte",
+  diptych_oilcanvas: "Diptyque, huile sur toile",
 
+  meringue_and_lemon: "Meringue et Citron",
+  the_onions_smile: "Les Oignons Sourient",
+  the_natural_order_of_things: "L'Ordre Naturel des Choses",
+  blue_night_hopper: "Blue Soir (Hopper)",
   the_winged_victory_of_samothrace: "La Victoire de Samothrace",
   air: "Air",
   venus_de_milo: "Vénus de Milo",
@@ -334,7 +349,12 @@ let pt = {
   oilpanel: "Óleo sobre painel",
   oilpaper: "Óleo sobre papel",
   mixed: "Mídia mista",
+  diptych_oilcanvas: "Díptico, óleo sobre tela",
 
+  meringue_and_lemon: "Merengue e Limão",
+  the_onions_smile: "As Cebolas Sorriem",
+  the_natural_order_of_things: "A Ordem Natural das Coisas",
+  blue_night_hopper: "Noite Azul (Hopper)",
   the_winged_victory_of_samothrace: "A Vitória de Samotrácia",
   air: "Ar",
   venus_de_milo: "Vênus de Milo",
@@ -440,8 +460,13 @@ let it = {
   oilpanel: "Olio su pannello",
   oilpaper: "Olio su carta",
   mixed: "Tecnica mista",
+  diptych_oilcanvas: "Dittico, olio su tela",
 
   // Opere d'arte
+  meringue_and_lemon: "Meringa e Limone",
+  the_onions_smile: "Le Cipolle Sorridono",
+  the_natural_order_of_things: "L'Ordine Naturale delle Cose",
+  blue_night_hopper: "Notte Blu (Hopper)",
   the_winged_victory_of_samothrace: "La Vittoria di Samotracia",
   air: "Aria",
   venus_de_milo: "Venere di Milo",
@@ -546,8 +571,13 @@ let de = {
   oilpanel: "Öl auf Holzplatte",
   oilpaper: "Öl auf Papier",
   mixed: "Mischtechnik",
+  diptych_oilcanvas: "Diptychon, Öl auf Leinwand",
 
   // Kunstwerke
+  meringue_and_lemon: "Baiser und Zitrone",
+  the_onions_smile: "Die Zwiebeln Lächeln",
+  the_natural_order_of_things: "Die Natürliche Ordnung der Dinge",
+  blue_night_hopper: "Blaue Nacht (Hopper)",
   the_winged_victory_of_samothrace: "Der Sieg von Samothrake",
   air: "Luft",
   venus_de_milo: "Venus von Milo",
@@ -652,8 +682,13 @@ let ja = {
   oilpanel: "パネルに油絵",
   oilpaper: "紙に油絵",
   mixed: "ミクストメディア",
+  diptych_oilcanvas: "二連祭壇画、油絵",
 
   // アートワーク
+  meringue_and_lemon: "メレンゲとレモン",
+  the_onions_smile: "玉ねぎの笑み",
+  the_natural_order_of_things: "物事の自然な順序",
+  blue_night_hopper: "ブルーナイト (ホッパー)",
   the_winged_victory_of_samothrace: "サモトラケの勝利",
   air: "空気",
   venus_de_milo: "ミロのヴィーナス",
@@ -754,6 +789,14 @@ function translate(lang) {
   document.getElementById("cv").innerHTML = lang.cv;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
+  document.getElementById("meringue-and-lemon-2024").innerHTML =
+    lang.meringue_and_lemon;
+  document.getElementById("the-onions-smile-2024").innerHTML =
+    lang.the_onions_smile;
+  document.getElementById("the-natural-order-of-things-2024").innerHTML =
+    lang.the_natural_order_of_things;
+  document.getElementById("blue-night-(hopper)-2024").innerHTML =
+    lang.blue_night_hopper;
   document.getElementById("the-winged-victory-of-samothrace-2024").innerHTML =
     lang.the_winged_victory_of_samothrace;
   document.getElementById("air-2024").innerHTML = lang.air;
@@ -901,7 +944,7 @@ function translate(lang) {
 
   // Replace medias
   let medias = document.querySelectorAll(
-    ".oilcanvas, .oilpanel, .oilpaper, .mixed"
+    ".oilcanvas, .oilpanel, .oilpaper, .mixed, .diptych_oilcanvas"
   );
   medias.forEach((media) => {
     let mediaKey = media.classList[0]; // Get the class name, which corresponds to the object key
