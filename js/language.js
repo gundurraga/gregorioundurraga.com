@@ -789,12 +789,12 @@ function translate(lang) {
   document.getElementById("cv").innerHTML = lang.cv;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
-  document.getElementById("meringue-and-lemon-2024").innerHTML =
-    lang.meringue_and_lemon;
+  // document.getElementById("meringue-and-lemon-2024").innerHTML =
+  //   lang.meringue_and_lemon;
   document.getElementById("the-onions-smile-2024").innerHTML =
     lang.the_onions_smile;
-  document.getElementById("the-natural-order-of-things-2024").innerHTML =
-    lang.the_natural_order_of_things;
+  // document.getElementById("the-natural-order-of-things-2024").innerHTML =
+  //   lang.the_natural_order_of_things;
   document.getElementById("blue-night-(hopper)-2024").innerHTML =
     lang.blue_night_hopper;
   document.getElementById("the-winged-victory-of-samothrace-2024").innerHTML =
