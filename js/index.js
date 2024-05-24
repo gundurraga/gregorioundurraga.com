@@ -1717,13 +1717,6 @@ document.querySelector("#header").innerHTML = `
       </div>
     </a>
   </li>
-<li>
-  <a href="/catalogo-arles.pdf">
-    <div class="menuLink">
-      <h4 style="font-weight: bold;">Catálogo Arlés</h4>
-    </div>
-  </a>
-</li>
 </ul>
 `;
 
