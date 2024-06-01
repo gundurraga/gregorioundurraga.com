@@ -89,7 +89,7 @@ const gundurraga = [
     DimensionCm: "40 x 30 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "air-2024",
