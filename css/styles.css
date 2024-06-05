@@ -749,7 +749,8 @@ nav.scrollUp {
 }
 
 .dot-available,
-.dot-sold {
+.dot-sold,
+.dot-unframed {
   height: 17px;
   width: 17px;
   border-radius: 50%;
@@ -762,6 +763,10 @@ nav.scrollUp {
 
 .dot-sold {
   background-color: rgb(210, 27, 27);
+}
+
+.dot-unframed {
+  background-color: rgb(210, 189, 27);
 }
 
 /* FOOTER */
