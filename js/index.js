@@ -1699,13 +1699,6 @@ document.querySelector("#header").innerHTML = `
   </li> */
   }
   <li>
-    <a href="/cv.pdf">
-      <div class="menuLink">
-        <h4 id="cv">CV</h4>
-      </div>
-    </a>
-  </li>
-  <li>
     <a href="https://twitter.com/gundurragad" target="_blank">
       <div class="menuLink">
         <h4>Twitter</h4>
