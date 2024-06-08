@@ -557,7 +557,7 @@ const gundurraga = [
     DimensionCm: "80 x 80 cm",
     ImageSize: "3.0",
     ImageDimension: "2944 x 2948",
-    onSale: "trueUnframed",
+    onSale: "false",
   },
   {
     ID: "rhino-park-2023",
@@ -1734,7 +1734,7 @@ ${gundurraga
 
 document.querySelector("footer").innerHTML = `
 <div class="feedback">
-  <h5><span id="sayHello">Saluda a</span> <a target="_blank" class="footerLink" href="https://instagram.com/undurraga.art/">@undurraga.art</a></h5>
+  <h5><span id="sayHello">Saluda a</span> <a target="_blank" class="footerLink" href="https://instagram.com/gregorioundurraga/">@gregorioundurraga</a></h5>
 </div>
 <div class="back-to-top" onclick="backTop()">
   <h5>TOP</h5>
