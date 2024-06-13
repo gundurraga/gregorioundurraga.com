@@ -1511,7 +1511,7 @@ const gundurraga = [
     DimensionCm: "80 x 100 cm",
     ImageSize: "5.4",
     ImageDimension: "3644 x 2899",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "untitled-i-2015",
