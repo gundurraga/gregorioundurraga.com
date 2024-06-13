@@ -1151,7 +1151,7 @@ const gundurraga = [
     DimensionCm: "38.5 x 28 cm",
     ImageSize: "2.1",
     ImageDimension: "2895 x 3942",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "space-xploration-2022",
