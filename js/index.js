@@ -143,7 +143,7 @@ const gundurraga = [
     DimensionCm: "104 x 145 cm",
     ImageSize: "10.9",
     ImageDimension: "7931 x 5678",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-straw-manikin-(goya)-2024",
@@ -1079,7 +1079,7 @@ const gundurraga = [
     DimensionCm: "41 x 33 cm",
     ImageSize: "3.8",
     ImageDimension: "2960 x 3680",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "window-2022",
