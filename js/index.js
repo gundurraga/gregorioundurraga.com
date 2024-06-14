@@ -53,7 +53,7 @@ const gundurraga = [
     DimensionCm: "106 x 130 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "blue-night-(hopper)-2024",
