@@ -1533,6 +1533,12 @@ const gundurraga = [
   },
 ];
 
+gundurraga.sort((a, b) => {
+  const aOnSale = a.onSale === true || a.onSale === "trueUnframed";
+  const bOnSale = b.onSale === true || b.onSale === "trueUnframed";
+  return bOnSale - aOnSale;
+});
+
 // javascript template literals https://www.youtube.com/watch?v=DG4obitDvUA&ab_channel=LearnWebCode
 function postUserTemplate(post) {
   return `
