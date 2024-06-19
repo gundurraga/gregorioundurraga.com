@@ -1718,6 +1718,13 @@ document.querySelector("#header").innerHTML = `
       </div>
     </a>
   </li>
+  <li>
+    <a href="https://github.com/gundurraga" target="_blank">
+      <div class="menuLink">
+        <h4>GitHub</h4>
+      </div>
+    </a>
+  </li>
 </ul>
 `;
 
