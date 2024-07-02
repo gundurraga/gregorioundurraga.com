@@ -359,7 +359,7 @@ const gundurraga = [
     DimensionCm: "40 x 50 cm",
     ImageSize: "2.1",
     ImageDimension: "2711 x 2168",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "sunflower-bull-2023",
