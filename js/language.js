@@ -874,7 +874,7 @@ function translate(lang) {
   document.getElementById("the-space-traveler-2023").innerHTML =
     lang.the_space_traveler;
   document.getElementById("snow-tiger-2023").innerHTML = lang.snow_tiger;
-  document.getElementById("thats-cool-2023").innerHTML = lang.thats_cool;
+  document.getElementById("the-owls-2023").innerHTML = lang.the_owls;
   document.getElementById("the-yellow-rider-2023").innerHTML =
     lang.the_yellow_rider;
   document.getElementById("brown-hen-2023").innerHTML = lang.brown_hen;

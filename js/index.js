@@ -704,10 +704,10 @@ const gundurraga = [
     onSale: "trueUnframed",
   },
   {
-    ID: "thats-cool-2023",
+    ID: "the-owls-2023",
     UserID: "gundurraga",
     Artist: "Gregorio Undurraga",
-    ArtworkTitle: "That's Cool",
+    ArtworkTitle: "The Owls",
     ArtworkYear: 2023,
     ArtworkLocation: "Arles, France",
     Location: "arles",
