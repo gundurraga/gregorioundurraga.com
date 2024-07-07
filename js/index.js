@@ -1,6 +1,60 @@
 "use strict";
 
 const gundurraga = [
+  // {
+  //   ID: "green-washing-2024",
+  //   UserID: "gundurraga",
+  //   Artist: "Gregorio Undurraga",
+  //   ArtworkTitle: "Green Washing",
+  //   ArtworkYear: 2024,
+  //   ArtworkLocation: "Santiago, Chile",
+  //   Location: "santiago",
+  //   ArtworkMedia: "Oil on canvas",
+  //   ArtworkMediaID: "oilcanvas",
+  //   BirthYear: 1993,
+  //   CountryId: "cl",
+  //   Country: "Chile",
+  //   DimensionCm: "73 x 55 cm",
+  //   ImageSize: "Assumed Size in MB",
+  //   ImageDimension: "Assumed Pixel Dimension",
+  //   onSale: true,
+  // },
+  // {
+  //   ID: "nothing-new-2024",
+  //   UserID: "gundurraga",
+  //   Artist: "Gregorio Undurraga",
+  //   ArtworkTitle: "Nothing New",
+  //   ArtworkYear: 2024,
+  //   ArtworkLocation: "Santiago, Chile",
+  //   Location: "santiago",
+  //   ArtworkMedia: "Oil on canvas",
+  //   ArtworkMediaID: "oilcanvas",
+  //   BirthYear: 1993,
+  //   CountryId: "cl",
+  //   Country: "Chile",
+  //   DimensionCm: "76 x 52 cm",
+  //   ImageSize: "Assumed Size in MB",
+  //   ImageDimension: "Assumed Pixel Dimension",
+  //   onSale: true,
+  // },
+  // {
+  //   ID: "in-search-of-the-perfect-quesadilla-2024",
+  //   UserID: "gundurraga",
+  //   Artist: "Gregorio Undurraga",
+  //   ArtworkTitle: "In Search of the Perfect Quesadilla",
+  //   ArtworkYear: 2024,
+  //   ArtworkLocation: "Santiago, Chile",
+  //   Location: "santiago",
+  //   ArtworkMedia: "Oil on canvas",
+  //   ArtworkMediaID: "oilcanvas",
+  //   BirthYear: 1993,
+  //   CountryId: "cl",
+  //   Country: "Chile",
+  //   DimensionCm: "52 x 76 cm",
+  //   ImageSize: "Assumed Size in MB",
+  //   ImageDimension: "Assumed Pixel Dimension",
+  //   onSale: true,
+  // },
   {
     ID: "meringue-and-lemon-2024",
     UserID: "gundurraga",
@@ -1643,7 +1697,6 @@ document.querySelector("#header").innerHTML = `
   </div>
   <h1>Gregorio<strong>Undurraga</strong></h1>
 </a>
-
 <div class="menuHamburguer" onclick="showMenu(this)">
   <div class="bar bar1"></div>
   <div class="bar bar2"></div>
@@ -1654,7 +1707,7 @@ document.querySelector("#header").innerHTML = `
 
   <li>
     <div class="switchTheme">
-      <h4 id="themeSelector">Night Mode</h4>
+      <h4 id="themeSelector">Night mode</h4>
       <div class="btn-nightMode">
         <div class="switch"></div>
       </div>

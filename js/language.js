@@ -1,6 +1,6 @@
 let en = {
   languageSelector: "Language: EN",
-  themeSelector: "Night Mode",
+  themeSelector: "Night mode",
   sayHello: "Say hello to",
   download: "Download",
   available: "Available",
@@ -19,6 +19,9 @@ let en = {
   diptych_oilcanvas: "Diptych, oil on canvas",
 
   //artworks
+  green_washing: "Green Washing",
+  nothing_new: "Nothing New",
+  in_search_of_the_perfect_quesadilla: "In Search of the Perfect Quesadilla",
   meringue_and_lemon: "Meringue and Lemon",
   the_onions_smile: "The Onions Smile",
   the_natural_order_of_things: "The Natural Order of Things",
@@ -57,7 +60,7 @@ let en = {
   patience: "Patience",
   the_space_traveler: "The Space Traveler",
   snow_tiger: "Snow Tiger",
-  thats_cool: "That's Cool",
+  the_owls: "The Owls",
   the_yellow_rider: "The Yellow Rider",
   brown_hen: "Brown Hen",
   rainbow_hen: "Rainbow Hen",
@@ -110,7 +113,7 @@ let en = {
 
 let es = {
   languageSelector: "Idioma: ES",
-  themeSelector: "Modo Noche",
+  themeSelector: "Modo noche",
   sayHello: "Saluda a",
   download: "Descargar",
   available: "Disponible",
@@ -128,6 +131,9 @@ let es = {
   mixed: "Técnica mixta",
   diptych_oilcanvas: "Díptico, óleo sobre tela",
 
+  green_washing: "Lavado verde",
+  nothing_new: "Nada nuevo",
+  in_search_of_the_perfect_quesadilla: "En busca de la quesadilla perfecta",
   meringue_and_lemon: "Merengue y Limón",
   the_onions_smile: "Las Cebollas Sonríen",
   the_natural_order_of_things: "El Orden Natural de las Cosas",
@@ -167,7 +173,7 @@ let es = {
   patience: "Paciencia",
   the_space_traveler: "El Viajero Espacial",
   snow_tiger: "Tigre de Nieve",
-  thats_cool: "Los Búhos",
+  the_owls: "Los Búhos",
   the_yellow_rider: "El Jinete Amarillo",
   brown_hen: "Gallina Café",
   rainbow_hen: "Gallina Arcoíris",
@@ -220,7 +226,7 @@ let es = {
 
 let fr = {
   languageSelector: "Langue: FR",
-  themeSelector: "Mode Nuit",
+  themeSelector: "Mode nuit",
   sayHello: "Dire salut à",
   download: "Télécharger",
   available: "Disponible",
@@ -238,6 +244,10 @@ let fr = {
   mixed: "Technique mixte",
   diptych_oilcanvas: "Diptyque, huile sur toile",
 
+  green_washing: "Écoblanchiment",
+  nothing_new: "Rien de nouveau",
+  in_search_of_the_perfect_quesadilla:
+    "À la recherche de la quesadilla parfaite",
   meringue_and_lemon: "Meringue et Citron",
   the_onions_smile: "Les Oignons Sourient",
   the_natural_order_of_things: "L'Ordre Naturel des Choses",
@@ -276,7 +286,7 @@ let fr = {
   patience: "Patience",
   the_space_traveler: "Le Voyageur Spatial",
   snow_tiger: "Tigre des Neiges",
-  thats_cool: "C'est Chouette",
+  the_owls: "C'est Chouette",
   the_yellow_rider: "Le Cavalier Jaune",
   brown_hen: "Poule Brune",
   rainbow_hen: "Poule Arc-en-ciel",
@@ -329,7 +339,7 @@ let fr = {
 
 let pt = {
   languageSelector: "Idioma: PT",
-  themeSelector: "Modo Noite",
+  themeSelector: "Modo noite",
   sayHello: "Diga oi para",
   download: "Baixar",
   available: "Disponível",
@@ -341,6 +351,9 @@ let pt = {
   santiago: "Santiago, Chile",
 
   //medias
+  green_washing: "Lavagem verde",
+  nothing_new: "Nada de novo",
+  in_search_of_the_perfect_quesadilla: "Em busca da quesadilla perfeita",
   oilcanvas: "Óleo sobre tela",
   oilpanel: "Óleo sobre painel",
   oilpaper: "Óleo sobre papel",
@@ -386,7 +399,7 @@ let pt = {
   patience: "Paciência",
   the_space_traveler: "O Viajante Espacial",
   snow_tiger: "Tigre da Neve",
-  thats_cool: "Isso é Legal",
+  the_owls: "Os Corujas",
   the_yellow_rider: "O Cavaleiro Amarelo",
   brown_hen: "Galinha Marrom",
   rainbow_hen: "Galinha Arco-Íris",
@@ -458,6 +471,9 @@ let it = {
   diptych_oilcanvas: "Dittico, olio su tela",
 
   // Opere d'arte
+  green_washing: "Greenwashing",
+  nothing_new: "Niente di nuovo",
+  in_search_of_the_perfect_quesadilla: "Alla ricerca della quesadilla perfetta",
   meringue_and_lemon: "Meringa e Limone",
   the_onions_smile: "Le Cipolle Sorridono",
   the_natural_order_of_things: "L'Ordine Naturale delle Cose",
@@ -496,7 +512,7 @@ let it = {
   patience: "Pazienza",
   the_space_traveler: "Il Viaggiatore Spaziale",
   snow_tiger: "Tigre delle Nevi",
-  thats_cool: "È Fantastico",
+  the_owls: "I Gufi",
   the_yellow_rider: "Il Cavaliere Giallo",
   brown_hen: "Gallina Marrone",
   rainbow_hen: "Gallina Arcobaleno",
@@ -568,6 +584,10 @@ let de = {
   diptych_oilcanvas: "Diptychon, Öl auf Leinwand",
 
   // Kunstwerke
+  green_washing: "Grünfärberei",
+  nothing_new: "Nichts Neues",
+  in_search_of_the_perfect_quesadilla:
+    "Auf der Suche nach der perfekten Quesadilla",
   meringue_and_lemon: "Baiser und Zitrone",
   the_onions_smile: "Die Zwiebeln Lächeln",
   the_natural_order_of_things: "Die Natürliche Ordnung der Dinge",
@@ -606,7 +626,7 @@ let de = {
   patience: "Geduld",
   the_space_traveler: "Der Weltraumreisende",
   snow_tiger: "Schneetiger",
-  thats_cool: "Das ist cool",
+  the_owls: "Die Eulen",
   the_yellow_rider: "Der Gelbe Reiter",
   brown_hen: "Braune Henne",
   rainbow_hen: "Regenbogen-Henne",
@@ -678,6 +698,9 @@ let ja = {
   diptych_oilcanvas: "二連祭壇画、油絵",
 
   // アートワーク
+  green_washing: "グリーンウォッシング",
+  nothing_new: "何も新しいことはない",
+  in_search_of_the_perfect_quesadilla: "完璧なケサディーヤを求めて",
   meringue_and_lemon: "メレンゲとレモン",
   the_onions_smile: "玉ねぎの笑み",
   the_natural_order_of_things: "物事の自然な順序",
@@ -715,7 +738,7 @@ let ja = {
   patience: "忍耐",
   the_space_traveler: "宇宙旅行者",
   snow_tiger: "雪のトラ",
-  thats_cool: "それはクール",
+  the_owls: "フクロウたち",
   the_yellow_rider: "黄色いライダー",
   brown_hen: "茶色のニワトリ",
   rainbow_hen: "虹のニワトリ",
@@ -781,6 +804,11 @@ function translate(lang) {
   document.getElementById("themeSelector").innerHTML = lang.themeSelector;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
+  // document.getElementById("green-washing-2024").innerHTML = lang.green_washing;
+  // document.getElementById("nothing-new-2024").innerHTML = lang.nothing_new;
+  // document.getElementById(
+  //   "in-search-of-the-perfect-quesadilla-2024"
+  // ).innerHTML = lang.in_search_of_the_perfect_quesadilla;
   document.getElementById("meringue-and-lemon-2024").innerHTML =
     lang.meringue_and_lemon;
   document.getElementById("the-onions-smile-2024").innerHTML =
