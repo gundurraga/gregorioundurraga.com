@@ -804,11 +804,11 @@ function translate(lang) {
   document.getElementById("themeSelector").innerHTML = lang.themeSelector;
   document.getElementById("sayHello").innerHTML = lang.sayHello;
 
-  // document.getElementById("green-washing-2024").innerHTML = lang.green_washing;
-  // document.getElementById("nothing-new-2024").innerHTML = lang.nothing_new;
-  // document.getElementById(
-  //   "in-search-of-the-perfect-quesadilla-2024"
-  // ).innerHTML = lang.in_search_of_the_perfect_quesadilla;
+  document.getElementById("green-washing-2024").innerHTML = lang.green_washing;
+  document.getElementById("nothing-new-2024").innerHTML = lang.nothing_new;
+  document.getElementById(
+    "in-search-of-the-perfect-quesadilla-2024"
+  ).innerHTML = lang.in_search_of_the_perfect_quesadilla;
   document.getElementById("meringue-and-lemon-2024").innerHTML =
     lang.meringue_and_lemon;
   document.getElementById("the-onions-smile-2024").innerHTML =
