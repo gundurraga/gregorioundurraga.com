@@ -539,7 +539,7 @@ const gundurraga = [
     DimensionCm: "60 x 30 cm",
     ImageSize: "3.9",
     ImageDimension: "1958 x 3892",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-sadness-of-gods-2023",
