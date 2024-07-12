@@ -341,7 +341,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "6.2",
     ImageDimension: "3923 x 2910",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-flamingos-2023",
