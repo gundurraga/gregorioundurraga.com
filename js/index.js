@@ -269,7 +269,7 @@ const gundurraga = [
     DimensionCm: "80 x 125 cm",
     ImageSize: "5.0",
     ImageDimension: "3847 x 2466",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-virgin-and-child-with-saint-anne-(davinci)-2023",
