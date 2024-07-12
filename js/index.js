@@ -485,7 +485,7 @@ const gundurraga = [
     DimensionCm: "54 x 65 cm",
     ImageSize: "5.7",
     ImageDimension: "2891 x 3484",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-peace-of-wild-things-2023",
