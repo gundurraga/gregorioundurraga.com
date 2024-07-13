@@ -1043,7 +1043,7 @@ const gundurraga = [
     DimensionCm: "65 x 92 cm",
     ImageSize: "3.5",
     ImageDimension: "3921 x 2759",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "pythagoras-2022",
