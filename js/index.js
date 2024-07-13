@@ -1097,7 +1097,7 @@ const gundurraga = [
     DimensionCm: "55 x 46 cm",
     ImageSize: "5.2",
     ImageDimension: "2944 x 3496",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "creme-brulee-2022",
