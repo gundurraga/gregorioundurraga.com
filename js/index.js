@@ -377,7 +377,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "5.6",
     ImageDimension: "3899 x 2869",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "underwater-museum-of-conceptual-art-2023",
