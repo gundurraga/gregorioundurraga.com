@@ -287,7 +287,7 @@ const gundurraga = [
     DimensionCm: "151 x 95 cm",
     ImageSize: "3.5",
     ImageDimension: "2510 x 3911",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-hunter-(lorca)-2023",
