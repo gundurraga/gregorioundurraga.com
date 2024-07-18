@@ -251,7 +251,7 @@ const gundurraga = [
     DimensionCm: "59 x 68 cm",
     ImageSize: "4.7",
     ImageDimension: "3412 x 2949",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-giraffes-2023",
