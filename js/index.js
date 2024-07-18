@@ -701,7 +701,7 @@ const gundurraga = [
     DimensionCm: "60 x 73 cm",
     ImageSize: "7.2",
     ImageDimension: "3585 x 2921",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-owls-2023",
