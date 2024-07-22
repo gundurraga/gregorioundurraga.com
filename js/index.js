@@ -305,7 +305,7 @@ const gundurraga = [
     DimensionCm: "114 x 132 cm",
     ImageSize: "4.9",
     ImageDimension: "3412 x 2953",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-temptations-of-saint-anthony-(bravo)-2023",
