@@ -1115,7 +1115,7 @@ const gundurraga = [
     DimensionCm: "46 x 38 cm",
     ImageSize: "6.0",
     ImageDimension: "2904 x 3520",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "spheres-2022",
