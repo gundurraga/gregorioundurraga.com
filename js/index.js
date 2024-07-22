@@ -917,7 +917,7 @@ const gundurraga = [
     DimensionCm: "81 x 60 cm",
     ImageSize: "4.4",
     ImageDimension: "2904 x 3912",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-sleeping-backhoe-2022",
