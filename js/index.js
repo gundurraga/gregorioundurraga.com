@@ -323,7 +323,7 @@ const gundurraga = [
     DimensionCm: "147 x 103 cm",
     ImageSize: "4.4",
     ImageDimension: "2777 x 3894",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-flock-2023",
