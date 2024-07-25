@@ -215,7 +215,7 @@ const gundurraga = [
     DimensionCm: "83 x 49 cm",
     ImageSize: "6.5",
     ImageDimension: "4745 x 7897",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "wapping-on-thames-(whistler)-2023",
