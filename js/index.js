@@ -971,7 +971,7 @@ const gundurraga = [
     DimensionCm: "80 x 80 cm",
     ImageSize: "5.0",
     ImageDimension: "2915 x 2934",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-train-station-2022",
