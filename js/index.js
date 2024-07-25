@@ -593,7 +593,7 @@ const gundurraga = [
     DimensionCm: "40 x 30 cm",
     ImageSize: "6.3",
     ImageDimension: "2851 x 3834",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-grandmaster-2023",
@@ -719,7 +719,7 @@ const gundurraga = [
     DimensionCm: "60 x 73 cm",
     ImageSize: "6.9",
     ImageDimension: "3577 x 2918",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-yellow-rider-2023",
