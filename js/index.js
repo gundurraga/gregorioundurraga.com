@@ -845,7 +845,7 @@ const gundurraga = [
     DimensionCm: "65 x 81 cm",
     ImageSize: "4.6",
     ImageDimension: "3603 x 2885",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-football-team-2023",
