@@ -161,7 +161,7 @@ const gundurraga = [
     DimensionCm: "30 x 40 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "the-winged-victory-of-samothrace-2024",
