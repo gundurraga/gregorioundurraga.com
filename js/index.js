@@ -359,7 +359,7 @@ const gundurraga = [
     DimensionCm: "54 x 73 cm",
     ImageSize: "7.1",
     ImageDimension: "3871 x 2851",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "luma-park-2023",
