@@ -125,7 +125,7 @@ const gundurraga = [
     DimensionCm: "45 x 90 cm",
     ImageSize: "Assumed Size in MB",
     ImageDimension: "Assumed Pixel Dimension",
-    onSale: true,
+    onSale: false,
   },
   {
     ID: "venus-de-milo-2024",
