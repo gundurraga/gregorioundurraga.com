@@ -575,7 +575,7 @@ const gundurraga = [
     DimensionCm: "46 x 38 cm",
     ImageSize: "4.3",
     ImageDimension: "2724 x 3320",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "the-milkmaid-2023",
