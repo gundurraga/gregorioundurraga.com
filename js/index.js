@@ -467,7 +467,7 @@ const gundurraga = [
     DimensionCm: "30 x 40 cm",
     ImageSize: "7.8",
     ImageDimension: "3783 x 2809",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "family-holidays-in-the-caribbean-2023",
@@ -557,7 +557,7 @@ const gundurraga = [
     DimensionCm: "35 x 26 cm",
     ImageSize: "5.9",
     ImageDimension: "2924 x 3772",
-    onSale: "trueUnframed",
+    onSale: false,
   },
   {
     ID: "piggy-bank-2023",
