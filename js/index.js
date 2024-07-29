@@ -1587,11 +1587,11 @@ const gundurraga = [
   },
 ];
 
-gundurraga.sort((a, b) => {
-  const aOnSale = a.onSale === true || a.onSale === "trueUnframed";
-  const bOnSale = b.onSale === true || b.onSale === "trueUnframed";
-  return bOnSale - aOnSale;
-});
+// gundurraga.sort((a, b) => {
+//   const aOnSale = a.onSale === true || a.onSale === "trueUnframed";
+//   const bOnSale = b.onSale === true || b.onSale === "trueUnframed";
+//   return bOnSale - aOnSale;
+// });
 
 // javascript template literals https://www.youtube.com/watch?v=DG4obitDvUA&ab_channel=LearnWebCode
 function postUserTemplate(post) {
@@ -1614,9 +1614,7 @@ function postUserTemplate(post) {
     <div class="info">
       <div class="info-text">
         <h4>
-          <strong><span id="${post.ID}" class="uppercase">${
-    post.ArtworkTitle
-  }</span>, ${post.ArtworkYear}</strong>
+          <strong><span id="${post.ID}" class="uppercase">${post.ArtworkTitle}</span>, ${post.ArtworkYear}</strong>
         </h4>
         <h5>
 <span class="${post.ArtworkMediaID}">${post.ArtworkMedia}</span>
@@ -1626,15 +1624,7 @@ function postUserTemplate(post) {
        <span class="${post.Location}">${post.ArtworkLocation}</span>
         <br />  
           </h5>
-      </div>
-      ${
-        post.onSale === "trueUnframed"
-          ? '<div class="dot-unframed"></div>'
-          : post.onSale === true
-          ? '<div class="dot-available"></div>'
-          : '<div class="dot-sold"></div>'
-      }
-      
+      </div>      
     </div>
   </article>
   `;
