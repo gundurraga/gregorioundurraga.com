@@ -1769,7 +1769,7 @@ document.querySelector("#header").innerHTML = `
     </a>
   </li>
   <li>
-    <a href="hhttps://www.linkedin.com/in/gundurraga/" target="_blank">
+    <a href="https://www.linkedin.com/in/gundurraga/" target="_blank">
       <div class="menuLink">
         <h4>LinkedIn</h4>
       </div>
