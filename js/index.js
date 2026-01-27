@@ -1783,7 +1783,7 @@ document.querySelector(".sliderIn").innerHTML = `
 ${gundurraga
   .map(function (post) {
     return `<div class="sliderPainting">
-  <a onclick="scrollSmoothTo('${post.ID}-post')">
+  <a onclick="trackCarouselClick('${post.ID}'); scrollSmoothTo('${post.ID}-post')">
   <img
   src="images/${post.UserID}/300p/${post.ID}.jpg"></a>
   </div>`;
@@ -1927,6 +1927,12 @@ function scrollSmoothTo(elementId) {
     block: "start",
     behavior: "smooth",
   });
+}
+
+function trackCarouselClick(postId) {
+  if (typeof umami !== "undefined") {
+    umami.track("carousel_click", { painting: postId });
+  }
 }
 
 // This block of code checks if the current URL contains the parameter 'fbclid'.
