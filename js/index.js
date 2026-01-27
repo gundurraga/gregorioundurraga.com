@@ -1762,16 +1762,9 @@ document.querySelector("#header").innerHTML = `
     </a>
   </li>
   <li>
-    <a href="https://github.com/gundurraga" target="_blank">
+    <a href="https://paintingstack.com" target="_blank">
       <div class="menuLink">
-        <h4>GitHub</h4>
-      </div>
-    </a>
-  </li>
-  <li>
-    <a href="https://www.linkedin.com/in/gundurraga/" target="_blank">
-      <div class="menuLink">
-        <h4>LinkedIn</h4>
+        <h4>Paintingstack</h4>
       </div>
     </a>
   </li>
