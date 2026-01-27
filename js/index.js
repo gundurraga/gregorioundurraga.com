@@ -1631,6 +1631,9 @@ function postUserTemplate(post) {
 }
 
 function showZoomImage(postId) {
+  if (typeof umami !== "undefined") {
+    umami.track("painting_click", { painting: postId });
+  }
   const imageUrl = `images/gundurraga/download/${postId}.jpg`;
 
   const modal = document.createElement("div");
