@@ -1751,7 +1751,7 @@ document.querySelector("#header").innerHTML = `
   </li> */
   }
   <li>
-    <a href="https://twitter.com/gundurragad" target="_blank">
+    <a href="https://x.com/gundurragad" target="_blank">
       <div class="menuLink">
         <h4>Twitter</h4>
       </div>
