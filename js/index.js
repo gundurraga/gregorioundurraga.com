@@ -1635,12 +1635,21 @@ function showZoomImage(postId) {
     umami.track("painting_click", { painting: postId });
   }
   const imageUrl = `images/gundurraga/download/${postId}.jpg`;
+  const post = gundurraga.find((p) => p.ID === postId);
+  const fileName = post
+    ? `${post.Artist} - ${post.ArtworkTitle} (${post.ArtworkYear}).jpg`
+    : `${postId}.jpg`;
 
   const modal = document.createElement("div");
   modal.className = "modal";
 
   modal.innerHTML = `
-    <span class="close-button"><ion-icon name="close-outline"></ion-icon></span>
+    <div class="modal-buttons">
+      <a class="download-button" href="${imageUrl}" download="${fileName}">
+        <ion-icon name="download-outline"></ion-icon>
+      </a>
+      <span class="close-button"><ion-icon name="close-outline"></ion-icon></span>
+    </div>
     <div class="modal-content">
       <img class="zoom" src="${imageUrl}" alt="${postId}">
     </div>
@@ -1658,6 +1667,12 @@ function showZoomImage(postId) {
     // Re-enable scrolling on the body
     document.body.style.overflow = "";
   };
+
+  modal.querySelector(".download-button").addEventListener("click", () => {
+    if (typeof umami !== "undefined") {
+      umami.track("painting_download", { painting: postId });
+    }
+  });
 
   modal.querySelector(".close-button").onclick = closeModal;
 

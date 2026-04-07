@@ -685,16 +685,39 @@ nav.scrollUp {
   ); /* Mantiene la relación de aspecto de la imagen */
 }
 
-.close-button {
+.modal-buttons {
   position: fixed;
   top: 7px;
   right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.download-button {
+  color: var(--light-menuCross-color);
+  font-size: 38px;
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.download-button:hover {
+  color: #aaa;
+}
+
+.close-button {
   color: var(--light-menuCross-color);
   font-size: 46px;
   font-weight: bold;
   cursor: pointer;
-  width: 46px; /* Default width */
-  height: 46px; /* Default height */
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
