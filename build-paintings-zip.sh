@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build a full-resolution zip of every painting and publish it as a GitHub
 # Release asset. The site's "Download all" menu link points at the stable URL
-#   https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/all-paintings.zip
+#   https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/gregorio-undurraga-collected-works.zip
 # Run this whenever the paintings change (or from deploy.sh). Needs `gh` auth.
 #
 # The zip is built in a temp dir, never committed (it is far over GitHub's 100MB
@@ -10,7 +10,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 TAG="paintings"
-ASSET="all-paintings.zip"
+ASSET="gregorio-undurraga-collected-works.zip"
 SRC="images/gundurraga/download"
 TMP="$(mktemp -d)"
 ZIP="$TMP/$ASSET"
