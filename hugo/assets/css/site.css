@@ -1,0 +1,195 @@
+/* Additions layered on top of the legacy styles.css. Keeps the original look;
+   adds the painting detail page, card-as-link resets, and the apps promo strip. */
+
+/* Card title links inherit the original typography, no browser link chrome. */
+.card-text h4 a,
+.card-text h4 a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+.frame a { display: block; }
+
+/* ---- Painting detail page ----
+   The whole painting always fits within the screen (contained, never larger
+   than the viewport); wheelzoom lets you zoom in to inspect the brushwork.
+   Phone/portrait: image on top, text below. Landscape/wide: text at the side. */
+.painting-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 5vw 56px;
+  box-sizing: border-box;
+}
+.painting-figure {
+  width: 100%;
+  text-align: center;
+}
+.painting-figure .zoom {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 76vh; /* the full painting fits on a portrait screen */
+  width: auto;
+  height: auto;
+  box-shadow: 0 0 2px 4px var(--light-frame-firstColor),
+    0 0 0 7px var(--light-frame-secondColor);
+}
+.night-mode .painting-figure .zoom {
+  box-shadow: 0 0 2px 4px var(--night-frame-firstColor),
+    0 0 0 7px var(--night-frame-secondColor);
+}
+.painting-card-info { text-align: center; }
+.painting-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--light-font-thirdColor);
+  margin-bottom: 10px;
+}
+.night-mode .painting-title { color: var(--night-font-firstColor); }
+.painting-title .uppercase { text-transform: uppercase; }
+.painting-meta {
+  color: var(--light-font-secondColor);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.night-mode .painting-meta { color: var(--night-font-secondColor); }
+.painting-blurb {
+  max-width: min(46ch, 100%);
+  margin: 0 auto 18px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--light-font-secondColor);
+}
+.night-mode .painting-blurb { color: var(--night-font-secondColor); }
+.painting-license {
+  font-size: 0.85rem;
+  color: var(--light-menuIcon-color);
+  margin-bottom: 20px;
+}
+.painting-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--lightDesktop-postBorder-color);
+  border-radius: 6px;
+  color: var(--light-font-thirdColor);
+  text-decoration: none;
+  font-weight: 700;
+  transition: opacity 0.15s ease;
+}
+.painting-download svg { font-size: 1.2rem; }
+.painting-download:hover { opacity: 0.7; }
+.night-mode .painting-download {
+  border-color: var(--nightDesktop-postBorder-color);
+  color: var(--night-font-firstColor);
+}
+.painting-back { margin-top: 28px; }
+.painting-back a {
+  color: var(--light-menuCross-color);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* 404 page */
+.notfound {
+  min-height: calc(100svh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 40px 24px;
+}
+.notfound-art { display: block; line-height: 0; margin-bottom: 8px; }
+.notfound-art img {
+  max-width: min(90vw, 520px);
+  max-height: 46vh;
+  width: auto;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.notfound-code { font-size: clamp(2.4rem, 9vw, 4.5rem); font-weight: 700; line-height: 1; }
+.notfound .painting-back { margin-top: 8px; }
+
+/* Landscape / wide screens: the painting fills the height, text sits beside it.
+   Still fully contained, so the whole work is visible without scrolling. */
+@media (min-aspect-ratio: 1 / 1) and (min-width: 760px) {
+  .painting-detail {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(24px, 4vw, 64px);
+    min-height: calc(100svh - 60px);
+    padding: 3vh 4vw 4vh;
+  }
+  .painting-figure {
+    width: auto;
+    max-width: 64vw;
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+  .painting-figure .zoom {
+    max-height: 86vh;
+    max-width: 64vw;
+  }
+  .painting-card-info {
+    text-align: left;
+    flex: 0 0 clamp(240px, 26vw, 340px);
+    margin: 0;
+  }
+  .painting-title { font-size: 1.6rem; }
+  .painting-blurb { margin-left: 0; margin-right: 0; max-width: none; }
+}
+
+/* ---- Paintingstack apps cross-promo strip ----
+   Reuses the painting carousel (.carousel/.carousel-track/.carousel-item) so the band,
+   the two hairline bars, the 16vh height and the horizontal swipe are identical
+   to the strip above. Only the icon gets the PuiAppIcon look. */
+.apps-carousel { grid-row: auto; } /* not the fixed row 2/3 the top carousel uses */
+.apps-carousel .carousel-track { justify-content: safe center; } /* centered when they fit, swipeable when they don't */
+.apps-strip-icon {
+  position: relative;
+  display: inline-block;
+  border-radius: 22.5%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, opacity 0.1s ease-in-out;
+}
+.apps-strip-icon img {
+  display: block;
+  height: 16vh;
+  width: 16vh;
+  border-radius: inherit;
+}
+/* Hairline edge drawn on top, theme-aware (dark edge on light, light on dark). */
+.apps-strip-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+.night-mode .apps-strip-icon::after { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); }
+.apps-carousel .carousel-item:hover .apps-strip-icon { transform: translateY(-2px); opacity: 0.9; }
+
+/* ---- Back-to-gallery link in the header on painting detail pages ---- */
+.header-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 22px;
+  text-decoration: none;
+  color: var(--light-font-firstColor);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.night-mode .header-back-link { color: var(--night-font-firstColor); }
+.header-chevron {
+  font-size: 1.4rem;
+  color: var(--light-menuCross-color);
+  flex: 0 0 auto;
+}
+.night-mode .header-chevron { color: var(--night-menuCross-color); }

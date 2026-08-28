@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{/* All paintings (default language) as {slug,title,url} for the client-side pick. */}}
+{{ $arts := slice }}
+{{ range .Site.RegularPages }}{{ $arts = $arts | append (dict "s" .Params.slug "t" .Title "u" .RelPermalink) }}{{ end }}
+{{/* Build-time random one, so no-JS visitors and first paint still see a painting. */}}
+{{ $rand := index (shuffle .Site.RegularPages) 0 }}
+<section class="notfound">
+  <a id="notfound-link" class="notfound-art" href="{{ $rand.RelPermalink }}">
+    <img id="notfound-img"
+         src="{{ printf "images/gundurraga/700p/%s.jpg" $rand.Params.slug | relURL }}"
+         alt="{{ $rand.Title }}" />
+  </a>
+  <h1 class="notfound-code">404</h1>
+  <p class="notfound-text">{{ i18n "galleryBlurb" }}</p>
+  <p class="painting-back">
+    <a href="{{ .Site.Home.RelPermalink }}">&larr; {{ i18n "backToGallery" }}</a>
+  </p>
+</section>
+
+<script>
+  (function () {
+    var arts = {{ $arts | jsonify | safeJS }};
+    if (!arts.length) return;
+    var p = arts[Math.floor(Math.random() * arts.length)];
+    var img = document.getElementById("notfound-img");
+    var link = document.getElementById("notfound-link");
+    if (img) { img.src = "/images/gundurraga/700p/" + p.s + ".jpg"; img.alt = p.t; }
+    if (link) { link.href = p.u; }
+  })();
+</script>
+{{ end }}

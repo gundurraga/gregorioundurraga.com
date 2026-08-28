@@ -1,0 +1,5 @@
+# Hugo build output and caches, never commit these.
+# The deployed site is built into ../docs by deploy.sh (served from main:/docs).
+public/
+resources/
+.hugo_build.lock

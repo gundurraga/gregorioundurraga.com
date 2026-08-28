@@ -1,0 +1,36 @@
+{{/* Structured data. Home = Person + the gallery. Painting = VisualArtwork. */}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" "Gregorio Undurraga"
+  "url" .Site.BaseURL
+  "jobTitle" "Painter"
+  "nationality" "Chilean"
+  "description" (i18n "pdDeclaration")
+  "sameAs" (slice "https://instagram.com/gregorioundurraga/" "https://x.com/gundurragad" "https://www.wikiart.org/en/gregorio-undurraga")
+  | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ else if .Params.slug }}
+{{ $img := printf "images/gundurraga/900p/%s.jpg" .Params.slug | absURL }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "VisualArtwork"
+  "name" .Title
+  "url" .Permalink
+  "description" (printf (i18n "artworkBlurb") .Title .Params.media .Params.dimensions .Params.location)
+  "image" $img
+  "artform" "Painting"
+  "artMedium" .Params.media
+  "dateCreated" (string (int .Params.year))
+  "creator" (dict "@type" "Person" "name" "Gregorio Undurraga")
+  "locationCreated" (dict "@type" "Place" "name" .Params.location)
+  "creditText" "Gregorio Undurraga"
+  "copyrightNotice" (i18n "pdDeclaration")
+  "license" "https://creativecommons.org/publicdomain/zero/1.0/"
+  "acquireLicensePage" .Permalink
+  | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ end }}

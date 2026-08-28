@@ -1,0 +1,19 @@
+# Gregorio Undurraga
+
+> Oil paintings by Gregorio Undurraga (Chilean painter, b. 1993). Every work on this site is released to the public domain (CC0) and free to download at full resolution. This is a personal gallery, not a store.
+
+## Paintings
+{{- $pages := sort .Site.RegularPages "Weight" }}
+{{- range $pages }}
+- [{{ .Params.titleEn }} ({{ .Params.year }})]({{ .Permalink }}): {{ .Params.media }}, {{ .Params.dimensions }}, {{ .Params.location }}. Full-resolution download: {{ printf "images/gundurraga/download/%s.jpg" .Params.slug | absURL }}
+{{- end }}
+
+## Statement
+{{ i18n "pdDeclaration" }}
+
+## About
+- Artist: Gregorio Undurraga
+- License: Public domain (CC0 1.0) — free to use, copy, and download
+- WikiArt: https://www.wikiart.org/en/gregorio-undurraga
+- Instagram: https://instagram.com/gregorioundurraga/
+- Built by: https://paintingstack.com

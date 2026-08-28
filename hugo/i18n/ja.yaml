@@ -1,0 +1,10 @@
+# ja: UI strings reviewed/translated by the i18n gang.
+nightMode: "ナイトモード"
+downloadFullRes: "フル解像度でダウンロード"
+language: "言語"
+publicDomain: "パブリックドメイン。自由に使用・ダウンロードできます"
+backToGallery: "すべての作品"
+oilPaintingBy: "グレゴリオ・ウンドゥラガによる油彩画"
+artworkBlurb: "%sは、グレゴリオ・ウンドゥラーガによる油彩画です。%s、%s、%sにて制作。パブリックドメインで、自由に使用・ダウンロードできます。"
+pdDeclaration: "私のすべての絵画がパブリックドメインであることを、こうしてお伝えできるのを嬉しく思います。作品の複製、改変、配布、そして商業目的での利用まで、私の許可を得ることなく自由に行っていただけます。"
+downloadAll: "すべてダウンロード"

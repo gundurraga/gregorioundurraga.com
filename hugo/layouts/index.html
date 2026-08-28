@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{ $pages := sort .Site.RegularPages "Weight" }}
+{{/* Split the collection into quarters and drop the apps strip at the 3 seams
+     (after 1/4, 2/4, 3/4). Scales automatically as paintings are added. */}}
+{{ $quarter := int (div (len $pages) 4) }}
+<div id="gallery">
+  <div class="carousel">
+    <div class="carousel-track">
+      {{ range $pages }}
+      <div class="carousel-item">
+        <a onclick="trackCarouselClick('{{ .Params.slug }}'); scrollSmoothTo('{{ .Params.slug }}-painting-card')">
+          <img src="{{ printf "images/gundurraga/300p/%s.jpg" .Params.slug | relURL }}" alt="{{ .Params.titleEn }}" />
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+  {{ range $i, $p := $pages }}
+  <article class="painting-card" id="{{ .Params.slug }}-painting-card">
+    <div class="painting-frame">
+      <div class="frame">
+        <a href="{{ .RelPermalink }}"
+           data-href="{{ printf "images/gundurraga/900p/%s.jpg" .Params.slug | relURL }}"
+           data-srcset="{{ printf "images/gundurraga/500p/%s.jpg" .Params.slug | relURL }} 500w,
+                        {{ printf "images/gundurraga/700p/%s.jpg" .Params.slug | relURL }} 700w,
+                        {{ printf "images/gundurraga/900p/%s.jpg" .Params.slug | relURL }} 900w"
+           data-sizes="90vw" class="progressive replace">
+          <img src="{{ printf "images/gundurraga/preview/%s.jpg" .Params.slug | relURL }}" class="preview"
+               alt="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }})" />
+        </a>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-text">
+        <h4>
+          <a href="{{ .RelPermalink }}"><strong><span id="{{ .Params.slug }}" class="uppercase">{{ .Title }}</span>, {{ .Params.year }}</strong></a>
+        </h4>
+        <h5>
+          <span>{{ .Params.media }}</span><br />
+          {{ .Params.dimensions }}<br />
+          <span>{{ .Params.location }}</span><br />
+        </h5>
+      </div>
+    </div>
+  </article>
+  {{ $n := add $i 1 }}
+  {{ if and (gt $quarter 0) (or (eq $n $quarter) (eq $n (mul $quarter 2)) (eq $n (mul $quarter 3))) }}{{ partial "apps-strip.html" . }}{{ end }}
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,21 @@
+{{/* Cross-promo strip: Paintingstack apps. Reuses the painting carousel markup
+     (.carousel/.carousel-track/.carousel-item) so it looks and swipes exactly like the
+     strip above. Links follow the current language (en at root like paintingstack). */}}
+{{ $l := .Site.Language.Lang }}
+{{ $base := "https://paintingstack.com/" }}
+{{ if ne $l "en" }}{{ $base = printf "https://paintingstack.com/%s/" $l }}{{ end }}
+<div class="carousel apps-carousel">
+  <div class="carousel-track">
+    {{ range hugo.Data.apps.apps }}
+    <div class="carousel-item">
+      <a href="{{ printf "%s%s/" $base .slug }}" target="_blank" rel="noopener"
+         aria-label="{{ .name }} — Paintingstack">
+        <span class="apps-strip-icon">
+          <img src="{{ printf "app-icons/%s.png" .slug | relURL }}" alt="{{ .name }}"
+               width="128" height="128" loading="lazy" />
+        </span>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>

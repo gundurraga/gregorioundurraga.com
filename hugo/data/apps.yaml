@@ -1,0 +1,15 @@
+# Paintingstack Flutter apps for the cross-promo strip. slug = URL path on
+# paintingstack.com. Icons: static/app-icons/<slug>.png (from APPS/<slug>/mobile).
+apps:
+  - slug: overgrid
+    name: Overgrid
+  - slug: koadro
+    name: Koadro
+  - slug: undertone
+    name: Undertone
+  - slug: trazu
+    name: Trazu
+  - slug: mintza
+    name: Mintza
+  - slug: kountrain
+    name: Kountrain

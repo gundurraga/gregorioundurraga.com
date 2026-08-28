@@ -1,0 +1,23 @@
+{{/*
+  Content adapter: generate one page per painting from data/paintings.yaml,
+  in the current site language. Runs once per language automatically (each
+  language mounts this same dir via its own sites.matrix binding in hugo.toml).
+  Add a painting to the YAML -> its page, URL, sitemap entry appear. Do it once.
+*/}}
+{{ $lang := .Site.Language.Lang }}
+{{ range $i, $p := hugo.Data.paintings.paintings }}
+  {{ $.AddPage (dict
+    "kind" "page"
+    "path" $p.slug
+    "title" (index $p.title $lang)
+    "weight" (add $i 1)
+    "params" (dict
+      "slug" $p.slug
+      "year" $p.year
+      "dimensions" $p.dimensions
+      "media" (index $p.media $lang)
+      "location" (index $p.location $lang)
+      "titleEn" (index $p.title "en")
+    )
+  ) }}
+{{ end }}

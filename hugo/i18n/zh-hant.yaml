@@ -1,0 +1,10 @@
+# zh-hant: UI strings reviewed/translated by the i18n gang.
+nightMode: "夜間模式"
+downloadFullRes: "下載完整解析度"
+language: "語言"
+publicDomain: "屬於公共領域，可自由使用與下載"
+backToGallery: "所有畫作"
+oilPaintingBy: "葛雷戈里歐·翁杜拉加的油畫作品"
+artworkBlurb: "《%s》是 Gregorio Undurraga 的油畫作品，%s，%s，繪製於 %s。此作品屬於公共領域，可自由使用與下載。"
+pdDeclaration: "我很高興向您宣布，我所有的畫作皆屬於公共領域。您可以自由複製、修改、散布及使用這些作品，即使用於商業用途也無妨，完全無需徵求我的同意。"
+downloadAll: "全部下載"

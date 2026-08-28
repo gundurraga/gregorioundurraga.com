@@ -1,0 +1,10 @@
+# NOTE : en attente de révision par la i18n gang.
+nightMode: "Mode nuit"
+downloadFullRes: "Télécharger en haute résolution"
+language: "Langue"
+publicDomain: "Domaine public, libre d’utilisation et de téléchargement"
+backToGallery: "Toutes les peintures"
+oilPaintingBy: "Peinture à l’huile de Gregorio Undurraga"
+artworkBlurb: "%s est une peinture de Gregorio Undurraga : %s, %s, réalisée à %s. Elle est dans le domaine public, libre d’utilisation et de téléchargement."
+pdDeclaration: "J’ai le plaisir de vous informer que toutes mes peintures sont dans le domaine public. Vous pouvez copier, modifier, distribuer et utiliser les œuvres, y compris à des fins commerciales, le tout sans avoir à me demander la permission."
+downloadAll: "Tout télécharger"

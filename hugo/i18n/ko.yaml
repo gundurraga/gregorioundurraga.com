@@ -1,0 +1,10 @@
+# ko: UI strings reviewed/translated by the i18n gang.
+nightMode: "야간 모드"
+downloadFullRes: "원본 해상도로 다운로드"
+language: "언어"
+publicDomain: "퍼블릭 도메인, 자유롭게 사용하고 다운로드할 수 있어요"
+backToGallery: "모든 작품"
+oilPaintingBy: "그레고리오 운두라가의 유화"
+artworkBlurb: "%s. 그레고리오 운드라가가 그린 유화예요. %s, %s, %s에서 제작했어요. 퍼블릭 도메인이라 자유롭게 사용하고 다운로드할 수 있어요."
+pdDeclaration: "제 모든 그림이 퍼블릭 도메인이라는 사실을 기쁜 마음으로 알려드려요. 상업적 용도를 포함해 작품을 복사하고 수정하고 배포하고 사용하실 수 있으며, 제 허락을 받으실 필요도 없어요."
+downloadAll: "전체 다운로드"

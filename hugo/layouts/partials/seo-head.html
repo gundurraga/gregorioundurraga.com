@@ -1,0 +1,48 @@
+{{/* Title + description, computed once per page kind. */}}
+{{ $siteName := "Gregorio Undurraga" }}
+{{ $title := "" }}
+{{ $desc := .Site.Params.description }}
+{{ $ogImage := "icons/all-paintings.jpg" | absURL }}
+{{ $ogAlt := printf "Paintings by %s" $siteName }}
+{{ if .IsHome }}
+  {{ $title = printf "%s | Oil Paintings" $siteName }}
+{{ else if .Params.slug }}
+  {{ $title = printf "%s, %d — %s" .Title (int .Params.year) $siteName }}
+  {{ $desc = printf "%s. %s, %s, %s. %s." (i18n "oilPaintingBy") .Params.media .Params.dimensions .Params.location (i18n "publicDomain") }}
+  {{ $ogImage = printf "images/gundurraga/900p/%s.jpg" .Params.slug | absURL }}
+  {{ $ogAlt = printf "%s - %s (%d)" $siteName .Params.titleEn (int .Params.year) }}
+{{ else }}
+  {{/* Non-painting pages (e.g. 404): no painting params to interpolate. */}}
+  {{ $title = printf "%s — %s" .Title $siteName }}
+  {{ $desc = i18n "galleryBlurb" }}
+{{ end }}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}" />
+<meta name="robots" content="max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* hreflang: every language version of this page, plus x-default. */}}
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+{{ end }}
+{{ with .Site.Home.AllTranslations }}
+  {{ range . }}{{ if eq .Language.Lang "en" }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />{{ end }}{{ end }}
+{{ end }}
+
+{{/* Open Graph + Twitter */}}
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+<meta property="og:site_name" content="{{ $siteName }}" />
+<meta property="og:locale" content="{{ .Site.Language.Lang }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:image" content="{{ $ogImage }}" />
+<meta property="og:image:alt" content="{{ $ogAlt }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $desc }}" />
+<meta name="twitter:image" content="{{ $ogImage }}" />
+<meta name="twitter:image:alt" content="{{ $ogAlt }}" />
+
+{{ partial "jsonld.html" . }}

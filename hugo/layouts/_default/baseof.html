@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default .Site.Language.Lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ partial "seo-head.html" . }}
+
+    <link href="{{ "css/reset.min.css" | relURL }}" rel="stylesheet" />
+    {{/* Self-hosted Roboto Condensed (@font-face) + styles, one fingerprinted bundle. */}}
+    {{ $css := slice (resources.Get "css/fonts.css") (resources.Get "css/base.css") (resources.Get "css/header.css") (resources.Get "css/content.css") (resources.Get "css/site.css") | resources.Concat "css/app.css" }}
+    {{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+    <link href="{{ $css.RelPermalink }}" rel="stylesheet"{{ with $css.Data.Integrity }} integrity="{{ . }}"{{ end }} />
+
+    {{/* Never leave the page hidden if JS is disabled (CSS gates body on the loader). */}}
+    <noscript>
+      <style>
+        body { visibility: visible !important; }
+        .loader { display: none !important; }
+      </style>
+    </noscript>
+
+    {{ partial "favicon.html" . }}
+
+    <!-- Umami Analytics -->
+    <script
+      defer
+      src="https://analytics.paintingstack.com/script.js"
+      data-website-id="fb0ae25a-b76d-4fbb-ac26-2477d4d63d10"
+    ></script>
+  </head>
+
+  <body>
+    <div class="loader">
+      <div class="frame">
+        <div class="logo noisy"><div class="inside-logo noisy"></div></div>
+      </div>
+    </div>
+
+    {{ partial "header.html" . }}
+
+    <main>{{ block "main" . }}{{ end }}</main>
+
+    <footer>
+      <div class="back-to-top" onclick="backTop()"><h5>TOP</h5></div>
+    </footer>
+
+    <script src="{{ "js/progressive-image.min.js" | relURL }}"></script>
+    <script src="{{ "js/wheelzoom.js" | relURL }}"></script>
+    <script src="{{ "js/site.js" | relURL }}"></script>
+  </body>
+</html>

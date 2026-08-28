@@ -1,0 +1,11 @@
+# NOTE: pending review by the i18n gang. en is the source of truth.
+nightMode: "Night mode"
+downloadFullRes: "Download full resolution"
+language: "Language"
+publicDomain: "Public domain, free to use and download"
+backToGallery: "All paintings"
+galleryBlurb: "Oil paintings by Gregorio Undurraga, released to the public domain"
+oilPaintingBy: "Oil painting by Gregorio Undurraga"
+artworkBlurb: "%s is an oil painting by Gregorio Undurraga — %s, %s, made in %s. It is in the public domain, free to use and download."
+pdDeclaration: "I am pleased to inform you that all my paintings are in the public domain. You may copy, modify, distribute and use the works, even for commercial purposes, all without needing to ask my permission."
+downloadAll: "Download all"

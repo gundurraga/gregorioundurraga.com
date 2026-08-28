@@ -1,0 +1,144 @@
+baseURL = 'https://gregorioundurraga.com/'
+title = 'Gregorio Undurraga'
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+
+# Taxonomies and RSS add nothing to an image gallery; keep the output surface
+# small so the sitemap stays clean (only real, indexable painting pages).
+disableKinds = ['taxonomy', 'term', 'rss']
+
+[pagination]
+  pagerSize = 200 # 88 paintings on one home page, never paginate the gallery
+
+# llms.txt: a plain-text map of the site for LLMs (emerging convention).
+[outputFormats.llms]
+  mediaType = 'text/plain'
+  baseName = 'llms'
+  isPlainText = true
+  notAlternative = true
+[outputs]
+  home = ['HTML', 'llms']
+
+[languages]
+  [languages.en]
+    label = 'English'
+    locale = 'en-US'
+    weight = 1
+    [languages.en.params]
+      description = 'Oil paintings by Gregorio Undurraga. All works released to the public domain, free to download.'
+  [languages.es]
+    label = 'Español'
+    locale = 'es-ES'
+    weight = 2
+    [languages.es.params]
+      description = 'Pinturas al óleo de Gregorio Undurraga. Todas las obras son de dominio público, libres para descargar.'
+  [languages.fr]
+    label = 'Français'
+    locale = 'fr-FR'
+    weight = 3
+    [languages.fr.params]
+      description = 'Peintures à l’huile de Gregorio Undurraga. Toutes les œuvres sont dans le domaine public, libres à télécharger.'
+  [languages.de]
+    label = 'Deutsch'
+    locale = 'de-DE'
+    weight = 4
+    [languages.de.params]
+      description = 'Ölgemälde von Gregorio Undurraga. Alle Werke sind gemeinfrei und frei herunterladbar.'
+  [languages.ja]
+    label = '日本語'
+    locale = 'ja-JP'
+    weight = 6
+    [languages.ja.params]
+      description = 'グレゴリオ・ウンドゥラガによる油彩画。すべての作品はパブリックドメインで、自由にダウンロードできます。'
+  [languages.ko]
+    label = '한국어'
+    locale = 'ko-KR'
+    weight = 7
+    [languages.ko.params]
+      description = '그레고리오 운두라가의 유화. 모든 작품은 퍼블릭 도메인으로 자유롭게 내려받을 수 있습니다.'
+  [languages.ru]
+    label = 'Русский'
+    locale = 'ru-RU'
+    weight = 5
+    [languages.ru.params]
+      description = 'Картины маслом Грегорио Ундурраги. Все работы переданы в общественное достояние и свободны для скачивания.'
+  [languages.zh-hant]
+    label = '繁體中文'
+    locale = 'zh-Hant'
+    weight = 8
+    [languages.zh-hant.params]
+      description = '格雷戈里奧・翁杜拉加的油畫。所有作品皆為公有領域，可自由下載。'
+
+# Mount the existing repo asset folders instead of copying 648MB into static/.
+# A content adapter runs once per mount-language binding, so each language needs
+# its own mount, but all 8 point at the SAME content/ dir (one shared
+# _content.gotmpl + _index.md). A single mount tagged to all languages does NOT
+# work (only the default language would generate pages). Declaring any mount
+# means we must declare all the standard ones.
+[module]
+  # Per-language bindings over one shared content dir.
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['en']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['es']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['fr']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['de']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['ja']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['ko']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['ru']
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+    sites.matrix.languages = ['zh-hant']
+  # Standard project dirs.
+  [[module.mounts]]
+    source = 'layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  [[module.mounts]]
+    source = 'data'
+    target = 'data'
+  [[module.mounts]]
+    source = 'i18n'
+    target = 'i18n'
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  # External assets from the legacy site root (single source of truth).
+  [[module.mounts]]
+    source = '../images'
+    target = 'static/images'
+  [[module.mounts]]
+    source = '../icons'
+    target = 'static/icons'
+  [[module.mounts]]
+    source = '../js/wheelzoom.js'
+    target = 'static/js/wheelzoom.js'
+  [[module.mounts]]
+    source = '../js/progressive-image.min.js'
+    target = 'static/js/progressive-image.min.js'
+  [[module.mounts]]
+    source = '../css/reset.min.css'
+    target = 'static/css/reset.min.css'

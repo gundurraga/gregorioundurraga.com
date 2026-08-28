@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{ $slug := .Params.slug }}
+<article class="painting-detail">
+  <div class="painting-figure">
+    <img class="zoom"
+         src="{{ printf "images/gundurraga/900p/%s.jpg" $slug | relURL }}"
+         alt="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }})" />
+  </div>
+
+  <div class="painting-card-info">
+    <h1 class="painting-title"><span class="uppercase">{{ .Title }}</span>, {{ .Params.year }}</h1>
+    <p class="painting-meta">
+      <span>{{ .Params.media }}</span><br />
+      {{ .Params.dimensions }}<br />
+      <span>{{ .Params.location }}</span>
+    </p>
+
+    <p class="painting-blurb">{{ printf (i18n "artworkBlurb") .Title .Params.media .Params.dimensions .Params.location }}</p>
+
+    <p class="painting-license">{{ i18n "publicDomain" }}</p>
+
+    <a class="painting-download"
+       href="{{ printf "images/gundurraga/download/%s.jpg" $slug | relURL }}"
+       download="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }}).jpg"
+       data-painting="{{ $slug }}">
+      <svg width="1em" height="1em" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" aria-hidden="true"><path d="M336 176h40a40 40 0 0140 40v208a40 40 0 01-40 40H136a40 40 0 01-40-40V216a40 40 0 0140-40h40"/><path d="M176 272l80 80 80-80M256 48v288"/></svg>
+      <span>{{ i18n "downloadFullRes" }}</span>
+    </a>
+
+    <p class="painting-back">
+      <a href="{{ .Site.Home.RelPermalink }}">&larr; {{ i18n "backToGallery" }}</a>
+    </p>
+  </div>
+</article>
+{{ end }}
