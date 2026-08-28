@@ -1,32 +1,29 @@
 # gregorioundurraga.com
 
-## About
+The personal gallery of painter Gregorio Undurraga. 88 oil paintings, all released to the public domain (CC0), free for anyone to download and use.
 
-gregorioundurraga.com is a personal website showcasing the oil paintings of Gregorio Undurraga.
+Live at [gregorioundurraga.com](https://gregorioundurraga.com).
 
-## Features
+## The paintings are yours
 
-### Multilingual Support
+Every painting here is in the public domain by the artist's choice. You may copy, modify, distribute and use the works, even commercially, without asking permission. Download any one at full resolution from its page, or grab [the whole collection as a zip](https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/all-paintings.zip).
 
-The website caters to a global audience, offering content in English, Spanish, French, Portuguese, Italian, German, and Japanese. Visitors can easily switch between these languages for a seamless browsing experience.
+## The site
 
-### Painting Gallery
+A static site built with [Hugo](https://gohugo.io), available in eight languages: English, Spanish, French, German, Russian, Japanese, Korean and Traditional Chinese. English lives at the root, the other languages under their own path (`/es/`, `/ja/`, and so on).
 
-The site features a selection of Gregorio Undurraga's oil paintings, including:
+- Source of truth: every painting is one entry in `hugo/data/paintings.yaml`, and a content adapter turns it into a page in each language.
+- No build service: the site is built locally and the output committed to `docs/`, which GitHub Pages serves. Run `./deploy.sh` to rebuild and publish.
+- Self-contained: fonts and icons are self-hosted, with no external CDNs.
 
-![The Natural Order of Things, 2024](images/gundurraga/download/the-natural-order-of-things-2024.jpg)
-_The Natural Order of Things, 2024_
+## Repository layout
 
-![The Fruitful Life of Dogs, 2023](images/gundurraga/download/the-fruitful-life-of-dogs-2023.jpg)
-_The Fruitful Life of Dogs, 2023_
-
-![The Race, 2017](images/gundurraga/download/the-race-2017.jpg)
-_The Race, 2017_
+- `hugo/`: the Hugo project (data, layouts, content adapter, i18n, assets)
+- `images/gundurraga/`: the paintings at every resolution, plus the full-resolution originals
+- `docs/`: the built site GitHub Pages serves (generated, not edited by hand)
+- `deploy.sh`: build and publish
+- `build-paintings-zip.sh`: package the full-resolution collection as a Release asset
 
 ## License
 
-This project is licensed under the MIT License. All paintings featured on the website are in the public domain by the choice of the artist. You may copy, modify, distribute and perform the work, even for commercial purposes, all without asking for permission.
-
----
-
-gregorioundurraga.com aims to present Gregorio Undurraga's oil paintings to a global audience through a simple, accessible platform.
+The paintings are public domain (CC0). The site's code is released under the MIT License (see `LICENSE`).
