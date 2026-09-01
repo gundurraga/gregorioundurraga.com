@@ -1,0 +1,30 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- /* Hugo's default sitemap plus a Google image extension. This site is 88
+       paintings, so image search is a primary channel, not a footnote: naming
+       each painting's file with its title and CC0 licence gives Google Images
+       everything it needs to index and label the work. */ -}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  {{ range .Data.Pages }}
+  {{- $page := . -}}
+  {{- if .Permalink -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{ with .Lastmod }}<lastmod>{{ safeHTML (.Format "2006-01-02T15:04:05-07:00") }}</lastmod>{{ end }}
+    {{- with .Params.slug }}
+    <image:image>
+      <image:loc>{{ printf "images/gundurraga/900p/%s.jpg" . | absURL }}</image:loc>
+      <image:title>{{ $page.Params.titleEn }}</image:title>
+      <image:caption>{{ printf "%s, %d" $page.Title (int $page.Params.year) }}</image:caption>
+      <image:license>https://creativecommons.org/publicdomain/zero/1.0/</image:license>
+    </image:image>
+    {{- end }}
+    {{- range .Translations }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+    {{- end }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+  </url>
+  {{- end -}}
+  {{ end }}
+</urlset>

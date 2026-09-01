@@ -4,6 +4,7 @@
 {{ $desc := .Site.Params.description }}
 {{ $ogImage := "icons/all-paintings.jpg" | absURL }}
 {{ $ogAlt := printf "Paintings by %s" $siteName }}
+{{ $ogSize := "" }}
 {{ if .IsHome }}
   {{ $title = printf "%s | Oil Paintings" $siteName }}
 {{ else if .Params.slug }}
@@ -11,6 +12,9 @@
   {{ $desc = printf "%s. %s, %s, %s. %s." (i18n "oilPaintingBy") .Params.media .Params.dimensions .Params.location (i18n "publicDomain") }}
   {{ $ogImage = printf "images/gundurraga/900p/%s.jpg" .Params.slug | absURL }}
   {{ $ogAlt = printf "%s - %s (%d)" $siteName .Params.titleEn (int .Params.year) }}
+  {{/* 900p is the share image itself, so the asset gives us its real
+       dimensions for free. */}}
+  {{ $ogSize = resources.Get (printf "paintings/%s.jpg" .Params.slug) }}
 {{ else }}
   {{/* Non-painting pages (e.g. 404): no painting params to interpolate. */}}
   {{ $title = printf "%s — %s" .Title $siteName }}
@@ -20,7 +24,17 @@
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}" />
 <meta name="robots" content="max-snippet:-1, max-image-preview:large" />
+<meta name="theme-color" content="#f0f0f0" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* Preload the subset the visible chrome actually uses, so the headings do not
+     swap fonts a beat after paint. Cyrillic for ru, latin everywhere else. */}}
+{{ $subset := cond (eq .Site.Language.Lang "ru") "cyrillic" "latin" }}
+{{ range slice 300 400 }}
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ printf "fonts/roboto-condensed-%d-%s.woff2" . $subset | relURL }}" />
+{{ end }}
 
 {{/* hreflang: every language version of this page, plus x-default. */}}
 {{ range .AllTranslations }}
@@ -33,13 +47,20 @@
 {{/* Open Graph + Twitter */}}
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
 <meta property="og:site_name" content="{{ $siteName }}" />
-<meta property="og:locale" content="{{ .Site.Language.Lang }}" />
+{{/* Open Graph wants language_TERRITORY (en_US), not a bare language code. */}}
+<meta property="og:locale" content="{{ replace (.Site.Language.Locale | default .Site.Language.Lang) "-" "_" }}" />
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $desc }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:image" content="{{ $ogImage }}" />
 <meta property="og:image:alt" content="{{ $ogAlt }}" />
+{{ with $ogSize }}
+<meta property="og:image:width" content="{{ .Width }}" />
+<meta property="og:image:height" content="{{ .Height }}" />
+{{ end }}
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@gundurragad" />
+<meta name="twitter:creator" content="@gundurragad" />
 <meta name="twitter:title" content="{{ $title }}" />
 <meta name="twitter:description" content="{{ $desc }}" />
 <meta name="twitter:image" content="{{ $ogImage }}" />

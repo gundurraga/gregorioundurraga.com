@@ -1,22 +1,42 @@
 {{/* Structured data. Home = Person + the gallery. Painting = VisualArtwork. */}}
 {{ if .IsHome }}
-<script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
+{{ $person := dict
   "@type" "Person"
+  "@id" (printf "%s#gregorio-undurraga" .Site.BaseURL)
   "name" "Gregorio Undurraga"
   "url" .Site.BaseURL
+  "image" ("icons/all-paintings.jpg" | absURL)
   "jobTitle" "Painter"
   "nationality" "Chilean"
   "description" (i18n "pdDeclaration")
-  "sameAs" (slice "https://instagram.com/gregorioundurraga/" "https://x.com/gundurragad" "https://www.wikiart.org/en/gregorio-undurraga")
+  "sameAs" (slice "https://instagram.com/gregorioundurraga/" "https://x.com/gundurragad" "https://www.wikiart.org/en/gregorio-undurraga") }}
+{{/* The home page IS the collection, so say so: an ImageGallery of 88 artworks
+     by a named creator is far more legible to search than a lone Person node. */}}
+{{ $gallery := dict
+  "@type" "ImageGallery"
+  "@id" .Permalink
+  "url" .Permalink
+  "name" (printf "%s | Oil Paintings" "Gregorio Undurraga")
+  "description" (i18n "galleryBlurb")
+  "inLanguage" (.Site.Language.Locale | default .Site.Language.Lang)
+  "creator" (dict "@id" (printf "%s#gregorio-undurraga" .Site.BaseURL))
+  "license" "https://creativecommons.org/publicdomain/zero/1.0/"
+  "isAccessibleForFree" true
+  "numberOfItems" (len .Site.RegularPages) }}
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@graph" (slice $person $gallery)
   | jsonify (dict "indent" "  ") | safeJS }}
 </script>
 {{ else if .Params.slug }}
 {{ $img := printf "images/gundurraga/900p/%s.jpg" .Params.slug | absURL }}
-<script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
+{{/* Breadcrumbs give the painting pages a Gallery > Title trail in the SERP
+     instead of a bare URL. */}}
+{{ $crumbs := dict
+  "@type" "BreadcrumbList"
+  "itemListElement" (slice
+    (dict "@type" "ListItem" "position" 1 "name" (i18n "backToGallery") "item" .Site.Home.Permalink)
+    (dict "@type" "ListItem" "position" 2 "name" .Title)) }}
+{{ $artwork := dict
   "@type" "VisualArtwork"
   "name" .Title
   "url" .Permalink
@@ -31,6 +51,10 @@
   "copyrightNotice" (i18n "pdDeclaration")
   "license" "https://creativecommons.org/publicdomain/zero/1.0/"
   "acquireLicensePage" .Permalink
+  "isAccessibleForFree" true
+  "inLanguage" (.Site.Language.Locale | default .Site.Language.Lang) }}
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@graph" (slice $artwork $crumbs)
   | jsonify (dict "indent" "  ") | safeJS }}
 </script>
 {{ end }}
