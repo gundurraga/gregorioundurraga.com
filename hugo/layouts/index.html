@@ -12,10 +12,10 @@
     <div class="carousel-track">
       {{ range $i, $p := $pages }}
       {{ $master := resources.Get (printf "paintings/%s.jpg" .Params.slug) }}
-      {{/* The strip renders ~200px tall, so ship a thumbnail built for that
-           instead of the 79KB 300p file: 360px of height covers retina, and
-           WebP at q75 is indistinguishable at this size. Over 88 thumbnails
-           that is the difference between a 7MB home page and a 1MB one. */}}
+      {{/* The strip renders ~200px tall, so build the thumbnail for that:
+           360px of height covers retina, and WebP at q75 is indistinguishable
+           at this size. Over 88 thumbnails that is the difference between a
+           7MB home page and a 1MB one. */}}
       {{ $thumb := $master.Resize "x360 webp q75" }}
       <div class="carousel-item">
         <a onclick="trackCarouselClick('{{ .Params.slug }}'); scrollSmoothTo('{{ .Params.slug }}-painting-card')">
