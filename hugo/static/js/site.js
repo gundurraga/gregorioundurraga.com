@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
 // Fail-safe: if load never fires (cache quirks), reveal anyway.
 setTimeout(revealBody, 2500);
 
-// ---- Deep-link back into the gallery (#<slug>-painting-card), so leaving a
+// ---- Deep-link back into the gallery (#<slug>), so leaving a
 // painting page returns you to that painting instead of the top. Images stream
 // in and shift the page under us, so re-anchor for a moment after load, and let
 // go the instant the visitor takes over.
@@ -95,7 +95,7 @@ window.showLanguages = showLanguages;
 // ---- Header hide-on-scroll-down + close menu when clicking outside.
 window.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector("#header");
-  // Start from wherever the page actually is: landing on #slug-painting-card
+  // Start from wherever the page actually is: landing on a #slug anchor
   // means we open partway down, and comparing that against 0 would read as a
   // scroll and hide the header the moment you arrive.
   let last = window.pageYOffset;

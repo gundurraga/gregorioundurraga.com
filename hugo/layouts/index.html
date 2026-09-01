@@ -18,7 +18,7 @@
            7MB home page and a 1MB one. */}}
       {{ $thumb := $master.Resize "x360 webp q75" }}
       <div class="carousel-item">
-        <a onclick="trackCarouselClick('{{ .Params.slug }}'); scrollSmoothTo('{{ .Params.slug }}-painting-card')">
+        <a onclick="trackCarouselClick('{{ .Params.slug }}'); scrollSmoothTo('{{ .Params.slug }}')">
           <img src="{{ $thumb.RelPermalink }}" alt="{{ .Params.titleEn }}"
                width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
                {{ if ge $i 8 }}loading="lazy" {{ end }}decoding="async" />
@@ -30,7 +30,7 @@
 
   {{ range $i, $p := $pages }}
   {{ $master := resources.Get (printf "paintings/%s.jpg" .Params.slug) }}
-  <article class="painting-card" id="{{ .Params.slug }}-painting-card">
+  <article class="painting-card" id="{{ .Params.slug }}">
     <div class="painting-frame">
       <div class="frame">
         <a href="{{ .RelPermalink }}"
@@ -50,7 +50,7 @@
     <div class="card-info">
       <div class="card-text">
         <h4>
-          <a href="{{ .RelPermalink }}"><strong><span id="{{ .Params.slug }}" class="uppercase">{{ .Title }}</span>, {{ .Params.year }}</strong></a>
+          <a href="{{ .RelPermalink }}"><strong><span class="uppercase">{{ .Title }}</span>, {{ .Params.year }}</strong></a>
         </h4>
         <h5>
           <span>{{ .Params.media }}</span><br />
