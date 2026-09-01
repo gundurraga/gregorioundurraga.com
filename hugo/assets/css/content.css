@@ -110,6 +110,9 @@
   opacity: 0.85;
 }
 .painting-card {
+  /* Clears the fixed header when you land here from a #slug-painting-card link
+     or from the carousel. */
+  scroll-margin-top: 60px;
   grid-column: center-start / center-end;
   display: flex;
   flex-direction: column;

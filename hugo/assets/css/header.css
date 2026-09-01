@@ -6,7 +6,10 @@ nav {
   margin-top: 0;
   width: 100%;
   z-index: 10;
-  transition: transform 1s;
+  /* The slide (hide on scroll down) and the fade-in on first load share one
+     transition list on purpose: a `transition` shorthand elsewhere would
+     replace this whole list, not add to it, and the slide would be lost. */
+  transition: transform 1s, opacity 0.5s ease-out;
   display: flex;
   height: 56px;
   background-color: var(--light-header-color);

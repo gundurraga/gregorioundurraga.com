@@ -82,8 +82,39 @@ body {
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  visibility: hidden; /* hidden for the loader */
+  visibility: hidden; /* hidden for the loader, which sets itself visible again */
   letter-spacing: 0.03em; /* Adjust this value as needed */
+}
+
+/* site.js adds .is-ready once the page has loaded. The content fades in while
+   the loader fades out, so the two cross rather than queue. A pure crossfade,
+   deliberately: nothing slides or drifts. The work should hang still, the way
+   it would on a wall, and only the light comes up.
+   The fade sits on the content, never on <body>: a child can opt out of an
+   inherited visibility, but nothing escapes an ancestor's opacity, so fading
+   <body> would take the loader down with it. */
+body.is-ready {
+  visibility: visible;
+}
+
+#header,
+main,
+footer {
+  opacity: 0;
+}
+
+body.is-ready #header,
+body.is-ready main,
+body.is-ready footer {
+  opacity: 1;
+}
+
+/* Only main and footer get their fade declared here. The header's lives in
+   header.css next to its slide, because one element can only have one
+   transition list and the slide has to survive. */
+body.is-ready main,
+body.is-ready footer {
+  transition: opacity 0.5s ease-out;
 }
 
 body.night-mode {
@@ -117,7 +148,12 @@ h4 {
   left: 50%;
   margin-top: -22vmin;
   margin-left: -22vmin;
-  transition: opacity 0.3s linear;
+  transition: opacity 0.5s ease-out;
+}
+
+.loader.is-gone {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .loader .logo {
@@ -125,6 +161,41 @@ h4 {
   height: 44vmin;
   width: 44vmin;
   background-color: rgb(243, 238, 229);
+}
+
+/* The breathing goes on the whole framed unit, never on the canvas alone: the
+   moulding is drawn by .frame, so scaling only the logo pulled the picture away
+   from its own frame. And it breathes with light rather than size, so nothing
+   in the loader moves either. */
+.loader .frame {
+  animation: loaderBreathe 2.6s ease-in-out infinite;
+}
+
+@keyframes loaderBreathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+  body.is-ready main,
+  body.is-ready footer {
+    transition: opacity 0.2s linear;
+  }
+  .loader .frame {
+    animation: none;
+  }
+  .loader {
+    transition: opacity 0.2s linear;
+  }
 }
 
 .loader .inside-logo {

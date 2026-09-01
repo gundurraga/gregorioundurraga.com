@@ -1,18 +1,55 @@
 "use strict";
 
-// ---- Reveal (CSS hides <body> until the loader clears; never leave it hidden).
+// ---- Reveal. The loader dissolves forward while the gallery rises into place;
+// CSS owns the motion, this only flips the classes. Never leave body hidden.
+const MIN_LOADER_MS = 400; // a floor, so a cached load doesn't flash the loader
+const bootedAt = performance.now();
+let revealed = false;
+
 function revealBody() {
+  if (revealed) return;
+  revealed = true;
   const loader = document.querySelector(".loader");
   if (loader) {
-    loader.style.opacity = "0";
-    setTimeout(() => { loader.style.display = "none"; }, 450);
+    loader.classList.add("is-gone");
+    loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+    setTimeout(() => loader.remove(), 1000); // in case the transition never fires
   }
-  document.body.style.visibility = "visible";
+  document.body.classList.add("is-ready");
   applyTheme();
 }
-window.addEventListener("load", () => setTimeout(revealBody, 300));
+window.addEventListener("load", () => {
+  setTimeout(revealBody, Math.max(0, MIN_LOADER_MS - (performance.now() - bootedAt)));
+});
 // Fail-safe: if load never fires (cache quirks), reveal anyway.
 setTimeout(revealBody, 2500);
+
+// ---- Deep-link back into the gallery (#<slug>-painting-card), so leaving a
+// painting page returns you to that painting instead of the top. Images stream
+// in and shift the page under us, so re-anchor for a moment after load, and let
+// go the instant the visitor takes over.
+// While this is true the page is being positioned by us, not by the visitor, so
+// the header must not read those jumps as scrolling and slide itself away.
+let anchoring = false;
+
+(function anchorToPainting() {
+  if (!location.hash) return;
+  anchoring = true;
+  const release = () => { anchoring = false; };
+  ["wheel", "touchstart", "keydown"].forEach((evt) =>
+    window.addEventListener(evt, release, { once: true, passive: true }));
+
+  const anchor = () => {
+    if (!anchoring) return;
+    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el) el.scrollIntoView({ block: "start", behavior: "instant" });
+  };
+  anchor();
+  window.addEventListener("load", () => {
+    [0, 150, 400, 900].forEach((t) => setTimeout(anchor, t));
+    setTimeout(release, 1000);
+  });
+})();
 
 // ---- Theme (system preference, overridable and persisted).
 function applyTheme() {
@@ -58,9 +95,13 @@ window.showLanguages = showLanguages;
 // ---- Header hide-on-scroll-down + close menu when clicking outside.
 window.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector("#header");
-  let last = 0;
+  // Start from wherever the page actually is: landing on #slug-painting-card
+  // means we open partway down, and comparing that against 0 would read as a
+  // scroll and hide the header the moment you arrive.
+  let last = window.pageYOffset;
   window.addEventListener("scroll", () => {
     const y = window.pageYOffset;
+    if (anchoring) { last = y; return; }
     if (last < y && y > 112) {
       navbar.classList.add("scrollUp");
       document.querySelector("#menu").classList.remove("in-view");

@@ -5,7 +5,8 @@
     <h1>Gregorio<strong>Undurraga</strong></h1>
   </a>
   {{ else }}
-  <a class="header-back-link" href="{{ .Site.Home.RelPermalink }}">
+  {{/* Land back on the painting you were looking at, not at the top. */}}
+  <a class="header-back-link" href="{{ .Site.Home.RelPermalink }}{{ with .Params.slug }}#{{ . }}-painting-card{{ end }}">
     <svg class="header-chevron" width="1em" height="1em" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" aria-hidden="true"><path d="M328 112L184 256l144 144"/></svg>
     <span>{{ i18n "backToGallery" }}</span>
   </a>
