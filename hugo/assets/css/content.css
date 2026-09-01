@@ -93,6 +93,7 @@
   display: block;
   max-height: 16vh;
   width: auto;
+  height: auto;
   transition: opacity 0.1s ease-in-out;
   cursor: pointer;
 }
@@ -175,17 +176,22 @@
   overflow: hidden;
 }
 
+/* A definite width plus height:auto is what lets the browser reserve the exact
+   box before the file arrives, which is what makes the lazy loading invisible.
+   min() reproduces the old max-width/max-height caps, but as a size it can
+   compute immediately rather than a clamp that only bites once the image has
+   loaded and reported its own dimensions. --w and --ar are set on .progressive
+   from the real file, so both the preview and the full image JS swaps in
+   resolve to the same box. */
 .progressive img {
   position: relative;
   display: block;
-  max-height: 90vh;
-  max-width: 90vw;
+  width: min(var(--w), 90vw, calc(90vh * var(--ar)));
+  height: auto;
 }
 
 .progressive img.preview {
   filter: blur(3px);
-  max-height: 90vh;
-  max-width: 90vw;
 }
 .progressive img.reveal {
   position: absolute;
@@ -393,13 +399,7 @@ a:active i {
   }
 
   .progressive img {
-    max-height: 85vh;
-    max-width: calc(85vw - 200px);
-  }
-
-  .progressive img.preview {
-    max-height: 85vh;
-    max-width: calc(85vw - 200px);
+    width: min(var(--w), calc(85vw - 200px), calc(85vh * var(--ar)));
   }
 
   .card-info {

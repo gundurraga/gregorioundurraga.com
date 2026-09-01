@@ -3,13 +3,25 @@
 {{/* Split the collection into quarters and drop the apps strip at the 3 seams
      (after 1/4, 2/4, 3/4). Scales automatically as paintings are added. */}}
 {{ $quarter := int (div (len $pages) 4) }}
+{{/* Every <img> carries its real width/height so the browser reserves the exact
+     box before the file arrives. That kills layout shift AND is what makes the
+     lazy loading below safe: progressive-image.js decides what to swap from
+     getBoundingClientRect(), which is only meaningful if the boxes have size. */}}
 <div id="gallery">
   <div class="carousel">
     <div class="carousel-track">
-      {{ range $pages }}
+      {{ range $i, $p := $pages }}
+      {{ $master := resources.Get (printf "paintings/%s.jpg" .Params.slug) }}
+      {{/* The strip renders ~200px tall, so ship a thumbnail built for that
+           instead of the 79KB 300p file: 360px of height covers retina, and
+           WebP at q75 is indistinguishable at this size. Over 88 thumbnails
+           that is the difference between a 7MB home page and a 1MB one. */}}
+      {{ $thumb := $master.Resize "x360 webp q75" }}
       <div class="carousel-item">
         <a onclick="trackCarouselClick('{{ .Params.slug }}'); scrollSmoothTo('{{ .Params.slug }}-painting-card')">
-          <img src="{{ printf "images/gundurraga/300p/%s.jpg" .Params.slug | relURL }}" alt="{{ .Params.titleEn }}" />
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ .Params.titleEn }}"
+               width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+               {{ if ge $i 8 }}loading="lazy" {{ end }}decoding="async" />
         </a>
       </div>
       {{ end }}
@@ -17,6 +29,7 @@
   </div>
 
   {{ range $i, $p := $pages }}
+  {{ $master := resources.Get (printf "paintings/%s.jpg" .Params.slug) }}
   <article class="painting-card" id="{{ .Params.slug }}-painting-card">
     <div class="painting-frame">
       <div class="frame">
@@ -25,8 +38,11 @@
            data-srcset="{{ printf "images/gundurraga/500p/%s.jpg" .Params.slug | relURL }} 500w,
                         {{ printf "images/gundurraga/700p/%s.jpg" .Params.slug | relURL }} 700w,
                         {{ printf "images/gundurraga/900p/%s.jpg" .Params.slug | relURL }} 900w"
-           data-sizes="90vw" class="progressive replace">
+           data-sizes="90vw" class="progressive replace"
+           style="--w: {{ $master.Width }}px; --ar: {{ printf "%.5f" (div (float $master.Width) (float $master.Height)) }}">
           <img src="{{ printf "images/gundurraga/preview/%s.jpg" .Params.slug | relURL }}" class="preview"
+               width="{{ $master.Width }}" height="{{ $master.Height }}"
+               {{ if eq $i 0 }}fetchpriority="high" {{ else }}loading="lazy" {{ end }}decoding="async"
                alt="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }})" />
         </a>
       </div>

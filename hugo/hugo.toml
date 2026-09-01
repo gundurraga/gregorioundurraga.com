@@ -130,6 +130,14 @@ disableKinds = ['taxonomy', 'term', 'rss']
   [[module.mounts]]
     source = '../images'
     target = 'static/images'
+  # The 900px masters again, this time as assets, so templates can (a) read each
+  # painting's real pixel dimensions at build time and (b) generate the carousel
+  # thumbnails. preview/ and 900p/ are the same pixel size, so these dimensions
+  # describe every derivative. Files are only published when a template asks for
+  # a transform; a plain dimension read costs nothing.
+  [[module.mounts]]
+    source = '../images/gundurraga/900p'
+    target = 'assets/paintings'
   [[module.mounts]]
     source = '../icons'
     target = 'static/icons'
