@@ -25,18 +25,19 @@
   width: 100%;
   text-align: center;
 }
-.painting-figure .zoom {
+/* .frame carries the moulding and the drop shadow (see content.css); here it
+   only has to hug the painting instead of stretching the full column. */
+.painting-figure .frame {
   display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.painting-figure .zoom {
+  display: block;
   max-width: 100%;
   max-height: 76vh; /* the full painting fits on a portrait screen */
   width: auto;
   height: auto;
-  box-shadow: 0 0 2px 4px var(--light-frame-firstColor),
-    0 0 0 7px var(--light-frame-secondColor);
-}
-.night-mode .painting-figure .zoom {
-  box-shadow: 0 0 2px 4px var(--night-frame-firstColor),
-    0 0 0 7px var(--night-frame-secondColor);
 }
 .painting-card-info { text-align: center; }
 .painting-title {

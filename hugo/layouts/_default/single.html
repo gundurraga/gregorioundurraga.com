@@ -1,10 +1,17 @@
 {{ define "main" }}
 {{ $slug := .Params.slug }}
 <article class="painting-detail">
+  {{/* Same .frame as the gallery, so a painting is hung the same way whether you
+       are scrolling past it or standing in front of it. */}}
+  {{ $master := resources.Get (printf "paintings/%s.jpg" $slug) }}
   <div class="painting-figure">
-    <img class="zoom"
-         src="{{ printf "images/gundurraga/900p/%s.jpg" $slug | relURL }}"
-         alt="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }})" />
+    <div class="frame">
+      <img class="zoom"
+           src="{{ printf "images/gundurraga/900p/%s.jpg" $slug | relURL }}"
+           width="{{ $master.Width }}" height="{{ $master.Height }}"
+           fetchpriority="high" decoding="async"
+           alt="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }})" />
+    </div>
   </div>
 
   <div class="painting-card-info">
