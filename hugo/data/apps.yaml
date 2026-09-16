@@ -9,6 +9,8 @@ apps:
     name: Undertone
   - slug: trazu
     name: Trazu
+  - slug: skisa
+    name: Skisa
   - slug: mintza
     name: Mintza
   - slug: kountrain
