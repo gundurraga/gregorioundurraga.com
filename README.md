@@ -6,7 +6,7 @@ Live at [gregorioundurraga.com](https://gregorioundurraga.com).
 
 ## The paintings are yours
 
-Every painting here is in the public domain by the artist's choice. You may copy, modify, distribute and use the works, even commercially, without asking permission. Download any one at full resolution from its page, or grab [the whole collection as a zip](https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/all-paintings.zip).
+Every painting here is in the public domain by the artist's choice. You may copy, modify, distribute and use the works, even commercially, without asking permission. Download any one at full resolution from its page, or grab [the whole collection as a zip](https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/gregorio-undurraga-collected-works.zip).
 
 ## The site
 
