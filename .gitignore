@@ -17,3 +17,6 @@ js/utils
 allPaintings.html
 
 project-root/
+# Secrets
+.env
+.env.*
