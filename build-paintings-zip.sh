@@ -15,6 +15,8 @@ SRC="images/gundurraga/download"
 TMP="$(mktemp -d)"
 ZIP="$TMP/$ASSET"
 
+./strip-location.sh
+
 echo "==> Zipping $SRC ..."
 # -j flattens (just the .jpg files, no directory nesting); -X drops extra metadata.
 ( cd "$SRC" && zip -q -j -X "$ZIP" ./*.jpg )

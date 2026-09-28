@@ -21,6 +21,8 @@ cd "$REPO_ROOT"
 
 command -v hugo >/dev/null || { echo "ERROR: hugo not found in PATH." >&2; exit 1; }
 
+./strip-location.sh
+
 echo "==> Building site (production, minified) into ./docs ..."
 # Wipe docs so deleted pages/images don't linger. The custom-domain CNAME is
 # sourced from hugo/static/CNAME, so Hugo re-emits docs/CNAME every build.
