@@ -1,0 +1,33 @@
+{{/*
+  "Download all" asks first, because it is one large zip: what it holds, how
+  big it is, and that it is free. Without JS the menu link downloads directly.
+*/}}
+{{ with hugo.Data.download }}
+<dialog id="download-all-dialog" class="download-dialog">
+  {{/* A central slice of every painting, side by side: the whole collection at a
+       glance. Composed once at build time into one small image; the steps stay
+       lossless PNG so 88 overlays do not degrade it, and only the result is WebP. */}}
+  {{ $pages := sort site.RegularPages "Weight" }}
+  {{ $sliceWidth := 10 }}
+  {{ $height := 240 }}
+  {{ $strip := (resources.Get (printf "paintings/%s.jpg" (index $pages 0).Params.slug)).Fill (printf "%dx%d png" (mul $sliceWidth (len $pages)) $height) }}
+  {{ range $index, $page := $pages }}
+    {{ $slice := (resources.Get (printf "paintings/%s.jpg" $page.Params.slug)).Fill (printf "%dx%d Center" $sliceWidth $height) }}
+    {{ $strip = $strip | images.Filter (images.Overlay $slice (mul $index $sliceWidth) 0) }}
+  {{ end }}
+  {{ $strip = $strip.Process "webp q80" }}
+  <img class="download-dialog-preview" src="{{ $strip.RelPermalink }}" width="{{ $strip.Width }}" height="{{ $strip.Height }}" alt="" loading="lazy" decoding="async" />
+  <div class="download-dialog-body">
+    <h3>{{ i18n "downloadAllTitle" }}</h3>
+    <p>{{ printf (i18n "downloadAllDetails") .paintings (math.Round (div .bytes 1e6) | int) }}</p>
+    <p class="download-dialog-license">{{ i18n "publicDomain" }}</p>
+    <form method="dialog" class="download-dialog-actions">
+      <button class="download-dialog-cancel">{{ i18n "cancel" }}</button>
+      <a class="download-dialog-confirm" href="{{ site.Params.collectedWorksZip }}">
+        {{ partial "icon.html" "download" }}
+        <span>{{ i18n "download" }}</span>
+      </a>
+    </form>
+  </div>
+</dialog>
+{{ end }}

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Build a full-resolution zip of every painting and publish it as a GitHub
-# Release asset. The site's "Download all" menu link points at the stable URL
-#   https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/gregorio-undurraga-collected-works.zip
-# Run this whenever the paintings change (or from deploy.sh). Needs `gh` auth.
+# Release asset, at the stable URL the site's "Download all" links to
+# (params.collectedWorksZip in hugo/hugo.toml). Run this whenever the paintings
+# change; the build fails while its painting count differs from the site's. Needs `gh` auth.
 #
 # The zip is built in a temp dir, never committed (it is far over GitHub's 100MB
 # per-file limit; Release assets allow up to 2GB, which is why we use a Release).
@@ -13,6 +13,7 @@ TAG="paintings"
 ASSET="gregorio-undurraga-collected-works.zip"
 SRC="images/gundurraga/download"
 TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
 ZIP="$TMP/$ASSET"
 
 ./strip-location.sh
@@ -33,5 +34,12 @@ else
     --notes "Every oil painting by Gregorio Undurraga at full resolution. Public domain (CC0), free to use and download. Rebuilt whenever the collection changes."
 fi
 
-rm -rf "$TMP"
+# The "Download all" dialog states what the visitor is about to get.
+cat > hugo/data/download.yaml <<EOF_DATA
+# Written by build-paintings-zip.sh from the published zip. Do not edit by hand.
+paintings: $COUNT
+bytes: $(wc -c < "$ZIP" | tr -d ' ')
+EOF_DATA
+echo "    Wrote hugo/data/download.yaml, deploy to update the site."
+
 echo "==> Done: https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/$ASSET"
