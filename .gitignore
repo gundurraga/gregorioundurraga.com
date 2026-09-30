@@ -20,3 +20,8 @@ project-root/
 # Secrets
 .env
 .env.*
+
+# Local scratch: screenshots, browser profiles, dev server logs
+.shots/
+*.log
+.tmp/

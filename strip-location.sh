@@ -12,13 +12,13 @@ cd "$(dirname "$0")"
 
 command -v exiftool >/dev/null || { echo "ERROR: exiftool not found (brew install exiftool)." >&2; exit 1; }
 
-echo "==> Stripping location metadata from images/ ..."
+echo "==> Stripping location metadata from images/ and icons/ ..."
 exiftool -q -q -r -overwrite_original -if '$GPSLatitude or $GPSLongitude or $GPSPosition' \
   -all= -tagsfromfile @ -icc_profile -orientation \
-  -ext jpg -ext jpeg -ext png -ext webp -ext heic -ext tif -ext tiff images || true
+  -ext jpg -ext jpeg -ext png -ext webp -ext heic -ext tif -ext tiff images icons || true
 
 LEFT=$(exiftool -q -q -r -if '$GPSLatitude or $GPSLongitude or $GPSPosition' -p '$Directory/$FileName' \
-  -ext jpg -ext jpeg -ext png -ext webp -ext heic -ext tif -ext tiff images || true)
+  -ext jpg -ext jpeg -ext png -ext webp -ext heic -ext tif -ext tiff images icons || true)
 if [ -n "$LEFT" ]; then
   echo "ERROR: these images still carry a location, refusing to publish:" >&2
   echo "$LEFT" >&2
