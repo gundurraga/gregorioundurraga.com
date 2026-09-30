@@ -34,13 +34,13 @@
 {{ $crumbs := dict
   "@type" "BreadcrumbList"
   "itemListElement" (slice
-    (dict "@type" "ListItem" "position" 1 "name" (i18n "backToGallery") "item" .Site.Home.Permalink)
+    (dict "@type" "ListItem" "position" 1 "name" (i18n "home") "item" .Site.Home.Permalink)
     (dict "@type" "ListItem" "position" 2 "name" .Title)) }}
 {{ $artwork := dict
   "@type" "VisualArtwork"
   "name" .Title
   "url" .Permalink
-  "description" (printf (i18n "artworkBlurb") .Title .Params.media .Params.dimensions .Params.location)
+  "description" (partial "artwork-blurb.html" . | plainify | htmlUnescape)
   "image" $img
   "artform" "Painting"
   "artMedium" .Params.media

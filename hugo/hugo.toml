@@ -8,8 +8,12 @@ enableRobotsTXT = true
 # small so the sitemap stays clean (only real, indexable painting pages).
 disableKinds = ['taxonomy', 'term', 'rss']
 
+[params]
+  # Every painting at full resolution, published by build-paintings-zip.sh.
+  collectedWorksZip = 'https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/gregorio-undurraga-collected-works.zip'
+
 [pagination]
-  pagerSize = 200 # 88 paintings on one home page, never paginate the gallery
+  pagerSize = 200 # 88 paintings on one home page, never paginate the home page
 
 # llms.txt: a plain-text map of the site for LLMs (emerging convention).
 [outputFormats.llms]
@@ -138,6 +142,11 @@ disableKinds = ['taxonomy', 'term', 'rss']
   [[module.mounts]]
     source = '../images/gundurraga/900p'
     target = 'assets/paintings'
+  # The full-resolution originals as assets, only so the 3D gallery can derive
+  # its sharp WebP textures from them (upscaling the 900px masters would blur).
+  [[module.mounts]]
+    source = '../images/gundurraga/download'
+    target = 'assets/originals'
   [[module.mounts]]
     source = '../icons'
     target = 'static/icons'

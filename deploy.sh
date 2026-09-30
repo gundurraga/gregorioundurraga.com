@@ -31,6 +31,27 @@ hugo --source hugo --destination "$REPO_ROOT/docs" --minify --gc --environment p
 
 test -f docs/CNAME || { echo "ERROR: docs/CNAME missing, refusing to deploy (custom domain would break)." >&2; exit 1; }
 
+echo "==> Testing the 3D gallery against the built site ..."
+command -v node >/dev/null || { echo "ERROR: node not found in PATH (needed for the gallery tests)." >&2; exit 1; }
+node --test "hugo/assets/gallery/plan/*.test.js"
+
+GALLERY_BUNDLE=$(ls docs/js/gallery.*.js)
+BUNDLE_KB=$(( $(gzip -c "$GALLERY_BUNDLE" | wc -c) / 1024 ))
+test "$BUNDLE_KB" -le 250 || { echo "ERROR: gallery bundle is ${BUNDLE_KB} KB gzipped, over the 250 KB budget." >&2; exit 1; }
+# The gallery fetches only from this site: no CDN, decoder or font host may slip
+# in. The two allowed hosts are plain strings inside three.js, never requested.
+FOREIGN_HOSTS=$(grep -oE 'https?://[a-zA-Z0-9.-]+' "$GALLERY_BUNDLE" | grep -vE '^https?://(www\.w3\.org|jcgt\.org)$' || true)
+test -z "$FOREIGN_HOSTS" || { echo "ERROR: gallery bundle references outside hosts: ${FOREIGN_HOSTS}" >&2; exit 1; }
+# Every language has an i18n file; English lives at the site root.
+LANGUAGE_COUNT=0
+for I18N_FILE in hugo/i18n/*.yaml; do
+  LANGUAGE=$(basename "$I18N_FILE" .yaml)
+  LANGUAGE_DIR=$([ "$LANGUAGE" = en ] && echo "" || echo "$LANGUAGE/")
+  test -f "docs/${LANGUAGE_DIR}gallery/index.html" || { echo "ERROR: docs/${LANGUAGE_DIR}gallery/index.html missing." >&2; exit 1; }
+  LANGUAGE_COUNT=$((LANGUAGE_COUNT + 1))
+done
+echo "==> Gallery bundle ${BUNDLE_KB} KB gzipped, no outside hosts, ${LANGUAGE_COUNT} languages."
+
 FILES=$(find docs -type f | wc -l | tr -d ' ')
 SIZE=$(du -sh docs | cut -f1)
 echo "==> Built ${FILES} files (${SIZE})."

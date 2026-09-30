@@ -1,0 +1,59 @@
+{{/*
+  Fails the build on painting data the site cannot show truthfully. Every
+  message names the slug. Dimensions are "H x W cm" and must agree with the
+  image's shape, because the 3D gallery hangs each painting at its true size.
+*/}}
+{{ $countryIds := slice }}
+{{ range hugo.Data.countries.countries }}
+  {{ $country := . }}
+  {{ $countryIds = $countryIds | append .id }}
+  {{ if not (where hugo.Data.paintings.paintings "country" .id) }}{{ errorf "countries.yaml: %q has no paintings, so its room would be empty" .id }}{{ end }}
+  {{ range slice "wall" "card" }}
+    {{ if not (findRE `^#[0-9A-Fa-f]{6}$` (index $country .)) }}{{ errorf "countries.yaml: %q needs a %s colour like \"#A1B2C3\"" $country.id . }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ $frameIds := slice }}
+{{ range hugo.Data.frames.frames }}{{ $frameIds = $frameIds | append .id }}{{ end }}
+{{ $seen := slice }}
+{{ range hugo.Data.paintings.paintings }}
+  {{ $painting := . }}
+  {{ $slug := .slug }}
+  {{ if in $seen $slug }}{{ errorf "paintings.yaml: duplicate slug %q" $slug }}{{ end }}
+  {{ $seen = $seen | append $slug }}
+
+  {{ range hugo.Sites }}
+    {{ $lang := .Language.Lang }}
+    {{ range slice "title" "media" "location" }}
+      {{ if not (index $painting . $lang) }}{{ errorf "paintings.yaml: %q has no %s in %q" $slug . $lang }}{{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $match := findRESubmatch `^(\d+(?:\.\d+)?) x (\d+(?:\.\d+)?) cm$` .dimensions }}
+  {{ if not $match }}{{ errorf "paintings.yaml: %q dimensions %q are not \"H x W cm\"" $slug .dimensions }}{{ end }}
+  {{ $heightCm := float (index $match 0 1) }}
+  {{ $widthCm := float (index $match 0 2) }}
+  {{ range slice $heightCm $widthCm }}
+    {{ if or (lt . 10) (gt . 300) }}{{ errorf "paintings.yaml: %q dimension %v cm is outside 10 to 300" $slug . }}{{ end }}
+  {{ end }}
+
+  {{ $image := resources.Get (printf "paintings/%s.jpg" $slug) }}
+  {{ if not $image }}{{ errorf "paintings.yaml: %q has no image in images/gundurraga/900p" $slug }}{{ end }}
+  {{ if not (resources.Get (printf "originals/%s.jpg" $slug)) }}{{ errorf "paintings.yaml: %q has no image in images/gundurraga/download" $slug }}{{ end }}
+  {{ $aspectRatio := div (div $widthCm $heightCm) (div (float $image.Width) $image.Height) }}
+  {{ if gt (math.Abs (sub $aspectRatio 1)) 0.06 }}
+    {{ errorf "paintings.yaml: %q dimensions %q disagree with its %dx%d image (height first?)" $slug .dimensions $image.Width $image.Height }}
+  {{ end }}
+
+  {{ if not (in $countryIds .country) }}{{ errorf "paintings.yaml: %q has unknown country %q" $slug .country }}{{ end }}
+  {{ range where hugo.Data.countries.countries "id" .country }}
+    {{ if not (strings.HasSuffix $painting.location.en .name.en) }}
+      {{ errorf "paintings.yaml: %q is filed under %q but located in %q" $slug .id $painting.location.en }}
+    {{ end }}
+  {{ end }}
+  {{ with .panels }}
+    {{ if or (ne (float .) (float (int .))) (lt (int .) 2) }}{{ errorf "paintings.yaml: %q panels must be a whole number of 2 or more" $slug }}{{ end }}
+  {{ end }}
+  {{ if not (in $frameIds .frame) }}{{ errorf "paintings.yaml: %q has unknown frame %q" $slug .frame }}{{ end }}
+{{ end }}
+{{ $zipPaintings := hugo.Data.download.paintings }}
+{{ if ne $zipPaintings (len hugo.Data.paintings.paintings) }}{{ errorf "download.yaml: the published zip holds %v paintings but paintings.yaml lists %d. Run ./build-paintings-zip.sh" $zipPaintings (len hugo.Data.paintings.paintings) }}{{ end }}

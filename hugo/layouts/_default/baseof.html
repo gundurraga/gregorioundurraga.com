@@ -10,6 +10,7 @@
     {{ $css := slice (resources.Get "css/fonts.css") (resources.Get "css/base.css") (resources.Get "css/header.css") (resources.Get "css/content.css") (resources.Get "css/site.css") | resources.Concat "css/app.css" }}
     {{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
     <link href="{{ $css.RelPermalink }}" rel="stylesheet"{{ with $css.Data.Integrity }} integrity="{{ . }}"{{ end }} />
+    {{ block "head" . }}{{ end }}
 
     {{/* Never leave the page hidden if JS is disabled (CSS gates body on the loader). */}}
     <noscript>
@@ -41,12 +42,16 @@
 
     <main>{{ block "main" . }}{{ end }}</main>
 
+    {{ block "footer" . }}
     <footer>
       <div class="back-to-top" onclick="backTop()"><h5>TOP</h5></div>
     </footer>
+    {{ end }}
 
+    {{ block "scripts" . }}
     <script src="{{ "js/progressive-image.min.js" | relURL }}"></script>
     <script src="{{ "js/wheelzoom.js" | relURL }}"></script>
+    {{ end }}
     <script src="{{ "js/site.js" | relURL }}"></script>
   </body>
 </html>

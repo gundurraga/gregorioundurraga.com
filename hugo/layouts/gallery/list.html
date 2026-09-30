@@ -1,0 +1,45 @@
+{{ define "head" }}
+  {{ $css := resources.Get "css/gallery.css" }}
+  {{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+  <link href="{{ $css.RelPermalink }}" rel="stylesheet"{{ with $css.Data.Integrity }} integrity="{{ . }}"{{ end }} />
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "gallery-data.html" . }}
+  <canvas id="gallery-canvas" aria-hidden="true"></canvas>
+  {{/* One line per gesture; the text (one line each, split on newlines) depends on the device. */}}
+  <div id="gallery-hint" hidden data-touch="{{ i18n "galleryHintTouch" }}" data-pointer="{{ i18n "galleryHintPointer" }}">
+    {{ range slice "footsteps" "painting" "drag" }}
+    <p>{{ partial "icon.html" . }}<span></span></p>
+    {{ end }}
+  </div>
+  <button id="gallery-reload" type="button" hidden>{{ i18n "galleryReload" }}</button>
+
+  {{/* The same rooms and paintings as plain HTML: what screen readers and
+       search engines read, and what a browser without 3D shows instead. */}}
+  {{ $lang := .Site.Language.Lang }}
+  <section class="gallery-list">
+    <h1>{{ i18n "gallery3d" }}</h1>
+    <p class="gallery-unsupported">{{ i18n "galleryUnsupported" }}</p>
+    {{ range hugo.Data.countries.countries }}
+      <h2>{{ index .name $lang }}</h2>
+      <ul>
+        {{ range where hugo.Data.paintings.paintings "country" .id }}
+          <li>
+            <a href="{{ printf "%s/" .slug | relLangURL }}"><span class="uppercase">{{ index .title $lang }}</span>, {{ .year }}</a><br />
+            {{ index .media $lang }}, {{ .dimensions }}, {{ index .location $lang }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </section>
+{{ end }}
+
+{{/* Go templates ignore an empty define, so the override carries a comment. */}}
+{{ define "footer" }}<!-- The gallery fills the screen: no footer. -->{{ end }}
+
+{{ define "scripts" }}
+  {{ $js := resources.Get "gallery/main.js" | js.Build (dict "targetPath" "js/gallery.js" "format" "esm" "target" "es2020" "minify" hugo.IsProduction) }}
+  {{ if hugo.IsProduction }}{{ $js = $js | fingerprint }}{{ end }}
+  <script type="module" src="{{ $js.RelPermalink }}"{{ with $js.Data.Integrity }} integrity="{{ . }}"{{ end }}></script>
+{{ end }}

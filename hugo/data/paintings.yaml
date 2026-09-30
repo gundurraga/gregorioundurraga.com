@@ -3,6 +3,8 @@ paintings:
   - slug: "green-washing-2024"
     year: 2024
     dimensions: "73 x 55 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "Green Washing"
       es: "Lavado verde"
@@ -33,6 +35,8 @@ paintings:
   - slug: "nothing-new-2024"
     year: 2024
     dimensions: "76 x 52 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "Nothing New"
       es: "Nada nuevo"
@@ -63,6 +67,8 @@ paintings:
   - slug: "in-search-of-the-perfect-quesadilla-2024"
     year: 2024
     dimensions: "52 x 76 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "In Search of the Perfect Quesadilla"
       es: "En busca de la quesadilla perfecta"
@@ -93,10 +99,12 @@ paintings:
   - slug: "meringue-and-lemon-2024"
     year: 2024
     dimensions: "65 x 65 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "Meringue and Lemon"
-      es: "Merengue y Limón"
-      fr: "Meringue et Citron"
+      es: "Merengue y limón"
+      fr: "Meringue et citron"
       de: "Baiser und Zitrone"
       ja: "メレンゲとレモン"
       ko: "머랭과 레몬"
@@ -123,10 +131,12 @@ paintings:
   - slug: "the-onions-smile-2024"
     year: 2024
     dimensions: "65 x 65 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "The Onions Smile"
-      es: "Las Cebollas Sonríen"
-      fr: "Les Oignons Sourient"
+      es: "Las cebollas sonríen"
+      fr: "Les Oignons sourient"
       de: "Die Zwiebeln lächeln"
       ja: "玉ねぎの微笑み"
       ko: "양파의 미소"
@@ -153,10 +163,13 @@ paintings:
   - slug: "the-natural-order-of-things-2024"
     year: 2024
     dimensions: "106 x 132 cm"
+    panels: 2
+    country: "chile"
+    frame: "oak-tray"
     title:
       en: "The Natural Order of Things"
-      es: "El Orden Natural de las Cosas"
-      fr: "L'Ordre Naturel des Choses"
+      es: "El orden natural de las cosas"
+      fr: "L'Ordre naturel des choses"
       de: "Die natürliche Ordnung der Dinge"
       ja: "物事の自然な秩序"
       ko: "사물의 자연스러운 질서"
@@ -183,10 +196,12 @@ paintings:
   - slug: "blue-night-hopper-2024"
     year: 2024
     dimensions: "45 x 90 cm"
+    country: "chile"
+    frame: "black-cassetta"
     title:
       en: "Blue Night (Hopper)"
-      es: "Tarde Azul (Hopper)"
-      fr: "Blue Soir (Hopper)"
+      es: "Tarde azul (Hopper)"
+      fr: "Soir bleu (Hopper)"
       de: "Blaue Nacht (Hopper)"
       ja: "ブルーナイト（ホッパー）"
       ko: "블루 나이트(호퍼)"
@@ -213,6 +228,8 @@ paintings:
   - slug: "venus-de-milo-2024"
     year: 2024
     dimensions: "40 x 30 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "Venus de Milo"
       es: "Venus de Milo"
@@ -243,6 +260,8 @@ paintings:
   - slug: "air-2024"
     year: 2024
     dimensions: "30 x 40 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "Air"
       es: "Aire"
@@ -272,10 +291,12 @@ paintings:
       zh-hant: "智利聖地牙哥"
   - slug: "the-winged-victory-of-samothrace-2024"
     year: 2024
-    dimensions: "30 x 40 cm"
+    dimensions: "40 x 30 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Winged Victory of Samothrace"
-      es: "La Victoria de Samotracia"
+      es: "La victoria de Samotracia"
       fr: "La Victoire de Samothrace"
       de: "Nike von Samothrake"
       ja: "サモトラケのニケ"
@@ -303,9 +324,11 @@ paintings:
   - slug: "the-cardsharps-caravaggio-2024"
     year: 2024
     dimensions: "104 x 145 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Cardsharps (Caravaggio)"
-      es: "Los Jugadores de Cartas (Caravaggio)"
+      es: "Los jugadores de cartas (Caravaggio)"
       fr: "Les Tricheurs (Caravage)"
       de: "Die Falschspieler (Caravaggio)"
       ja: "いかさま師（カラヴァッジョ）"
@@ -333,10 +356,12 @@ paintings:
   - slug: "the-straw-manikin-goya-2024"
     year: 2024
     dimensions: "83 x 49 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Straw Manikin (Goya)"
-      es: "El Pelele (Goya)"
-      fr: "Le Mannequin de Paille (Goya)"
+      es: "El pelele (Goya)"
+      fr: "Le Mannequin de paille (Goya)"
       de: "Die Strohpuppe (Goya)"
       ja: "藁人形（ゴヤ）"
       ko: "짚 인형(고야)"
@@ -363,6 +388,8 @@ paintings:
   - slug: "wapping-on-thames-whistler-2023"
     year: 2023
     dimensions: "53 x 76 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "Wapping on Thames (Whistler)"
       es: "Wapping en el Támesis (Whistler)"
@@ -393,11 +420,13 @@ paintings:
   - slug: "house-of-cards-serebriakova-2023"
     year: 2023
     dimensions: "59 x 68 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "House of Cards (Serebriakova)"
-      es: "Castillo de Naipes (Serebriakova)"
-      fr: "Château de Cartes (Serebriakova)"
-      de: "Kartenhaus (Serebriakowa)"
+      es: "Castillo de naipes (Serebriakova)"
+      fr: "Château de cartes (Serebriakova)"
+      de: "Kartenhaus (Serebrjakowa)"
       ja: "カードの家（セレブリャコワ）"
       ko: "카드의 집(세레브리아코바)"
       ru: "Карточный домик (Серебрякова)"
@@ -423,9 +452,11 @@ paintings:
   - slug: "the-giraffes-2023"
     year: 2023
     dimensions: "80 x 125 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Giraffes"
-      es: "Las Jirafas"
+      es: "Las jirafas"
       fr: "Les Girafes"
       de: "Die Giraffen"
       ja: "キリン"
@@ -453,6 +484,8 @@ paintings:
   - slug: "the-virgin-and-child-with-saint-anne-davinci-2023"
     year: 2023
     dimensions: "151 x 95 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Virgin and Child with Saint Anne (Da Vinci)"
       es: "La Virgen, el Niño Jesús y Santa Ana (Da Vinci)"
@@ -483,9 +516,11 @@ paintings:
   - slug: "the-hunter-lorca-2023"
     year: 2023
     dimensions: "114 x 132 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Hunter (Lorca)"
-      es: "El Cazador (Lorca)"
+      es: "El cazador (Lorca)"
       fr: "Le Chasseur (Lorca)"
       de: "Der Jäger (Lorca)"
       ja: "狩人（ロルカ）"
@@ -513,9 +548,11 @@ paintings:
   - slug: "the-temptations-of-saint-anthony-bravo-2023"
     year: 2023
     dimensions: "147 x 103 cm"
+    country: "chile"
+    frame: "gilt-cassetta"
     title:
       en: "The Temptations of Saint Anthony (Bravo)"
-      es: "Las Tentaciones de San Antonio (Bravo)"
+      es: "Las tentaciones de San Antonio (Bravo)"
       fr: "Les Tentations de Saint Antoine (Bravo)"
       de: "Die Versuchungen des heiligen Antonius (Bravo)"
       ja: "聖アントニウスの誘惑（ブラボ）"
@@ -543,9 +580,11 @@ paintings:
   - slug: "the-flock-2023"
     year: 2023
     dimensions: "54 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Flock"
-      es: "El Rebaño"
+      es: "El rebaño"
       fr: "Le Troupeau"
       de: "Die Herde"
       ja: "群れ"
@@ -573,10 +612,12 @@ paintings:
   - slug: "the-flamingos-2023"
     year: 2023
     dimensions: "54 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Flamingos"
-      es: "Los Flamencos"
-      fr: "Les Flamants Roses"
+      es: "Los flamencos"
+      fr: "Les Flamants roses"
       de: "Die Flamingos"
       ja: "フラミンゴ"
       ko: "플라밍고"
@@ -603,6 +644,8 @@ paintings:
   - slug: "luma-park-2023"
     year: 2023
     dimensions: "54 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Luma Park"
       es: "Parque Luma"
@@ -633,12 +676,14 @@ paintings:
   - slug: "underwater-museum-of-conceptual-art-2023"
     year: 2023
     dimensions: "54 x 65 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Underwater Museum of Conceptual Art"
-      es: "Museo Submarino de Arte Conceptual"
-      fr: "Musée Sous-marin d'Art Conceptuel"
+      es: "Museo submarino de arte conceptual"
+      fr: "Musée sous-marin d'art conceptuel"
       de: "Unterwassermuseum für Konzeptkunst"
-      ja: "コンセプチュアルアートの水中美術館"
+      ja: "コンセプチュアル・アートの水中美術館"
       ko: "수중 개념미술관"
       ru: "Подводный музей концептуального искусства"
       zh-hant: "水下概念藝術博物館"
@@ -663,10 +708,12 @@ paintings:
   - slug: "the-fruitful-life-of-dogs-2023"
     year: 2023
     dimensions: "40 x 50 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Fruitful Life of Dogs"
-      es: "La Vida Fructífera de los Perros"
-      fr: "La Vie Fructueuse des Chiens"
+      es: "La vida fructífera de los perros"
+      fr: "La Vie fructueuse des chiens"
       de: "Das fruchtbare Leben der Hunde"
       ja: "犬の実り多き生活"
       ko: "개들의 풍요로운 삶"
@@ -693,14 +740,16 @@ paintings:
   - slug: "sunflower-bull-2023"
     year: 2023
     dimensions: "60 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Sunflower Bull"
-      es: "Toro Girasol"
-      fr: "Taureau Tournesol"
+      es: "Toro girasol"
+      fr: "Taureau tournesol"
       de: "Sonnenblumenstier"
       ja: "ひまわりの雄牛"
       ko: "해바라기 황소"
-      ru: "Подсолнуховый бык"
+      ru: "Подсолнечный бык"
       zh-hant: "向日葵公牛"
     media:
       en: "Oil on canvas"
@@ -723,10 +772,12 @@ paintings:
   - slug: "electric-dreams-2023"
     year: 2023
     dimensions: "54 x 65 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Electric Dreams"
-      es: "Sueños Eléctricos"
-      fr: "Rêves Électriques"
+      es: "Sueños eléctricos"
+      fr: "Rêves électriques"
       de: "Elektrische Träume"
       ja: "エレクトリック・ドリーム"
       ko: "일렉트릭 드림"
@@ -753,13 +804,15 @@ paintings:
   - slug: "formal-and-polite-2023"
     year: 2023
     dimensions: "30 x 40 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Formal and Polite"
-      es: "Formal y Cortés"
-      fr: "Formel et Poli"
+      es: "Formal y cortés"
+      fr: "Formel et poli"
       de: "Formell und höflich"
-      ja: "端正で礼儀正しく"
-      ko: "격식 있고 정중하게"
+      ja: "端正で礼儀正しい"
+      ko: "격식 있고 정중하다"
       ru: "Официально и вежливо"
       zh-hant: "拘謹有禮"
     media:
@@ -782,10 +835,12 @@ paintings:
       zh-hant: "法國亞爾"
   - slug: "family-holidays-in-the-caribbean-2023"
     year: 2023
-    dimensions: "54 x 65 cm"
+    dimensions: "65 x 54 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Family Holidays in the Caribbean"
-      es: "Vacaciones Familiares en el Caribe"
+      es: "Vacaciones familiares en el Caribe"
       fr: "Vacances en famille dans les Caraïbes"
       de: "Familienurlaub in der Karibik"
       ja: "カリブ海の家族旅行"
@@ -813,12 +868,14 @@ paintings:
   - slug: "the-peace-of-wild-things-2023"
     year: 2023
     dimensions: "38 x 46 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Peace of Wild Things"
-      es: "La Paz de las Cosas Salvajes"
-      fr: "La Paix des Choses Sauvages"
+      es: "La paz de las cosas salvajes"
+      fr: "La Paix des choses sauvages"
       de: "Der Frieden der wilden Dinge"
-      ja: "野生のものの安らぎ"
+      ja: "野生のものたちの安らぎ"
       ko: "야생의 평온"
       ru: "Покой диких существ"
       zh-hant: "野性生靈的寧靜"
@@ -843,10 +900,12 @@ paintings:
   - slug: "bears-like-contemporary-art-too-2023"
     year: 2023
     dimensions: "54 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Bears Like Contemporary Art Too"
-      es: "A los Osos También les Gusta el Arte Contemporáneo"
-      fr: "Les Ours Aiment Aussi l'Art Contemporain"
+      es: "A los osos también les gusta el arte contemporáneo"
+      fr: "Les Ours aiment aussi l'art contemporain"
       de: "Auch Bären mögen zeitgenössische Kunst"
       ja: "クマも現代アートが好き"
       ko: "곰도 현대미술을 좋아한다"
@@ -873,10 +932,12 @@ paintings:
   - slug: "the-origin-of-species-2023"
     year: 2023
     dimensions: "60 x 30 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Origin of Species"
-      es: "El Origen de las Especies"
-      fr: "L'Origine des Espèces"
+      es: "El origen de las especies"
+      fr: "L'Origine des espèces"
       de: "Die Entstehung der Arten"
       ja: "種の起源"
       ko: "종의 기원"
@@ -903,10 +964,12 @@ paintings:
   - slug: "the-sadness-of-gods-2023"
     year: 2023
     dimensions: "35 x 26 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Sadness of Gods"
-      es: "La Tristeza de los Dioses"
-      fr: "La Tristesse des Dieux"
+      es: "La tristeza de los dioses"
+      fr: "La Tristesse des dieux"
       de: "Die Traurigkeit der Götter"
       ja: "神々の悲しみ"
       ko: "신들의 슬픔"
@@ -933,12 +996,14 @@ paintings:
   - slug: "piggy-bank-2023"
     year: 2023
     dimensions: "46 x 38 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Piggy Bank"
-      es: "Chanchito Alcancía"
+      es: "Chanchito alcancía"
       fr: "Tirelire"
       de: "Sparschwein"
-      ja: "貯金箱"
+      ja: "豚の貯金箱"
       ko: "돼지 저금통"
       ru: "Копилка"
       zh-hant: "小豬撲滿"
@@ -963,9 +1028,11 @@ paintings:
   - slug: "the-milkmaid-2023"
     year: 2023
     dimensions: "40 x 30 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Milkmaid"
-      es: "La Lechera"
+      es: "La lechera"
       fr: "La Laitière"
       de: "Das Milchmädchen"
       ja: "牛乳を注ぐ女"
@@ -993,9 +1060,11 @@ paintings:
   - slug: "the-grandmaster-2023"
     year: 2023
     dimensions: "80 x 80 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Grandmaster"
-      es: "El Gran Maestro"
+      es: "El gran maestro"
       fr: "Le Grand Maître"
       de: "Der Großmeister"
       ja: "グランドマスター"
@@ -1023,10 +1092,12 @@ paintings:
   - slug: "rhino-park-2023"
     year: 2023
     dimensions: "60 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Rhino Park"
-      es: "Parque Rinoceronte"
-      fr: "Parc Rinocerós"
+      es: "Parque rinoceronte"
+      fr: "Parc Rhinocéros"
       de: "Nashornpark"
       ja: "サイの公園"
       ko: "코뿔소 공원"
@@ -1053,9 +1124,11 @@ paintings:
   - slug: "the-supermarket-2023"
     year: 2023
     dimensions: "65 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Supermarket"
-      es: "El Supermercado"
+      es: "El supermercado"
       fr: "Le Supermarché"
       de: "Der Supermarkt"
       ja: "スーパーマーケット"
@@ -1083,6 +1156,8 @@ paintings:
   - slug: "patience-2023"
     year: 2023
     dimensions: "65 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Patience"
       es: "Paciencia"
@@ -1113,10 +1188,12 @@ paintings:
   - slug: "the-space-traveler-2023"
     year: 2023
     dimensions: "60 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Space Traveler"
-      es: "El Viajero Espacial"
-      fr: "Le Voyageur Spatial"
+      es: "El viajero espacial"
+      fr: "Le Voyageur spatial"
       de: "Der Weltraumreisende"
       ja: "宇宙旅行者"
       ko: "우주 여행자"
@@ -1143,10 +1220,12 @@ paintings:
   - slug: "snow-tiger-2023"
     year: 2023
     dimensions: "60 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Snow Tiger"
-      es: "Tigre de Nieve"
-      fr: "Tigre des Neiges"
+      es: "Tigre de nieve"
+      fr: "Tigre des neiges"
       de: "Schneetiger"
       ja: "雪のトラ"
       ko: "눈 호랑이"
@@ -1173,10 +1252,12 @@ paintings:
   - slug: "the-owls-2023"
     year: 2023
     dimensions: "60 x 73 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Owls"
-      es: "Los Búhos"
-      fr: "C'est Chouette"
+      es: "Los búhos"
+      fr: "C'est chouette"
       de: "Die Eulen"
       ja: "フクロウ"
       ko: "올빼미"
@@ -1203,10 +1284,12 @@ paintings:
   - slug: "the-yellow-rider-2023"
     year: 2023
     dimensions: "24 x 30 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Yellow Rider"
-      es: "El Jinete Amarillo"
-      fr: "Le Cavalier Jaune"
+      es: "El jinete amarillo"
+      fr: "Le Cavalier jaune"
       de: "Der Gelbe Reiter"
       ja: "黄色い騎手"
       ko: "노란 기수"
@@ -1233,12 +1316,14 @@ paintings:
   - slug: "brown-hen-2023"
     year: 2023
     dimensions: "20 x 20 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Brown Hen"
-      es: "Gallina Café"
-      fr: "Poule Brune"
+      es: "Gallina café"
+      fr: "Poule brune"
       de: "Braune Henne"
-      ja: "茶色のニワトリ"
+      ja: "茶色い雌鶏"
       ko: "갈색 암탉"
       ru: "Коричневая курица"
       zh-hant: "棕色母雞"
@@ -1263,12 +1348,14 @@ paintings:
   - slug: "rainbow-hen-2023"
     year: 2023
     dimensions: "20 x 20 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Rainbow Hen"
-      es: "Gallina Arcoíris"
-      fr: "Poule Arc-en-ciel"
+      es: "Gallina arcoíris"
+      fr: "Poule arc-en-ciel"
       de: "Regenbogen-Henne"
-      ja: "虹のニワトリ"
+      ja: "虹色の雌鶏"
       ko: "무지개 암탉"
       ru: "Радужная курица"
       zh-hant: "彩虹母雞"
@@ -1293,12 +1380,14 @@ paintings:
   - slug: "white-hen-2023"
     year: 2023
     dimensions: "20 x 20 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "White Hen"
-      es: "Gallina Blanca"
-      fr: "Poule Blanche"
+      es: "Gallina blanca"
+      fr: "Poule blanche"
       de: "Weiße Henne"
-      ja: "白いニワトリ"
+      ja: "白い雌鶏"
       ko: "흰 암탉"
       ru: "Белая курица"
       zh-hant: "白色母雞"
@@ -1323,13 +1412,15 @@ paintings:
   - slug: "harlequin-and-pierrot-2023"
     year: 2023
     dimensions: "70 x 70 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Harlequin and Pierrot"
       es: "Arlequín y Pierrot"
       fr: "Arlequin et Pierrot"
       de: "Harlekin und Pierrot"
       ja: "アルルカンとピエロ"
-      ko: "아를레키노와 피에로"
+      ko: "아를캥과 피에로"
       ru: "Арлекин и Пьеро"
       zh-hant: "丑角與皮埃洛"
     media:
@@ -1353,9 +1444,11 @@ paintings:
   - slug: "the-jungle-2023"
     year: 2023
     dimensions: "70 x 70 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Jungle"
-      es: "La Jungla"
+      es: "La jungla"
       fr: "La Jungle"
       de: "Der Dschungel"
       ja: "ジャングル"
@@ -1383,10 +1476,12 @@ paintings:
   - slug: "first-steps-2023"
     year: 2023
     dimensions: "65 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "First Steps"
-      es: "Primeros Pasos"
-      fr: "Premiers Pas"
+      es: "Primeros pasos"
+      fr: "Premiers pas"
       de: "Erste Schritte"
       ja: "最初の一歩"
       ko: "첫걸음"
@@ -1413,10 +1508,12 @@ paintings:
   - slug: "the-football-team-2023"
     year: 2023
     dimensions: "46 x 55 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Football Team"
-      es: "El Equipo de Fútbol"
-      fr: "L'Équipe de Foot"
+      es: "El equipo de fútbol"
+      fr: "L'Équipe de foot"
       de: "Das Fußballteam"
       ja: "サッカーチーム"
       ko: "축구팀"
@@ -1443,9 +1540,11 @@ paintings:
   - slug: "the-elephants-2023"
     year: 2023
     dimensions: "65 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Elephants"
-      es: "Los Elefantes"
+      es: "Los elefantes"
       fr: "Les Éléphants"
       de: "Die Elefanten"
       ja: "ゾウ"
@@ -1473,9 +1572,11 @@ paintings:
   - slug: "the-thinker-2022"
     year: 2022
     dimensions: "80 x 80 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Thinker"
-      es: "El Pensador"
+      es: "El pensador"
       fr: "Le Penseur"
       de: "Der Denker"
       ja: "考える人"
@@ -1483,7 +1584,7 @@ paintings:
       ru: "Мыслитель"
       zh-hant: "沉思者"
     media:
-      en: "Mixed Media"
+      en: "Mixed media"
       es: "Técnica mixta"
       fr: "Technique mixte"
       de: "Mischtechnik"
@@ -1503,6 +1604,8 @@ paintings:
   - slug: "satoshi-nakamoto-2022"
     year: 2022
     dimensions: "81 x 60 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Satoshi Nakamoto"
       es: "Satoshi Nakamoto"
@@ -1533,10 +1636,12 @@ paintings:
   - slug: "the-sleeping-backhoe-2022"
     year: 2022
     dimensions: "60 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Sleeping Backhoe"
-      es: "La Retroexcavadora Durmiente"
-      fr: "La Tractopelle Dormante"
+      es: "La retroexcavadora durmiente"
+      fr: "La Tractopelle dormante"
       de: "Der schlafende Bagger"
       ja: "眠るバックホー"
       ko: "잠자는 굴착기"
@@ -1563,10 +1668,12 @@ paintings:
   - slug: "public-works-2022"
     year: 2022
     dimensions: "60 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Public Works"
-      es: "Obras en la Ciudad"
-      fr: "Travaux en Ville"
+      es: "Obras en la ciudad"
+      fr: "Travaux en ville"
       de: "Öffentliche Arbeiten"
       ja: "公共事業"
       ko: "공공사업"
@@ -1593,6 +1700,8 @@ paintings:
   - slug: "composition-i-2022"
     year: 2022
     dimensions: "80 x 80 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Composition I"
       es: "Composición I"
@@ -1623,9 +1732,11 @@ paintings:
   - slug: "the-train-station-2022"
     year: 2022
     dimensions: "65 x 92 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "The Train Station"
-      es: "La Estación de Tren"
+      es: "La estación de tren"
       fr: "La Gare"
       de: "Der Bahnhof"
       ja: "駅"
@@ -1653,10 +1764,12 @@ paintings:
   - slug: "wind-cows-2022"
     year: 2022
     dimensions: "60 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Wind Cows"
-      es: "Vacas Eólicas"
-      fr: "Vaches Éoliennes"
+      es: "Vacas eólicas"
+      fr: "Vaches éoliennes"
       de: "Windkühe"
       ja: "風の牛"
       ko: "바람의 소"
@@ -1683,6 +1796,8 @@ paintings:
   - slug: "airplane-2022"
     year: 2022
     dimensions: "60 x 81 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Airplane"
       es: "Avión"
@@ -1713,10 +1828,12 @@ paintings:
   - slug: "yellow-submarine-2022"
     year: 2022
     dimensions: "65 x 92 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Yellow Submarine"
-      es: "Submarino Amarillo"
-      fr: "Sous-Marin Jaune"
+      es: "Submarino amarillo"
+      fr: "Sous-marin jaune"
       de: "Gelbes U-Boot"
       ja: "イエロー・サブマリン"
       ko: "옐로 서브마린"
@@ -1743,6 +1860,8 @@ paintings:
   - slug: "pythagoras-2022"
     year: 2022
     dimensions: "55 x 46 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Pythagoras"
       es: "Pitágoras"
@@ -1773,13 +1892,15 @@ paintings:
   - slug: "good-morning-madame-giraffe-2022"
     year: 2022
     dimensions: "55 x 46 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Good Morning Madame Giraffe"
-      es: "Buenos Días Señora Jirafa"
+      es: "Buenos días señora Jirafa"
       fr: "Bonjour Madame Girafe"
       de: "Guten Morgen, Madame Giraffe"
       ja: "おはよう、キリン夫人"
-      ko: "안녕하세요, 기린 부인"
+      ko: "안녕, 기린 부인"
       ru: "Доброе утро, мадам Жираф"
       zh-hant: "早安，長頸鹿夫人"
     media:
@@ -1803,6 +1924,8 @@ paintings:
   - slug: "swirl-2022"
     year: 2022
     dimensions: "55 x 46 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Swirl"
       es: "Remolino"
@@ -1833,11 +1956,13 @@ paintings:
   - slug: "creme-brulee-2022"
     year: 2022
     dimensions: "46 x 38 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Crème Brûlée"
       es: "Crème Brûlée"
-      fr: "Crème Brûlée"
-      de: "Crème Brûlée"
+      fr: "Crème brûlée"
+      de: "Crème brûlée"
       ja: "クレームブリュレ"
       ko: "크렘 브륄레"
       ru: "Крем-брюле"
@@ -1863,6 +1988,8 @@ paintings:
   - slug: "spheres-2022"
     year: 2022
     dimensions: "41 x 33 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Spheres"
       es: "Esferas"
@@ -1893,6 +2020,8 @@ paintings:
   - slug: "window-2022"
     year: 2022
     dimensions: "50 x 40 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Window"
       es: "Ventana"
@@ -1923,9 +2052,11 @@ paintings:
   - slug: "wrath-of-the-gods-2022"
     year: 2022
     dimensions: "34 x 28 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Wrath of the Gods"
-      es: "La Ira de los Dioses"
+      es: "La ira de los dioses"
       fr: "La Colère des Dieux"
       de: "Zorn der Götter"
       ja: "神々の怒り"
@@ -1953,10 +2084,12 @@ paintings:
   - slug: "human-figure-ii-2022"
     year: 2022
     dimensions: "55 x 46 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Human Figure II"
-      es: "Figura Humana II"
-      fr: "Figure Humaine II"
+      es: "Figura humana II"
+      fr: "Figure humaine II"
       de: "Menschliche Figur II"
       ja: "人物像 II"
       ko: "인물상 II"
@@ -1983,10 +2116,12 @@ paintings:
   - slug: "human-figure-i-2022"
     year: 2022
     dimensions: "38.5 x 28 cm"
+    country: "france"
+    frame: "oak-tray"
     title:
       en: "Human Figure I"
-      es: "Figura Humana I"
-      fr: "Figure Humaine I"
+      es: "Figura humana I"
+      fr: "Figure humaine I"
       de: "Menschliche Figur I"
       ja: "人物像 I"
       ko: "인물상 I"
@@ -2013,14 +2148,16 @@ paintings:
   - slug: "space-xploration-2022"
     year: 2022
     dimensions: "76 x 110 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Space Xploration"
-      es: "Xploración Espacial"
+      es: "Xploración espacial"
       fr: "Xploration de l'espace"
       de: "Weltraum-Xploration"
       ja: "宇宙探検"
       ko: "우주 탐험"
-      ru: "Space Xploration"
+      ru: "Спейс Иксплорейшн"
       zh-hant: "太空探索"
     media:
       en: "Oil on canvas"
@@ -2043,10 +2180,12 @@ paintings:
   - slug: "modern-curves-2022"
     year: 2022
     dimensions: "90 x 90 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Modern Curves"
-      es: "Curvas Modernas"
-      fr: "Courbes Modernes"
+      es: "Curvas modernas"
+      fr: "Courbes modernes"
       de: "Moderne Kurven"
       ja: "モダンな曲線"
       ko: "현대적인 곡선"
@@ -2073,9 +2212,11 @@ paintings:
   - slug: "the-city-2022"
     year: 2022
     dimensions: "90 x 120 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "The City"
-      es: "La Ciudad"
+      es: "La ciudad"
       fr: "La Ville"
       de: "Die Stadt"
       ja: "都市"
@@ -2103,6 +2244,8 @@ paintings:
   - slug: "fosforos-copihue-2022"
     year: 2022
     dimensions: "90 x 90 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Fósforos Copihue"
       es: "Fósforos Copihue"
@@ -2133,10 +2276,12 @@ paintings:
   - slug: "chocolate-on-chocolate-2022"
     year: 2022
     dimensions: "80 x 80 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Chocolate on Chocolate"
-      es: "Chocolate sobre Chocolate"
-      fr: "Chocolat sur Chocolat"
+      es: "Chocolate sobre chocolate"
+      fr: "Chocolat sur chocolat"
       de: "Schokolade auf Schokolade"
       ja: "チョコレートの上のチョコレート"
       ko: "초콜릿 위의 초콜릿"
@@ -2163,6 +2308,8 @@ paintings:
   - slug: "mona-lisa-2022"
     year: 2022
     dimensions: "61 x 110 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Mona Lisa"
       es: "Mona Lisa"
@@ -2193,6 +2340,8 @@ paintings:
   - slug: "cat-2022"
     year: 2022
     dimensions: "80 x 60 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Cat"
       es: "Gato"
@@ -2223,6 +2372,8 @@ paintings:
   - slug: "escher-mosaic-2022"
     year: 2022
     dimensions: "85 x 100 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Escher Mosaic"
       es: "Mosaico Escher"
@@ -2253,6 +2404,8 @@ paintings:
   - slug: "earth-2022"
     year: 2022
     dimensions: "64 x 110 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Earth"
       es: "Tierra"
@@ -2283,6 +2436,8 @@ paintings:
   - slug: "margherita-2022"
     year: 2022
     dimensions: "40 x 40 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Margherita"
       es: "Margherita"
@@ -2313,6 +2468,8 @@ paintings:
   - slug: "the-last-supper-2021"
     year: 2021
     dimensions: "53 x 100 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "The Last Supper"
       es: "La Última Cena"
@@ -2343,6 +2500,8 @@ paintings:
   - slug: "lisbon-2021"
     year: 2021
     dimensions: "100 x 86 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Lisbon"
       es: "Lisboa"
@@ -2373,10 +2532,12 @@ paintings:
   - slug: "golden-statues-2021"
     year: 2021
     dimensions: "74 x 100 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Golden Statues"
-      es: "Estatuas Doradas"
-      fr: "Statues Dorées"
+      es: "Estatuas doradas"
+      fr: "Statues dorées"
       de: "Goldene Statuen"
       ja: "黄金の像"
       ko: "황금 조각상"
@@ -2403,9 +2564,11 @@ paintings:
   - slug: "the-ermine-2021"
     year: 2021
     dimensions: "50 x 60 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "The Ermine"
-      es: "El Armiño"
+      es: "El armiño"
       fr: "L'Hermine"
       de: "Das Hermelin"
       ja: "白貂"
@@ -2433,6 +2596,8 @@ paintings:
   - slug: "mondrian-room-2021"
     year: 2021
     dimensions: "50 x 60 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "Mondrian Room"
       es: "Pieza Mondrian"
@@ -2463,6 +2628,8 @@ paintings:
   - slug: "pura-vida-road-2021"
     year: 2021
     dimensions: "50 x 70 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "Pura Vida Road"
       es: "Calle Pura Vida"
@@ -2493,10 +2660,12 @@ paintings:
   - slug: "scarlet-macaws-2020"
     year: 2020
     dimensions: "50 x 60 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "Scarlet Macaws"
-      es: "Guacamayas Rojas"
-      fr: "Aras Écarlates"
+      es: "Guacamayas rojas"
+      fr: "Aras écarlates"
       de: "Scharlachrote Aras"
       ja: "ベニコンゴウインコ"
       ko: "홍금강앵무"
@@ -2523,10 +2692,12 @@ paintings:
   - slug: "three-motorcycles-2020"
     year: 2020
     dimensions: "50 x 50 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "Three Motorcycles"
-      es: "Tres Motos"
-      fr: "Trois Motos"
+      es: "Tres motos"
+      fr: "Trois motos"
       de: "Drei Motorräder"
       ja: "三台のオートバイ"
       ko: "오토바이 세 대"
@@ -2553,11 +2724,13 @@ paintings:
   - slug: "aloe-vera-2020"
     year: 2020
     dimensions: "60 x 50 cm"
+    country: "costa-rica"
+    frame: "oak-tray"
     title:
       en: "Aloe Vera"
-      es: "Aloe Vera"
-      fr: "Aloe Vera"
-      de: "Aloe Vera"
+      es: "Aloe vera"
+      fr: "Aloe vera"
+      de: "Aloe vera"
       ja: "アロエベラ"
       ko: "알로에 베라"
       ru: "Алоэ вера"
@@ -2583,9 +2756,11 @@ paintings:
   - slug: "the-race-2017"
     year: 2017
     dimensions: "80 x 100 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "The Race"
-      es: "La Carrera"
+      es: "La carrera"
       fr: "La Course"
       de: "Das Rennen"
       ja: "レース"
@@ -2613,10 +2788,12 @@ paintings:
   - slug: "untitled-i-2015"
     year: 2015
     dimensions: "60 x 80 cm"
+    country: "chile"
+    frame: "black-tray"
     title:
       en: "Untitled I"
-      es: "Sin Título I"
-      fr: "Sans Titre I"
+      es: "Sin título I"
+      fr: "Sans titre I"
       de: "Ohne Titel I"
       ja: "無題 I"
       ko: "무제 I"

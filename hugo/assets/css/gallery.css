@@ -1,0 +1,115 @@
+/* The 3D gallery. Until the script confirms 3D works, the page is a plain list
+   of rooms and paintings; with 3D it fills the viewport and never scrolls,
+   and the list stays in the page for screen readers only. */
+
+#gallery-canvas {
+  display: none;
+}
+
+html.gallery-is-3d,
+html.gallery-is-3d body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.gallery-is-3d #gallery-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+
+#gallery-canvas.is-dragging {
+  cursor: grabbing;
+}
+
+/* How to move, shown on arrival until the visitor first touches or clicks. */
+#gallery-hint {
+  position: fixed;
+  left: 50%;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 14px 20px;
+  background: rgba(250, 250, 248, 0.94);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+  color: var(--font-thirdColor);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  z-index: 2;
+}
+#gallery-hint p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+#gallery-hint p + p { margin-top: 8px; }
+#gallery-hint .icon {
+  flex: none;
+  font-size: 1.2rem;
+  color: var(--logo-firstColor);
+}
+
+#gallery-reload {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 22px;
+  border: 1px solid var(--desktop-postBorder-color);
+  border-radius: 6px;
+  background: #F4F2EE;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.gallery-list {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 96px 16px 48px;
+  text-align: left;
+}
+
+.gallery-list h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.gallery-list h2 {
+  margin: 32px 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.gallery-list li {
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+.gallery-list a {
+  color: var(--font-thirdColor);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+html.gallery-is-3d .gallery-list {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+html.gallery-is-3d .gallery-unsupported {
+  display: none;
+}

@@ -1,0 +1,41 @@
+{{/*
+  Everything the 3D gallery needs, localized for this page's language and
+  already validated (see validate-paintings.html). The browser never parses
+  "73 x 55 cm": sizes arrive as numbers. Rooms keep countries.yaml's order.
+  Three WebP tiers per painting: small for every painting in view, medium for
+  the nearest few, large only for the one being looked at closely.
+*/}}
+{{ $lang := .Site.Language.Lang }}
+{{ $rooms := slice }}
+{{ range hugo.Data.countries.countries }}
+  {{ $rooms = $rooms | append (dict "id" .id "wall" .wall "card" .card) }}
+{{ end }}
+
+{{ $paintings := slice }}
+{{ range hugo.Data.paintings.paintings }}
+  {{ $size := index (findRESubmatch `^(\d+(?:\.\d+)?) x (\d+(?:\.\d+)?) cm$` .dimensions) 0 }}
+  {{ $master := resources.Get (printf "paintings/%s.jpg" .slug) }}
+  {{ $original := resources.Get (printf "originals/%s.jpg" .slug) }}
+  {{ $paintings = $paintings | append (dict
+    "slug" .slug
+    "room" .country
+    "year" .year
+    "heightCm" (float (index $size 1))
+    "widthCm" (float (index $size 2))
+    "frame" .frame
+    "panels" (.panels | default 1)
+    "title" (index .title $lang)
+    "media" (index .media $lang)
+    "dimensions" .dimensions
+    "location" (index .location $lang)
+    "textures" (dict
+      "small" ($master.Fit "256x256 webp q80").RelPermalink
+      "medium" ($original.Fit "1024x1024 webp q82").RelPermalink
+      "large" ($original.Fit "2048x2048 webp q82").RelPermalink
+    )
+  ) }}
+{{ end }}
+
+<script type="application/json" id="gallery-data">
+  {{- dict "rooms" $rooms "frames" hugo.Data.frames.frames "paintings" $paintings | jsonify | safeJS -}}
+</script>
