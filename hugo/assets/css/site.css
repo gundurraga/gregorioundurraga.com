@@ -43,51 +43,100 @@
 .painting-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--light-font-thirdColor);
+  color: var(--font-thirdColor);
   margin-bottom: 10px;
 }
-.night-mode .painting-title { color: var(--night-font-firstColor); }
 .painting-title .uppercase { text-transform: uppercase; }
 .painting-meta {
-  color: var(--light-font-secondColor);
+  color: var(--font-secondColor);
   line-height: 1.6;
   margin-bottom: 16px;
 }
-.night-mode .painting-meta { color: var(--night-font-secondColor); }
 .painting-blurb {
   max-width: min(46ch, 100%);
   margin: 0 auto 18px;
   font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--light-font-secondColor);
+  color: var(--font-secondColor);
 }
-.night-mode .painting-blurb { color: var(--night-font-secondColor); }
+.painting-blurb cite { font-style: italic; } /* the reset strips it */
 .painting-license {
   font-size: 0.85rem;
-  color: var(--light-menuIcon-color);
+  color: var(--menuIcon-color);
   margin-bottom: 20px;
 }
-.painting-download {
+.painting-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* follows the centred text; left beside the painting on wide screens */
+  gap: 12px;
+}
+.painting-action {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  border: 1px solid var(--lightDesktop-postBorder-color);
+  border: 1px solid var(--desktop-postBorder-color);
   border-radius: 6px;
-  color: var(--light-font-thirdColor);
+  color: var(--font-thirdColor);
   text-decoration: none;
   font-weight: 700;
   transition: opacity 0.15s ease;
 }
-.painting-download svg { font-size: 1.2rem; }
-.painting-download:hover { opacity: 0.7; }
-.night-mode .painting-download {
-  border-color: var(--nightDesktop-postBorder-color);
-  color: var(--night-font-firstColor);
+.painting-action .icon { font-size: 1.2rem; }
+.painting-action:hover { opacity: 0.7; }
+
+/* "Download all" confirmation: a glimpse of the collection, then one clear action. */
+.download-dialog {
+  width: min(400px, calc(100vw - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgb(250, 250, 248);
+  color: var(--font-thirdColor);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
 }
-.painting-back { margin-top: 28px; }
-.painting-back a {
-  color: var(--light-menuCross-color);
+.download-dialog[open] { animation: download-dialog-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.download-dialog::backdrop { background: rgba(20, 24, 28, 0.45); backdrop-filter: blur(3px); }
+@keyframes download-dialog-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+}
+.download-dialog-preview { display: block; width: 100%; height: 120px; object-fit: cover; }
+.download-dialog-body { padding: 22px 24px 24px; text-align: left; }
+.download-dialog h3 { margin: 0 0 8px; font-size: 1.35rem; font-weight: 700; color: var(--logo-firstColor); }
+.download-dialog p { margin: 0; line-height: 1.45; }
+.download-dialog .download-dialog-license { margin-top: 6px; font-size: 0.85rem; color: var(--menuIcon-color); }
+.download-dialog-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 22px; }
+.download-dialog-cancel {
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--font-secondColor);
+  font: inherit;
+  cursor: pointer;
+}
+.download-dialog-cancel:hover { background: rgba(0, 0, 0, 0.05); }
+.download-dialog-actions .download-dialog-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--logo-firstColor);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 0.15s ease;
+}
+.download-dialog-confirm:hover { filter: brightness(1.2); }
+.download-dialog-confirm .icon { font-size: 1.15rem; }
+@media (prefers-reduced-motion: reduce) {
+  .download-dialog[open] { animation: none; }
+}
+.notfound-back a {
+  color: var(--menuCross-color);
   text-decoration: none;
   font-weight: 700;
 }
@@ -113,7 +162,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 .notfound-code { font-size: clamp(2.4rem, 9vw, 4.5rem); font-weight: 700; line-height: 1; }
-.notfound .painting-back { margin-top: 8px; }
+.notfound-back { margin-top: 8px; }
 
 /* Landscape / wide screens: the painting fills the height, text sits beside it.
    Still fully contained, so the whole work is visible without scrolling. */
@@ -143,6 +192,7 @@
   }
   .painting-title { font-size: 1.6rem; }
   .painting-blurb { margin-left: 0; margin-right: 0; max-width: none; }
+  .painting-actions { justify-content: flex-start; }
 }
 
 /* ---- Paintingstack apps cross-promo strip ----
@@ -164,7 +214,7 @@
   width: 16vh;
   border-radius: inherit;
 }
-/* Hairline edge drawn on top, theme-aware (dark edge on light, light on dark). */
+/* Hairline edge drawn on top of the icon. */
 .apps-strip-icon::after {
   content: "";
   position: absolute;
@@ -173,7 +223,6 @@
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   pointer-events: none;
 }
-.night-mode .apps-strip-icon::after { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); }
 .apps-carousel .carousel-item:hover .apps-strip-icon { transform: translateY(-2px); opacity: 0.9; }
 
 /* ---- Back-to-gallery link in the header on painting detail pages ---- */
@@ -183,14 +232,12 @@
   gap: 4px;
   padding-left: 22px;
   text-decoration: none;
-  color: var(--light-font-firstColor);
+  color: var(--font-firstColor);
   font-weight: 700;
   font-size: 0.95rem;
 }
-.night-mode .header-back-link { color: var(--night-font-firstColor); }
 .header-chevron {
   font-size: 1.4rem;
-  color: var(--light-menuCross-color);
+  color: var(--menuCross-color);
   flex: 0 0 auto;
 }
-.night-mode .header-chevron { color: var(--night-menuCross-color); }

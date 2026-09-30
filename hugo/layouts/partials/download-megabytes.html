@@ -1,0 +1,4 @@
+{{/* The full-resolution file's size in whole megabytes (at least 1), read from the file itself. */}}
+{{ $original := resources.Get (printf "originals/%s.jpg" .) }}
+{{ $megabytes := math.Max 1 (math.Round (div (len $original.Content) 1e6)) | int }}
+{{ return $megabytes }}

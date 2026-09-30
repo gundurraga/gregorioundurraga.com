@@ -16,7 +16,6 @@ function revealBody() {
     setTimeout(() => loader.remove(), 1000); // in case the transition never fires
   }
   document.body.classList.add("is-ready");
-  applyTheme();
 }
 window.addEventListener("load", () => {
   setTimeout(revealBody, Math.max(0, MIN_LOADER_MS - (performance.now() - bootedAt)));
@@ -36,13 +35,13 @@ let anchoring = false;
   if (!location.hash) return;
   anchoring = true;
   const release = () => { anchoring = false; };
-  ["wheel", "touchstart", "keydown"].forEach((evt) =>
-    window.addEventListener(evt, release, { once: true, passive: true }));
+  ["wheel", "touchstart", "keydown"].forEach((eventName) =>
+    window.addEventListener(eventName, release, { once: true, passive: true }));
 
   const anchor = () => {
     if (!anchoring) return;
-    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (el) el.scrollIntoView({ block: "start", behavior: "instant" });
+    const painting = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (painting) painting.scrollIntoView({ block: "start", behavior: "instant" });
   };
   anchor();
   window.addEventListener("load", () => {
@@ -51,96 +50,83 @@ let anchoring = false;
   });
 })();
 
-// ---- Theme (system preference, overridable and persisted).
-function applyTheme() {
-  const saved = localStorage.getItem("theme");
-  const dark = saved ? saved === "night"
-    : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.body.classList.toggle("night-mode", dark);
+// ---- Menu toggles (referenced by inline onclick in the header).
+function showMenu(toggle) {
+  toggle.classList.toggle("in-view");
+  document.querySelector("#menu").classList.toggle("in-view");
+  document.querySelector(".languages").classList.remove("lang-in-view");
 }
-document.addEventListener("DOMContentLoaded", () => {
-  applyTheme();
-  const btn = document.querySelector(".theme-toggle");
-  if (btn) btn.addEventListener("click", () => {
-    document.body.classList.toggle("night-mode");
-    localStorage.setItem("theme",
-      document.body.classList.contains("night-mode") ? "night" : "light");
-  });
+function showLanguages() {
+  document.querySelector(".languages").classList.toggle("lang-in-view");
+}
+function closeMenu() {
+  document.querySelectorAll(".nav-toggle, #menu").forEach((element) => element.classList.remove("in-view"));
+  document.querySelector(".languages").classList.remove("lang-in-view");
+}
 
+document.addEventListener("DOMContentLoaded", () => {
   // ---- Zoom on the detail image.
   const zoomImage = document.querySelector("img.zoom");
   if (zoomImage && typeof wheelzoom === "function") wheelzoom(zoomImage);
 
   // ---- Download tracking.
-  const dl = document.querySelector(".painting-download");
-  if (dl) dl.addEventListener("click", () => {
-    if (typeof umami !== "undefined") umami.track("painting_download", { painting: dl.dataset.painting });
+  const paintingDownload = document.querySelector(".painting-download");
+  if (paintingDownload) paintingDownload.addEventListener("click", () => {
+    if (typeof umami !== "undefined") umami.track("painting_download", { painting: paintingDownload.dataset.painting });
   });
-});
 
-// ---- Menu toggles (referenced by inline onclick in the header).
-function showMenu(x) {
-  x.classList.toggle("in-view");
-  document.querySelector("#menu").classList.toggle("in-view");
-  const langs = document.querySelector(".languages");
-  if (langs) langs.classList.remove("lang-in-view");
-}
-function showLanguages() {
-  const langs = document.querySelector(".languages");
-  if (langs) langs.classList.toggle("lang-in-view");
-}
-window.showMenu = showMenu;
-window.showLanguages = showLanguages;
+  // ---- "Download all" asks first: it is one large zip.
+  const downloadDialog = document.getElementById("download-all-dialog");
+  document.querySelector("[data-download-all]").addEventListener("click", (event) => {
+    if (!downloadDialog.showModal) return; // no <dialog> support: the link downloads directly
+    event.preventDefault();
+    closeMenu();
+    downloadDialog.showModal();
+  });
+  downloadDialog.addEventListener("click", (event) => {
+    if (event.target === downloadDialog) downloadDialog.close(); // a tap on the backdrop
+  });
+  downloadDialog.querySelector(".download-dialog-confirm").addEventListener("click", () => {
+    downloadDialog.close();
+    if (typeof umami !== "undefined") umami.track("download_all");
+  });
 
-// ---- Header hide-on-scroll-down + close menu when clicking outside.
-window.addEventListener("DOMContentLoaded", () => {
-  const navbar = document.querySelector("#header");
+  // ---- Header hides while scrolling down; the menu closes on scroll or a click outside it.
+  const header = document.querySelector("#header");
   // Start from wherever the page actually is: landing on a #slug anchor
   // means we open partway down, and comparing that against 0 would read as a
   // scroll and hide the header the moment you arrive.
-  let last = window.pageYOffset;
+  let lastScrollY = window.pageYOffset;
   window.addEventListener("scroll", () => {
-    const y = window.pageYOffset;
-    if (anchoring) { last = y; return; }
-    if (last < y && y > 112) {
-      navbar.classList.add("scrollUp");
-      document.querySelector("#menu").classList.remove("in-view");
-      document.querySelector(".nav-toggle").classList.remove("in-view");
-      const langs = document.querySelector(".languages");
-      if (langs) langs.classList.remove("lang-in-view");
-    } else if (y === 0 || last > y) {
-      navbar.classList.remove("scrollUp");
+    const scrollY = window.pageYOffset;
+    if (anchoring) { lastScrollY = scrollY; return; }
+    if (lastScrollY < scrollY && scrollY > 112) {
+      header.classList.add("scrollUp");
+      closeMenu();
+    } else if (scrollY === 0 || lastScrollY > scrollY) {
+      header.classList.remove("scrollUp");
     }
-    last = y;
+    lastScrollY = scrollY;
   });
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", (event) => {
     const menu = document.querySelector("#menu");
-    const burger = document.querySelector(".nav-toggle");
-    if (!menu.contains(e.target) && !burger.contains(e.target)) {
-      menu.classList.remove("in-view");
-      burger.classList.remove("in-view");
-      const langs = document.querySelector(".languages");
-      if (langs) langs.classList.remove("lang-in-view");
-    }
+    const toggle = document.querySelector(".nav-toggle");
+    if (!menu.contains(event.target) && !toggle.contains(event.target)) closeMenu();
   });
 });
 
 function backTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
-  const h = document.querySelector("#header");
-  if (h) h.classList.remove("scrollUp");
+  document.querySelector("#header").classList.remove("scrollUp");
 }
-window.backTop = backTop;
 
 // ---- Carousel helpers (top thumbnail strip on the home page).
 function scrollSmoothTo(elementId) {
-  const el = document.getElementById(elementId);
-  if (el) el.scrollIntoView({ block: "start", behavior: "smooth" });
+  const element = document.getElementById(elementId);
+  if (element) element.scrollIntoView({ block: "start", behavior: "smooth" });
 }
-function trackCarouselClick(id) {
-  if (typeof umami !== "undefined") umami.track("carousel_click", { painting: id });
+function trackCarouselClick(slug) {
+  if (typeof umami !== "undefined") umami.track("carousel_click", { painting: slug });
 }
-window.scrollSmoothTo = scrollSmoothTo;
-window.trackCarouselClick = trackCarouselClick;

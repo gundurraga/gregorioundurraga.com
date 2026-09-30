@@ -8,7 +8,7 @@
   {{/* Land back on the painting you were looking at, not at the top. */}}
   <a class="header-back-link" href="{{ .Site.Home.RelPermalink }}{{ with .Params.slug }}#{{ . }}{{ end }}">
     <svg class="header-chevron" width="1em" height="1em" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" aria-hidden="true"><path d="M328 112L184 256l144 144"/></svg>
-    <span>{{ i18n "backToGallery" }}</span>
+    <span>{{ i18n "home" }}</span>
   </a>
   {{ end }}
   <div class="nav-toggle" onclick="showMenu(this)">
@@ -18,15 +18,24 @@
   </div>
 
   <ul id="menu">
+    {{ if eq .Section "gallery" }}
     <li>
-      <div class="theme-toggle">
-        <h4 id="themeSelector">{{ i18n "nightMode" }}</h4>
-        <div class="theme-switch"><div class="switch"></div></div>
-      </div>
+      <a href="{{ .Site.Home.RelPermalink }}">
+        <div class="menu-link"><h4>{{ partial "icon.html" "home" }}<span>{{ i18n "home" }}</span></h4></div>
+      </a>
     </li>
+    {{ else }}
+    {{ with site.GetPage "/gallery" }}
+    <li>
+      <a href="{{ .RelPermalink }}">
+        <div class="menu-link"><h4>{{ partial "icon.html" "cube" }}<span>{{ i18n "gallery3d" }}</span></h4></div>
+      </a>
+    </li>
+    {{ end }}
+    {{ end }}
     <li>
       <div class="menu-link language-toggle" onclick="showLanguages()">
-        <h4>{{ i18n "language" }}: {{ .Site.Language.Lang | upper }}</h4>
+        <h4>{{ partial "icon.html" "globe" }}<span>{{ i18n "language" }}: {{ .Site.Language.Lang | upper }}</span></h4>
       </div>
     </li>
     <div class="languages">
@@ -41,24 +50,21 @@
       {{ end }}
     </div>
     <li>
-      <a href="https://github.com/gundurraga/gregorioundurraga.com/releases/latest/download/gregorio-undurraga-collected-works.zip">
-        <div class="menu-link"><h4>{{ i18n "downloadAll" }}</h4></div>
-      </a>
-    </li>
-    <li>
-      <a href="https://x.com/gundurragad" target="_blank" rel="noopener">
-        <div class="menu-link"><h4>Twitter</h4></div>
+      <a href="{{ site.Params.collectedWorksZip }}" data-download-all>
+        <div class="menu-link"><h4>{{ partial "icon.html" "download" }}<span>{{ i18n "downloadAll" }}</span></h4></div>
       </a>
     </li>
     <li>
       <a href="https://www.instagram.com/gregorioundurraga/" target="_blank" rel="noopener">
-        <div class="menu-link"><h4>Instagram</h4></div>
+        <div class="menu-link"><h4>{{ partial "icon.html" "instagram" }}<span>Instagram</span></h4></div>
       </a>
     </li>
     <li>
       <a href="https://paintingstack.com" target="_blank" rel="noopener">
-        <div class="menu-link"><h4>Paintingstack</h4></div>
+        <div class="menu-link"><h4>{{ partial "icon.html" "paintingstack" }}<span>Paintingstack</span></h4></div>
       </a>
     </li>
   </ul>
+
+  {{ partialCached "download-dialog.html" . .Site.Language.Lang }}
 </nav>

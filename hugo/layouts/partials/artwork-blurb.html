@@ -1,0 +1,12 @@
+{{/*
+  The sentence that introduces a painting, as HTML. Each language marks the
+  title its own way (italics, «», 《》) and the media reads mid sentence, after a
+  colon, so it starts lowercase, except in German, where nouns keep their capital.
+*/}}
+{{ $title := printf (i18n "titleInText") (htmlEscape .Title) }}
+{{ $media := .Params.media }}
+{{ if ne .Language.Lang "de" }}
+  {{ $media = printf "%s%s" (substr $media 0 1 | lower) (substr $media 1) }}
+{{ end }}
+{{ $blurb := printf (i18n "artworkBlurb") $title (htmlEscape $media) (htmlEscape .Params.dimensions) (htmlEscape .Params.location) }}
+{{ return safeHTML $blurb }}
