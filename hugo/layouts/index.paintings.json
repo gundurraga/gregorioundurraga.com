@@ -1,0 +1,12 @@
+{{- $paintings := slice }}
+{{- range sort .Site.RegularPages "Weight" }}
+  {{- if .Params.slug }}
+    {{- $paintings = $paintings | append (dict
+      "slug" .Params.slug
+      "title" .Params.titleEn
+      "year" .Params.year
+      "image" (printf "images/gundurraga/900p/%s.jpg" .Params.slug | absURL)
+    ) }}
+  {{- end }}
+{{- end }}
+{{- dict "paintings" $paintings | jsonify (dict "indent" "  ") }}

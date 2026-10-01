@@ -21,8 +21,15 @@ disableKinds = ['taxonomy', 'term', 'rss']
   baseName = 'llms'
   isPlainText = true
   notAlternative = true
+# paintings.json: a machine-readable index of every painting (slug, title, year,
+# 900px image URL), read by the Paintingstack social bot.
+[outputFormats.paintings]
+  mediaType = 'application/json'
+  baseName = 'paintings'
+  isPlainText = true
+  notAlternative = true
 [outputs]
-  home = ['HTML', 'llms']
+  home = ['HTML', 'llms', 'paintings']
 
 [languages]
   [languages.en]
