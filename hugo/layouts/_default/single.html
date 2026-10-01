@@ -27,6 +27,12 @@
     <p class="painting-license">{{ i18n "publicDomain" }}</p>
 
     <div class="painting-actions">
+      {{ with site.GetPage "/gallery" }}
+      <a class="painting-action" href="{{ .RelPermalink }}#{{ $slug }}">
+        {{ partial "icon.html" "cube" }}
+        <span>{{ i18n "seeInGallery" }}</span>
+      </a>
+      {{ end }}
       <a class="painting-action painting-download"
          href="{{ printf "images/gundurraga/download/%s.jpg" $slug | relURL }}"
          download="Gregorio Undurraga - {{ .Params.titleEn }} ({{ .Params.year }}).jpg"
@@ -34,12 +40,6 @@
         {{ partial "icon.html" "download" }}
         <span>{{ printf (i18n "downloadWithSize") (partialCached "download-megabytes.html" $slug $slug) }}</span>
       </a>
-      {{ with site.GetPage "/gallery" }}
-      <a class="painting-action" href="{{ .RelPermalink }}#{{ $slug }}">
-        {{ partial "icon.html" "cube" }}
-        <span>{{ i18n "seeInGallery" }}</span>
-      </a>
-      {{ end }}
     </div>
   </div>
 </article>
