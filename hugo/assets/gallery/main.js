@@ -6,7 +6,7 @@ import {
 } from "./vendor/three/three.module.js";
 import { layoutGallery } from "./plan/layout.js";
 import { createMaterials } from "./scene/materials.js";
-import { buildBuilding, LOBBY_WALL } from "./scene/building.js";
+import { buildBuilding } from "./scene/building.js";
 import { buildFrames, buildPaintings } from "./scene/artworks.js";
 import { createWallLabels } from "./scene/wall-labels.js";
 import { createNavigation } from "./runtime/navigation.js";
@@ -19,7 +19,8 @@ import {
   DEFAULT_VERTICAL_FOV_DEGREES, MIN_HORIZONTAL_FOV_DEGREES, MAX_VERTICAL_FOV_DEGREES, MAX_ZOOM,
 } from "./constants.js";
 
-const NEAR_PLANE = 0.05;
+const SKY = "#DCE4E9"; // a soft overcast
+const NEAR_PLANE = 0.1; // the closest view stands 0.35 m back; a nearer plane only costs depth precision
 const FAR_PLANE = 120;
 const MAX_FRAME_SECONDS = 0.1; // after a stall (tab switch, GC), resume instead of leaping
 
@@ -46,11 +47,11 @@ function start() {
   const anisotropy = Math.min(MAX_ANISOTROPY, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new Scene();
-  scene.background = new Color(LOBBY_WALL);
+  scene.background = new Color(SKY); // seen only through the lobby's glass
   const camera = new PerspectiveCamera(DEFAULT_VERTICAL_FOV_DEGREES, 1, NEAR_PLANE, FAR_PLANE);
   const materials = createMaterials(anisotropy);
 
-  const building = buildBuilding(plan, materials);
+  const building = buildBuilding(plan, materials, anisotropy);
   const paintings = buildPaintings(artworks);
   const labels = createWallLabels(artworks);
   scene.add(building.group, paintings.group, buildFrames(artworks, materials), ...labels.meshes);
@@ -66,7 +67,11 @@ function start() {
   }
   hintLines.forEach((line, index) => { hintSlots[index].textContent = line; });
   hint.hidden = false;
-  canvas.addEventListener("pointerdown", () => { hint.hidden = true; }, { once: true });
+  // Gone at the first move of any kind: a tap or click, a key, a scroll.
+  const hideHint = () => { hint.hidden = true; };
+  canvas.addEventListener("pointerdown", hideHint, { once: true });
+  canvas.addEventListener("wheel", hideHint, { once: true, passive: true });
+  window.addEventListener("keydown", hideHint, { once: true });
 
   const raycaster = new Raycaster();
   const pointer = new Vector2();
@@ -152,7 +157,7 @@ function start() {
       lastLod = now;
       textures.update(camera, focalPx, navigation.focusedSlug());
     }
-    if ((moved || isLodTick) && labels.update(camera.position)) requestRender();
+    if ((moved || isLodTick) && labels.update(camera.position, zoomLevel)) requestRender();
     if (textures.applyOne()) requestRender();
     if (needsRender) {
       needsRender = false;

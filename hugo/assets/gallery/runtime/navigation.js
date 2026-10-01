@@ -1,14 +1,14 @@
 // How a visitor moves. One gesture set on every device: drag to look, tap the
-// floor to walk there, tap a painting to glide in front of it, tap again (or
-// Esc) to step back. Keyboard walking on desktop, never required. No pointer
-// lock, no joystick.
+// floor to walk there, tap a painting to glide in front of it, drag there to
+// move along it and its label, tap again (or Esc) to step back. Keyboard
+// walking on desktop, never required. No pointer lock, no joystick.
 
 import { MathUtils } from "../vendor/three/three.module.js";
 import { isWalkable, slide, route } from "../plan/walk-bounds.js";
-import { focusPose, standingPose } from "../plan/focus-pose.js";
+import { focusPose, standingPose, labelReach } from "../plan/focus-pose.js";
 import {
   EYE_HEIGHT, WALK_SPEED, TURN_SPEED, DRAG_SENSITIVITY, MAX_PITCH, TAP_MAX_MOVE_PX, TAP_MAX_MS,
-  GLIDE_BASE_SECONDS, GLIDE_SECONDS_PER_METRE, GLIDE_MAX_SECONDS,
+  GLIDE_BASE_SECONDS, GLIDE_SECONDS_PER_METRE, GLIDE_MAX_SECONDS, LABEL_HEIGHT,
 } from "../constants.js";
 
 const REACHABLE_STEPS = 20;
@@ -109,6 +109,28 @@ export function createNavigation({ canvas, camera, plan, pick, onFocusChange, zo
     startGlide(returnPose);
   }
 
+  // In front of a painting, a drag slides the view along the wall, as a visitor
+  // leans towards a corner of the canvas or the label, never past their edges.
+  // The content follows the finger at any zoom.
+  function pan(dx, dy) {
+    const { centre, normal, right, frame, label, width } = focused.artwork;
+    const offsetX = pose.x - centre.x;
+    const offsetZ = pose.z - centre.z;
+    const distance = offsetX * normal.x + offsetZ * normal.z;
+    const metresPerPixel = (2 * distance * Math.tan(MathUtils.degToRad(camera.fov) / 2)) / canvas.clientHeight;
+    const lateral = MathUtils.clamp(
+      offsetX * right.x + offsetZ * right.z - dx * metresPerPixel,
+      -width / 2, labelReach(focused.artwork),
+    );
+    pose.x = centre.x + right.x * lateral + normal.x * distance;
+    pose.z = centre.z + right.z * lateral + normal.z * distance;
+    pose.y = MathUtils.clamp(
+      pose.y + dy * metresPerPixel,
+      Math.min(centre.y - frame.outerHeight / 2, label.y - LABEL_HEIGHT / 2),
+      centre.y + frame.outerHeight / 2,
+    );
+  }
+
   // The nearest walkable spot on the way from the target back to the visitor.
   function reachable(point) {
     for (let step = 0; step <= REACHABLE_STEPS; step += 1) {
@@ -159,11 +181,15 @@ export function createNavigation({ canvas, camera, plan, pick, onFocusChange, zo
     if (!pointer.isDrag) return;
     pointer.x = event.clientX;
     pointer.y = event.clientY;
-    if (focused || glide) return;
+    if (glide) return;
+    pointer.moved = true;
+    if (focused) {
+      pan(dx, dy);
+      return;
+    }
     const sensitivity = DRAG_SENSITIVITY / zoom.level(); // magnified views turn slower, like a telescope
     pose.yaw += dx * sensitivity;
     pose.pitch = Math.max(-MAX_PITCH, Math.min(MAX_PITCH, pose.pitch + dy * sensitivity));
-    pointer.moved = true;
   });
   const endPointer = (event, isCancel) => {
     if (!pointer || event.pointerId !== pointer.id) return;

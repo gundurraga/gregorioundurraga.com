@@ -2,7 +2,7 @@
 // the work's centre height, far enough back that frame and label fit the screen
 // with a margin.
 
-import { FOCUS_MARGIN, LABEL_OFFSET, LABEL_WIDTH, EYE_HEIGHT } from "../constants.js";
+import { FOCUS_MARGIN, LABEL_WIDTH, EYE_HEIGHT } from "../constants.js";
 
 const MIN_DISTANCE = 0.35;
 const STANDING_FARTHEST = 2.5;
@@ -14,10 +14,17 @@ export function yawFacing(normal) {
   return Math.atan2(normal.x, normal.z);
 }
 
+// How far right of the work's centre its label ends. A label usually sits
+// beside its work, but a set stacks its labels after the last work.
+export function labelReach(artwork) {
+  const { centre, right, label } = artwork;
+  return (label.x - centre.x) * right.x + (label.z - centre.z) * right.z + LABEL_WIDTH / 2;
+}
+
 export function focusPose(artwork, verticalFov, aspect) {
   const { frame, centre, normal, right } = artwork;
   const leftEdge = -artwork.width / 2;
-  const rightEdge = artwork.width / 2 + LABEL_OFFSET + LABEL_WIDTH;
+  const rightEdge = labelReach(artwork);
   const width = rightEdge - leftEdge;
   const sideways = (leftEdge + rightEdge) / 2;
   const halfVertical = Math.tan(verticalFov / 2);

@@ -27,7 +27,7 @@ html.gallery-is-3d #gallery-canvas {
   cursor: grabbing;
 }
 
-/* How to move, shown on arrival until the visitor first touches or clicks. */
+/* How to move, shown on arrival until the visitor first moves: a touch, a click, a key or a scroll. */
 #gallery-hint {
   position: fixed;
   left: 50%;

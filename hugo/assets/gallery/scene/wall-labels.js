@@ -5,6 +5,7 @@
 
 import { CanvasTexture, Mesh, MeshBasicMaterial, PlaneGeometry, SRGBColorSpace } from "../vendor/three/three.module.js";
 import { yawFacing } from "../plan/focus-pose.js";
+import { ON_THE_WALL } from "./materials.js";
 import {
   LABEL_WIDTH, LABEL_HEIGHT, LABEL_DEPTH, LABEL_TEXT_START, LABEL_TEXT_FULL, LABEL_TEXT_DROP,
 } from "../constants.js";
@@ -83,7 +84,7 @@ export function createWallLabels(artworks) {
     .then(() => { canDraw = true; });
 
   const labels = artworks.map((artwork) => {
-    const material = new MeshBasicMaterial({ transparent: true, depthWrite: false, visible: false, opacity: 0 });
+    const material = new MeshBasicMaterial({ transparent: true, depthWrite: false, visible: false, opacity: 0, ...ON_THE_WALL });
     const mesh = new Mesh(new PlaneGeometry(LABEL_WIDTH, LABEL_HEIGHT), material);
     const lift = LABEL_DEPTH + TEXT_LIFT;
     mesh.position.set(artwork.label.x + artwork.normal.x * lift, artwork.label.y, artwork.label.z + artwork.normal.z * lift);
@@ -92,12 +93,14 @@ export function createWallLabels(artworks) {
   });
 
   // Returns true when any text appeared, faded or disappeared.
-  function update(cameraPosition) {
+  // zoom: the lens magnification. A card seen at 4x from 12 m reads as one 3 m
+  // away, so its text appears through the zoom just as it does on approach.
+  function update(cameraPosition, zoom) {
     if (!canDraw) return false;
     let changed = false;
     let created = 0;
     for (const { artwork, mesh } of labels) {
-      const distance = mesh.position.distanceTo(cameraPosition);
+      const distance = mesh.position.distanceTo(cameraPosition) / zoom;
       const material = mesh.material;
       if (!material.map && distance < LABEL_TEXT_START && created < MAX_NEW_PER_UPDATE) {
         material.map = drawText(artwork.painting);

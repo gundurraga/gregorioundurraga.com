@@ -6,10 +6,9 @@
 // hangs alone, centred on its own wall.
 
 import {
-  GAP_TO_WIDTH, MIN_GAP, MAX_GAP, MAX_SPREAD, LABEL_OFFSET, LABEL_WIDTH,
+  GAP_TO_WIDTH, MIN_GAP, MAX_GAP, MAX_SPREAD, LABEL_TAIL,
 } from "../constants.js";
 
-const LABEL_TAIL = LABEL_OFFSET + LABEL_WIDTH;
 
 export function gapBetween(leftWidth, rightWidth) {
   const gap = GAP_TO_WIDTH * (leftWidth + rightWidth) / 2;

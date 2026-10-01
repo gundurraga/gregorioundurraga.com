@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { layoutGallery } from "./layout.js";
 import { gapBetween } from "./hanging.js";
-import { LABEL_OFFSET, LABEL_WIDTH, MIN_BOTTOM_EDGE } from "../constants.js";
+import { LABEL_TAIL, MIN_BOTTOM_EDGE } from "../constants.js";
 
 const page = process.env.GALLERY_PAGE ?? new URL("../../../../docs/gallery/index.html", import.meta.url).pathname;
 if (!existsSync(page)) throw new Error(`No built gallery page at ${page}: build the site first`);
@@ -36,7 +36,7 @@ test("works and labels stay on their wall and keep their air", () => {
         .sort((left, right) => left.centre - right.centre);
       onWall.forEach((item, index) => {
         assert.ok(item.centre - item.width / 2 >= -EPSILON, `${item.artwork.slug} starts before ${wall.id}`);
-        assert.ok(item.centre + item.width / 2 + LABEL_OFFSET + LABEL_WIDTH <= wall.length + EPSILON,
+        assert.ok(item.centre + item.width / 2 + LABEL_TAIL <= wall.length + EPSILON,
           `${item.artwork.slug} label runs past ${wall.id}`);
         const next = onWall[index + 1];
         if (!next || (next.artwork.setId && next.artwork.setId === item.artwork.setId)) return;

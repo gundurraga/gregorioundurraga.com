@@ -1,9 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { gapBetween, requiredSpan, justify, hangRoom, arrangeSymmetrically } from "./hanging.js";
-import { MIN_GAP, MAX_GAP, MAX_SPREAD, LABEL_OFFSET, LABEL_WIDTH } from "../constants.js";
+import { MIN_GAP, MAX_GAP, MAX_SPREAD, LABEL_TAIL } from "../constants.js";
 
-const LABEL_TAIL = LABEL_OFFSET + LABEL_WIDTH;
 const work = (slug, width) => ({ slug, width });
 
 test("gap grows with size and stays within museum bounds", () => {
