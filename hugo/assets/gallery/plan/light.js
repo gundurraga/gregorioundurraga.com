@@ -2,7 +2,7 @@
 // a laylight, as in a museum. Values are display brightness (1 = full albedo);
 // the scene converts them to linear once, when it writes vertex colours.
 
-const smoothstep = (edge0, edge1, value) => {
+export const smoothstep = (edge0, edge1, value) => {
   const t = Math.min(1, Math.max(0, (value - edge0) / (edge1 - edge0)));
   return t * t * (3 - 2 * t);
 };

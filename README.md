@@ -10,7 +10,7 @@ Every painting here is in the public domain by the artist's choice. You may copy
 
 ## The 3D gallery
 
-[gregorioundurraga.com/gallery](https://gregorioundurraga.com/gallery/) is a walkable museum of the whole collection: one room per country where the paintings were made, each work hung at its true size in its own frame, with a wall label beside it. Tap or click the floor to walk, tap a painting to stand in front of it, drag to look around, pinch or scroll to zoom. It runs in the browser on phones and desktops, and `/gallery/#<painting-slug>` opens straight in front of a painting.
+[gregorioundurraga.com/gallery](https://gregorioundurraga.com/gallery/) is a walkable museum of the whole collection: a glazed lobby between two walled Japanese gardens, then one room per country where the paintings were made, each work hung at its true size in its own frame, with a wall label beside it. Tap or click the floor to walk, tap a painting to stand in front of it, drag to look around, pinch or scroll to zoom. It runs in the browser on phones and desktops, and `/gallery/#<painting-slug>` opens straight in front of a painting.
 
 ## The site
 

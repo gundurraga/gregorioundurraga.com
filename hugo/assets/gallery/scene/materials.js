@@ -8,7 +8,7 @@ import {
 } from "../vendor/three/three.module.js";
 
 // Seeded, so the building looks the same on every visit.
-function random(seed) {
+export function random(seed) {
   let state = seed;
   return () => {
     state = (state + 0x6d2b79f5) | 0;
@@ -18,10 +18,10 @@ function random(seed) {
   };
 }
 
-function canvas(size) {
+export function canvas(width, height = width) {
   const element = document.createElement("canvas");
-  element.width = size;
-  element.height = size;
+  element.width = width;
+  element.height = height;
   return { element, context: element.getContext("2d") };
 }
 
@@ -66,39 +66,53 @@ function drawOak() {
   return element;
 }
 
-// 4 x 4 m of polished concrete: soft mottling and fine speckle.
+// 2.4 x 2.4 m of precast concrete paving: 60 x 120 cm slabs laid in a running
+// bond, long side along the walk. Each slab is its own pour: a tone and a soft
+// cloud across it. Fine joints with a lit arris. No grain: at a distance grain
+// reads as carpet, not stone.
+const PAVING_METRES = 2.4;
+
 function drawConcrete() {
   const size = 1024;
   const { element, context } = canvas(size);
   const next = random(11);
-  context.fillStyle = grey(0.92);
+  const pixelsPerMetre = size / PAVING_METRES;
+  const slabLength = 1.2 * pixelsPerMetre;
+  const slabWidth = 0.6 * pixelsPerMetre;
+  context.fillStyle = grey(0.9);
   context.fillRect(0, 0, size, size);
-  for (let blot = 0; blot < 500; blot += 1) {
-    const x = next() * size;
-    const y = next() * size;
-    const radius = 20 + next() * 160;
-    const tone = next() > 0.5 ? 0.7 : 1;
-    // Blots that cross an edge are drawn again on the opposite side, so the texture tiles.
-    for (const dx of [-size, 0, size]) {
-      if (x + dx + radius < 0 || x + dx - radius > size) continue;
-      for (const dy of [-size, 0, size]) {
-        if (y + dy + radius < 0 || y + dy - radius > size) continue;
-        const gradient = context.createRadialGradient(x + dx, y + dy, 0, x + dx, y + dy, radius);
-        gradient.addColorStop(0, grey(tone, 0.05));
-        gradient.addColorStop(1, grey(tone, 0));
-        context.fillStyle = gradient;
-        context.fillRect(x + dx - radius, y + dy - radius, radius * 2, radius * 2);
+  // A joint: a dark line, then the lit arris beside it.
+  const joint = (x, y, width, height, across) => {
+    context.fillStyle = grey(0.4, 0.35);
+    context.fillRect(x, y, across ? 2 : width, across ? height : 2);
+    context.fillStyle = grey(1, 0.12);
+    context.fillRect(across ? x + 2 : x, across ? y : y + 2, across ? 1 : width, across ? height : 1);
+  };
+  const rows = Math.round(size / slabWidth);
+  const slabsPerRow = Math.round(size / slabLength);
+  for (let row = 0; row < rows; row += 1) {
+    const top = row * slabWidth;
+    for (let slab = 0; slab < slabsPerRow; slab += 1) {
+      // One pour per slab, drawn twice where it crosses the texture's edge so the tiling never seams.
+      const start = (row % 2) * slabLength / 2 + slab * slabLength;
+      const tone = 0.86 + next() * 0.08;
+      const cloudX = start + next() * slabLength;
+      const cloudY = top + next() * slabWidth;
+      const cloudTone = next() > 0.5 ? 1 : 0.6;
+      for (const shift of [-size, 0]) {
+        const left = start + shift;
+        context.fillStyle = grey(tone);
+        context.fillRect(left, top, slabLength, slabWidth);
+        const cloud = context.createRadialGradient(cloudX + shift, cloudY, 0, cloudX + shift, cloudY, slabLength * 0.7);
+        cloud.addColorStop(0, grey(cloudTone, 0.05));
+        cloud.addColorStop(1, grey(0.8, 0));
+        context.fillStyle = cloud;
+        context.fillRect(left, top, slabLength, slabWidth);
+        joint(left, top, 0, slabWidth, true);
       }
     }
+    joint(0, top, size, 0, false);
   }
-  const pixels = context.getImageData(0, 0, size, size);
-  for (let index = 0; index < pixels.data.length; index += 4) {
-    const speckle = (next() - 0.5) * 10;
-    pixels.data[index] += speckle;
-    pixels.data[index + 1] += speckle;
-    pixels.data[index + 2] += speckle;
-  }
-  context.putImageData(pixels, 0, 0);
   return element;
 }
 
@@ -135,15 +149,27 @@ function drawShadow() {
   return element;
 }
 
-function tiledTexture(image, metres, anisotropy) {
+// metres: what one repeat of the image covers, one number or [across, along].
+export function tiledTexture(image, metres, anisotropy) {
+  const [across, along] = Array.isArray(metres) ? metres : [metres, metres];
   const texture = new CanvasTexture(image);
   texture.wrapS = RepeatWrapping;
   texture.wrapT = RepeatWrapping;
-  texture.repeat.set(1 / metres, 1 / metres);
+  texture.repeat.set(1 / across, 1 / along);
   texture.colorSpace = SRGBColorSpace;
   texture.anisotropy = anisotropy;
+  // Once on the GPU the drawing canvas is dead weight; a lost context reloads the page anyway.
+  texture.onUpdate = () => {
+    image.width = 0;
+    image.height = 0;
+  };
   return texture;
 }
+
+// Things a few millimetres off a wall (frames, label cards, their shadows) would
+// fight the wall for depth across a long room and flicker; this settles every
+// tie in their favour.
+export const ON_THE_WALL = { polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4 };
 
 export function createMaterials(anisotropy) {
   const surface = (map) => new MeshBasicMaterial({ vertexColors: true, map, side: FrontSide });
@@ -151,10 +177,10 @@ export function createMaterials(anisotropy) {
   return {
     plain: surface(null),
     oak: surface(tiledTexture(drawOak(), 2, anisotropy)),
-    concrete: surface(tiledTexture(drawConcrete(), 4, anisotropy)),
+    concrete: surface(tiledTexture(drawConcrete(), PAVING_METRES, anisotropy)),
     gilt: surface(tiledTexture(drawGilt(), 0.24, anisotropy)),
     shadow: new MeshBasicMaterial({
-      color: 0x000000, alphaMap: shadowTexture, transparent: true, opacity: 0.42, depthWrite: false,
+      color: 0x000000, alphaMap: shadowTexture, transparent: true, opacity: 0.42, depthWrite: false, ...ON_THE_WALL,
     }),
   };
 }
