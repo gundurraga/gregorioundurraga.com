@@ -17,6 +17,24 @@ export function linearAlbedo(hex) {
   return [scratchColor.r, scratchColor.g, scratchColor.b];
 }
 
+// Ascending break positions from 0 to length: every step, plus extra ones where
+// light changes fast or edges fall.
+export function breaks(length, step, extra = []) {
+  const values = [0, length, ...extra.filter((value) => value > 0 && value < length)];
+  for (let value = step; value < length; value += step) values.push(value);
+  return [...new Set(values.map((value) => Math.round(value * 1000) / 1000))].sort((a, b) => a - b);
+}
+
+// Appends one vertex: position, texture coordinate, and colour as albedo times
+// display brightness (converted to linear once, here). Returns its index.
+export function pushVertex(surfaces, position, uv, albedo, light) {
+  surfaces.positions.push(...position);
+  surfaces.uvs.push(...uv);
+  const brightness = toLinear(light);
+  surfaces.colors.push(albedo[0] * brightness, albedo[1] * brightness, albedo[2] * brightness);
+  return surfaces.positions.length / 3 - 1;
+}
+
 // origin, uAxis, vAxis: [x, y, z]. uBreaks, vBreaks: ascending positions along
 // each axis. skip(u, v): true for a cell to leave open (a doorway). light(u, v):
 // display brightness at a vertex. uvOffset shifts the texture.
@@ -24,16 +42,10 @@ export function addQuad(surfaces, { origin, uAxis, vAxis, uBreaks, vBreaks, albe
   const base = surfaces.positions.length / 3;
   for (const v of vBreaks) {
     for (const u of uBreaks) {
-      surfaces.positions.push(
-        origin[0] + uAxis[0] * u + vAxis[0] * v,
-        origin[1] + uAxis[1] * u + vAxis[1] * v,
-        origin[2] + uAxis[2] * u + vAxis[2] * v,
-      );
+      const position = origin.map((value, index) => value + uAxis[index] * u + vAxis[index] * v);
       const textureU = u + uvOffset[0];
       const textureV = v + uvOffset[1];
-      surfaces.uvs.push(swapUv ? textureV : textureU, swapUv ? textureU : textureV);
-      const brightness = toLinear(light ? light(u, v) : 1);
-      surfaces.colors.push(albedo[0] * brightness, albedo[1] * brightness, albedo[2] * brightness);
+      pushVertex(surfaces, position, swapUv ? [textureV, textureU] : [textureU, textureV], albedo, light ? light(u, v) : 1);
     }
   }
   const columns = uBreaks.length;
@@ -49,6 +61,13 @@ export function addQuad(surfaces, { origin, uAxis, vAxis, uBreaks, vBreaks, albe
       surfaces.indices.push(a, b, c, a, c, d);
     }
   }
+}
+
+// Any flat four-sided face, corners in order with the front on the side they
+// turn anticlockwise around. lights: display brightness at each corner.
+export function addFace(surfaces, { corners, uvs, albedo, lights }) {
+  const [a, b, c, d] = corners.map((corner, index) => pushVertex(surfaces, corner, uvs[index], albedo, lights[index]));
+  surfaces.indices.push(a, b, c, a, c, d);
 }
 
 const scale = (vector, amount) => vector.map((component) => component * amount);

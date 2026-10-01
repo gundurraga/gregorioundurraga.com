@@ -63,6 +63,7 @@ export const PANEL_GAP = 0.05; // between the frames of a diptych's canvases
 // in as the visitor comes close enough to read it.
 export const LABEL_OFFSET = 0.15;
 export const LABEL_WIDTH = 0.16;
+export const LABEL_TAIL = LABEL_OFFSET + LABEL_WIDTH; // how far a work's label reaches past its right edge
 export const LABEL_HEIGHT = 0.1;
 export const LABEL_DEPTH = 0.003;
 export const LABEL_CENTER = 1.35;
