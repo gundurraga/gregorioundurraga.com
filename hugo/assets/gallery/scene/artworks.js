@@ -6,6 +6,7 @@
 import { BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshBasicMaterial } from "../vendor/three/three.module.js";
 import { createSurfaces, addBox, addQuad, linearAlbedo, toGeometry, isEmpty } from "./surfaces.js";
 import { yawFacing } from "../plan/focus-pose.js";
+import { ON_THE_WALL } from "./materials.js";
 import { LABEL_WIDTH, LABEL_HEIGHT, LABEL_DEPTH, CENTIMETRE } from "../constants.js";
 
 const CANVAS_EDGE = "#E9E4D8";
@@ -143,7 +144,10 @@ export function buildFrames(artworks, materials) {
   }
   if (!isEmpty(shadows)) group.add(new Mesh(toGeometry(shadows), materials.shadow));
   for (const [surfaces, material] of [[plain, materials.plain], [oak, materials.oak], [gilt, materials.gilt]]) {
-    if (!isEmpty(surfaces)) group.add(new Mesh(toGeometry(surfaces), material));
+    if (isEmpty(surfaces)) continue;
+    const onTheWall = material.clone();
+    onTheWall.setValues(ON_THE_WALL);
+    group.add(new Mesh(toGeometry(surfaces), onTheWall));
   }
   return group;
 }
@@ -176,7 +180,7 @@ function canvasGeometry(artwork) {
 export function buildPaintings(artworks) {
   const group = new Group();
   const meshes = artworks.map((artwork) => {
-    const material = new MeshBasicMaterial({ color: PLACEHOLDER });
+    const material = new MeshBasicMaterial({ color: PLACEHOLDER, ...ON_THE_WALL });
     const mesh = new Mesh(canvasGeometry(artwork), material);
     const lift = artwork.frame.canvasFront + CANVAS_LIFT;
     mesh.position.set(
