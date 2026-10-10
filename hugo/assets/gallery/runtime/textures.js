@@ -1,10 +1,12 @@
 // Painting textures in three tiers. Small (256 px) for every painting, loaded
 // nearest first; medium (1024 px) for the few that fill enough of the screen;
-// large (2048 px) only for the painting being looked at closely. Decoding
+// large (2048 px) only for the painting being looked at closely. The paintings
+// in the first view load before anything else, and onFirstView fires once they
+// show, so the page can open on a hung gallery rather than empty frames. Decoding
 // happens off the main thread and at most one texture uploads per frame, so
 // walking never stutters. Demoted tiers are freed at once.
 
-import { Texture, SRGBColorSpace, LinearMipmapLinearFilter, Vector3 } from "../vendor/three/three.module.js";
+import { Texture, SRGBColorSpace, LinearMipmapLinearFilter, Vector3, Frustum, Matrix4 } from "../vendor/three/three.module.js";
 import {
   MEDIUM_TIER_MIN_PX, MEDIUM_TIER_DROP_PX, MAX_MEDIUM_TEXTURES, MAX_CONCURRENT_FETCHES, CENTIMETRE,
 } from "../constants.js";
@@ -16,8 +18,11 @@ const MIN_DISTANCE = 0.2; // keeps the projected size finite with the nose on th
 const FACING_THRESHOLD = 0.3; // cosine of the angle off the view direction that still counts as in view
 const OUT_OF_VIEW_WEIGHT = 0.2; // works behind or beside the visitor load later, not never
 const forward = new Vector3();
+const frustum = new Frustum();
+const viewProjection = new Matrix4();
 
-export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onError }) {
+// isInSight(point): nothing of the building stands between the camera and point.
+export function createTextureTiers({ renderer, paintingMeshes, anisotropy, isInSight, onError, onFirstView }) {
   const entries = paintingMeshes.map((mesh) => ({
     mesh,
     artwork: mesh.userData.artwork,
@@ -29,6 +34,20 @@ export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onErr
     wanted: new Set(["small"]),
     priority: 0,
   }));
+  for (const entry of entries) entry.mesh.updateWorldMatrix(true, false);
+  // The entries in view at the first update, until all of them show: undefined
+  // before that update, null once they all have.
+  let firstView;
+
+  function settleFirstView() {
+    if (!firstView) return;
+    firstView = firstView.filter((entry) => !entry.textures.small && (entry.failures.get("small") ?? 0) < MAX_ATTEMPTS);
+    if (firstView.length > 0) return;
+    firstView = null;
+    onFirstView();
+  }
+  // The first view's small textures go before anything else, then the rest by priority.
+  const isFirst = ({ entry, tier }) => tier === "small" && Boolean(firstView?.includes(entry));
   const queue = [];
   const ready = [];
   let activeFetches = 0;
@@ -60,7 +79,7 @@ export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onErr
   }
 
   function pump() {
-    queue.sort((left, right) => right.entry.priority - left.entry.priority);
+    queue.sort((left, right) => isFirst(right) - isFirst(left) || right.entry.priority - left.entry.priority);
     while (activeFetches < MAX_CONCURRENT_FETCHES && queue.length > 0) {
       const { entry, tier } = queue.shift();
       entry.queued.delete(tier);
@@ -80,7 +99,10 @@ export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onErr
           entry.loading.delete(tier);
           const failures = (entry.failures.get(tier) ?? 0) + 1;
           entry.failures.set(tier, failures);
-          if (failures === MAX_ATTEMPTS) onError(`texture ${entry.artwork.slug} ${tier}: ${error.message}`);
+          if (failures === MAX_ATTEMPTS) {
+            onError(`texture ${entry.artwork.slug} ${tier}: ${error.message}`);
+            settleFirstView();
+          }
         })
         .finally(() => {
           activeFetches -= 1;
@@ -116,13 +138,20 @@ export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onErr
     renderer.initTexture(texture);
     residentBytes += bitmap.width * bitmap.height * BYTES_PER_PIXEL_WITH_MIPMAPS;
     entry.textures[tier] = texture;
-    return showBest(entry);
+    const changed = showBest(entry);
+    settleFirstView();
+    return changed;
   }
 
   // Decide tiers from what the camera sees. focalPx: pixels per unit of
   // height at one metre, i.e. viewport height / (2 tan(fov / 2)).
   function update(camera, focalPx, focusedSlug) {
     camera.getWorldDirection(forward);
+    if (firstView === undefined) {
+      camera.updateMatrixWorld();
+      frustum.setFromProjectionMatrix(viewProjection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+      firstView = entries.filter((entry) => frustum.intersectsObject(entry.mesh) && isInSight(entry.artwork.centre));
+    }
     for (const entry of entries) {
       const { centre } = entry.artwork;
       const dx = centre.x - camera.position.x;
@@ -147,6 +176,7 @@ export function createTextureTiers({ renderer, paintingMeshes, anisotropy, onErr
       else if (entry.wanted.delete("large")) release(entry, "large");
       want(entry, "small");
     }
+    settleFirstView(); // a first view with no painting in it is ready at once
     pump();
   }
 

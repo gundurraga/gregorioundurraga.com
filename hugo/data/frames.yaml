@@ -1,6 +1,7 @@
 # Frame profiles for the 3D gallery. A painting's `frame` must be an id here.
-# Two geometries: "tray" (float frame, hides no paint) and "cassetta" (flat
-# Italian box frame, its rebate laps over the paint). Sizes are computed from
+# Three geometries: "tray" (float frame, hides no paint), "cassetta" (flat
+# Italian box frame, its rebate laps over the paint) and "mat" (a work on
+# paper floated whole inside a mat, under glass). Sizes are computed from
 # each painting in hugo/assets/gallery/plan/frame-geometry.js.
 frames:
   - id: "oak-tray"
@@ -8,10 +9,13 @@ frames:
     color: "#D2C2A2"
   - id: "black-tray"
     geometry: "tray"
-    color: "#1C1B1A"
+    color: "#302E2B" # black paint over oak: charcoal under the gallery light
   - id: "gilt-cassetta"
     geometry: "cassetta"
     color: "#B08D4C"
   - id: "black-cassetta"
     geometry: "cassetta"
-    color: "#1C1B1A"
+    color: "#302E2B" # black paint over oak: charcoal under the gallery light
+  - id: "oak-mat"
+    geometry: "mat"
+    color: "#D2C2A2"

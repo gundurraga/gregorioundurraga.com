@@ -1,6 +1,7 @@
 // How a visitor moves. One gesture set on every device: drag to look, tap the
 // floor to walk there, tap a painting to glide in front of it, drag there to
-// move along it and its label, tap again (or Esc) to step back. Keyboard
+// move along it and its label, tap again (or Esc) to step back from it, still
+// facing it, ready to walk on. Keyboard
 // walking on desktop, never required. No pointer lock, no joystick.
 
 import { MathUtils } from "../vendor/three/three.module.js";
@@ -55,7 +56,7 @@ export function createNavigation({ canvas, camera, plan, pick, onFocusChange, zo
   const pressed = new Set();
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let glide = null;
-  let focused = null; // { artwork, returnPose }
+  let focused = null; // the artwork being looked at closely
   let pointer = null;
   let jumped = false;
   let refitAfterGlide = false;
@@ -80,53 +81,55 @@ export function createNavigation({ canvas, camera, plan, pick, onFocusChange, zo
   }
 
   function focus(artwork, { instant = false } = {}) {
-    if (focused?.artwork === artwork) return;
+    if (focused === artwork) return;
     zoom.reset();
     const target = focusPose(artwork, MathUtils.degToRad(camera.fov), camera.aspect);
-    const returnPose = instant ? standingPose(artwork, (x, z) => isWalkable(plan, x, z)) : { ...pose };
-    focused = { artwork, returnPose };
+    focused = artwork;
     onFocusChange(artwork);
     if (instant) placeAt(target);
     else startGlide(target, { path: route(plan, pose, target) });
   }
 
-  // The screen changed shape (rotation, resize): frame the open painting again.
+  // The screen changed shape (rotation, resize): frame the open painting again,
+  // at the plain lens, since a zoomed one would fit it from metres further back.
   function refit() {
     if (!focused) return;
     if (glide) {
       refitAfterGlide = true;
       return;
     }
-    placeAt(focusPose(focused.artwork, MathUtils.degToRad(camera.fov), camera.aspect));
+    zoom.reset();
+    placeAt(focusPose(focused, MathUtils.degToRad(camera.fov), camera.aspect));
   }
 
+  // Step back from the painting to where a visitor would stand to see it whole.
   function unfocus() {
     if (!focused) return;
-    const { returnPose } = focused;
+    const standing = standingPose(focused, (x, z) => isWalkable(plan, x, z));
     focused = null;
     zoom.reset();
     onFocusChange(null);
-    startGlide(returnPose);
+    startGlide(standing);
   }
 
   // In front of a painting, a drag slides the view along the wall, as a visitor
   // leans towards a corner of the canvas or the label, never past their edges.
   // The content follows the finger at any zoom.
   function pan(dx, dy) {
-    const { centre, normal, right, frame, label, width } = focused.artwork;
+    const { centre, normal, right, frame, label, width } = focused;
     const offsetX = pose.x - centre.x;
     const offsetZ = pose.z - centre.z;
     const distance = offsetX * normal.x + offsetZ * normal.z;
     const metresPerPixel = (2 * distance * Math.tan(MathUtils.degToRad(camera.fov) / 2)) / canvas.clientHeight;
     const lateral = MathUtils.clamp(
       offsetX * right.x + offsetZ * right.z - dx * metresPerPixel,
-      -width / 2, labelReach(focused.artwork),
+      -width / 2, labelReach(focused),
     );
     pose.x = centre.x + right.x * lateral + normal.x * distance;
     pose.z = centre.z + right.z * lateral + normal.z * distance;
     pose.y = MathUtils.clamp(
       pose.y + dy * metresPerPixel,
-      Math.min(centre.y - frame.outerHeight / 2, label.y - LABEL_HEIGHT / 2),
+      Math.min(centre.y - frame.outerHeight / 2, label.y - (LABEL_HEIGHT * label.scale) / 2),
       centre.y + frame.outerHeight / 2,
     );
   }
@@ -274,5 +277,5 @@ export function createNavigation({ canvas, camera, plan, pick, onFocusChange, zo
   camera.position.set(pose.x, pose.y, pose.z);
   camera.rotation.set(pose.pitch, pose.yaw, 0, "YXZ");
 
-  return { update, focus, unfocus, refit, focusedSlug: () => focused?.artwork.slug ?? null };
+  return { update, focus, unfocus, refit, focusedSlug: () => focused?.slug ?? null };
 }

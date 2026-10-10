@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { planBuilding } from "./floor-plan.js";
-import { isWalkable, slide, route, roomIndexAt } from "./walk-bounds.js";
+import { isWalkable, slide, route } from "./walk-bounds.js";
 import { HANG_SLACK, WALL_THICKNESS, ROOM_MAX_WIDTH } from "../constants.js";
 
 const specs = [
@@ -60,20 +60,50 @@ test("walls stop walking, doorways do not, and a visitor slides along walls", ()
   assert.ok(slid.x < lobby.width / 2);
 });
 
-test("a route from the lobby to the last room passes every doorway and stays walkable", () => {
+// Every leg of a route, checked finely, stays on the floor.
+function assertOnFloor(plan, from, path) {
+  let cursor = from;
+  for (const point of path) {
+    for (let t = 0; t <= 1; t += 0.02) {
+      const x = cursor.x + (point.x - cursor.x) * t;
+      const z = cursor.z + (point.z - cursor.z) * t;
+      assert.ok(isWalkable(plan, x, z), `route from ${from.x.toFixed(2)}, ${from.z.toFixed(2)} leaves the floor at ${x.toFixed(2)}, ${z.toFixed(2)}`);
+    }
+    cursor = point;
+  }
+}
+
+test("a route from the lobby to the last room ends at its target and stays walkable", () => {
   const plan = planBuilding(specs);
   const last = plan.rooms[plan.rooms.length - 1];
   const target = { x: last.width / 2 - 1, z: last.farZ + 1 };
   const path = route(plan, { x: plan.spawn.x, z: plan.spawn.z }, target);
   assert.deepEqual(path[path.length - 1], target);
-  let cursor = plan.spawn;
-  for (const point of path) {
-    for (let t = 0; t <= 1; t += 0.02) {
-      const x = cursor.x + (point.x - cursor.x) * t;
-      const z = cursor.z + (point.z - cursor.z) * t;
-      assert.ok(isWalkable(plan, x, z), `route leaves the floor at ${x.toFixed(2)}, ${z.toFixed(2)}`);
+  assertOnFloor(plan, plan.spawn, path);
+});
+
+test("routes between any two spots on the floor never pass through a wall or partition", () => {
+  const plan = planBuilding(specs);
+  let seed = 7;
+  const random = () => {
+    seed = (seed * 16807) % 2147483647;
+    return seed / 2147483647;
+  };
+  const minX = Math.min(...plan.walkable.map((area) => area.minX));
+  const maxX = Math.max(...plan.walkable.map((area) => area.maxX));
+  const minZ = Math.min(...plan.walkable.map((area) => area.minZ));
+  const maxZ = Math.max(...plan.walkable.map((area) => area.maxZ));
+  const spot = () => {
+    for (;;) {
+      const point = { x: minX + random() * (maxX - minX), z: minZ + random() * (maxZ - minZ) };
+      if (isWalkable(plan, point.x, point.z)) return point;
     }
-    cursor = point;
+  };
+  for (let trial = 0; trial < 300; trial += 1) {
+    const from = spot();
+    const to = spot();
+    const path = route(plan, from, to);
+    assert.deepEqual(path[path.length - 1], to);
+    assertOnFloor(plan, from, path);
   }
-  assert.equal(roomIndexAt(plan, target.x, target.z), plan.rooms.length - 1);
 });

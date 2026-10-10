@@ -32,12 +32,6 @@ export function ceilingLight(distanceToEdge) {
 // Box faces (frames, partitions' edges): lit from above.
 export const FACE_LIGHT = { front: 0.93, top: 1, bottom: 0.6, side: 0.82 };
 
-// Faint, fixed irregularity so no surface is render-perfect.
-export function plasterNoise(x, y, z) {
-  const hash = Math.sin(x * 12.9898 + y * 78.233 + z * 37.719) * 43758.5453;
-  return 1 + ((hash - Math.floor(hash)) - 0.5) * 0.008;
-}
-
 export function toLinear(display) {
   return display ** 2.2;
 }

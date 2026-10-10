@@ -39,6 +39,7 @@ export const ROOM_STEP = 0.5;
 export const CEILING_TO_WIDTH = 0.42;
 export const MIN_CEILING = 3.6;
 export const CEILING_TO_TALLEST_WORK = 2.2;
+export const MAX_WALL_ABOVE_WORKS = 2.2; // a wide room still never towers over small works
 export const MAX_PARTITIONS = 2;
 export const PARTITION_PASSAGE = 2.5; // clear floor between a partition end and the wall
 export const PARTITION_HEIGHT = 3.4;
@@ -59,15 +60,18 @@ export const SET_MAX_SIDE_CM = 41; // small works of one size and year hang toge
 export const SET_GAP = 0.15;
 export const PANEL_GAP = 0.05; // between the frames of a diptych's canvases
 
-// Labels: a paper card to the right of each work, always there; its text fades
-// in as the visitor comes close enough to read it.
+// Labels: lettered straight onto the wall to the right of each work, as a
+// museum sets them in vinyl; the text fades in as the visitor comes close
+// enough to read it. Width and height bound the block of text at 1 cm letters;
+// a work seen from further back gets its label lettered larger to match.
 export const LABEL_OFFSET = 0.15;
 export const LABEL_WIDTH = 0.16;
 export const LABEL_TAIL = LABEL_OFFSET + LABEL_WIDTH; // how far a work's label reaches past its right edge
 export const LABEL_HEIGHT = 0.1;
-export const LABEL_DEPTH = 0.003;
 export const LABEL_CENTER = 1.35;
 export const LABEL_STACK_GAP = 0.02; // a set's labels stack beside it
+export const LABEL_READING_DISTANCE = 0.75; // the close view from which 1 cm letters read comfortably on screen
+export const READING_ASPECT = 1.6; // the screen shape a label's size is judged for: a laptop's
 export const LABEL_TEXT_START = 5; // text begins to appear
 export const LABEL_TEXT_FULL = 3; // text fully legible
 export const LABEL_TEXT_DROP = 8; // text texture freed
@@ -85,6 +89,18 @@ export const CASSETTA_MAX_FACE_CM = 9;
 export const CASSETTA_DEPTH_CM = 5.5;
 export const LARGE_CASSETTA_DEPTH_CM = 7;
 export const CASSETTA_REBATE_CM = 0.5;
+// A work on paper, floated whole on a backing board inside a bevelled mat,
+// under glass, in a slim moulding.
+export const MAT_BORDER_SHARE = 0.2; // the mat's width, about a fifth of the paper's long side
+export const MAT_MIN_BORDER_CM = 6;
+export const MAT_MAX_BORDER_CM = 12;
+export const MAT_BOTTOM_EXTRA_CM = 1.5; // wider below, so the work sits at the optical centre
+export const MAT_REVEAL_CM = 1.5; // backing board showing round the paper
+export const MAT_THICKNESS_CM = 0.28; // eight-ply museum board
+export const MAT_BACK_CM = 1; // backing board's face, off the wall
+export const MAT_PAPER_RISE_CM = 0.15; // a hidden riser lifts the sheet off the board, so it casts a hairline shadow
+export const MAT_FRAME_FACE_CM = 2;
+export const MAT_FRAME_DEPTH_CM = 3;
 
 // Textures and rendering.
 export const MEDIUM_TIER_MIN_PX = 200; // projected height that earns the 1024 px texture

@@ -1,12 +1,10 @@
 # Rooms of the 3D gallery, one per country where the paintings were made, in
 # walking order after the lobby. A painting's `country` must be an id here.
 # Names match the localized country in each painting's `location`. `wall` is
-# the room's paint; `card` is its label card, one quiet step lighter than the
-# wall as it renders (walls read about 10% darker than their paint).
+# the room's paint; the labels lettered on it take a dark or light ink to suit.
 countries:
   - id: "costa-rica"
     wall: "#F1ECE2"
-    card: "#F6F3ED"
     name:
       en: "Costa Rica"
       es: "Costa Rica"
@@ -18,7 +16,6 @@ countries:
       zh-hant: "哥斯大黎加"
   - id: "france"
     wall: "#F3F2EF"
-    card: "#F8F6F1"
     name:
       en: "France"
       es: "Francia"
@@ -30,7 +27,6 @@ countries:
       zh-hant: "法國"
   - id: "chile"
     wall: "#8A857E"
-    card: "#CFC9BF"
     name:
       en: "Chile"
       es: "Chile"

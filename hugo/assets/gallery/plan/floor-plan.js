@@ -7,7 +7,7 @@
 import {
   WALL_THICKNESS, DOOR_WIDTH, LOBBY_WIDTH, LOBBY_LENGTH, LOBBY_CEILING,
   ROOM_MIN_WIDTH, ROOM_MAX_WIDTH, ROOM_ASPECT, ROOM_MAX_LENGTH, ROOM_STEP,
-  CEILING_TO_WIDTH, MIN_CEILING, CEILING_TO_TALLEST_WORK, MAX_PARTITIONS,
+  CEILING_TO_WIDTH, MIN_CEILING, CEILING_TO_TALLEST_WORK, MAX_WALL_ABOVE_WORKS, HANG_CENTER, MAX_PARTITIONS,
   PARTITION_PASSAGE, PARTITION_HEIGHT, CORNER_MARGIN, DOOR_CLEARANCE, MIN_SEGMENT,
   HANG_SLACK, BODY_RADIUS, LOBBY_ID, SPAWN_DISTANCE_TO_DOOR,
 } from "../constants.js";
@@ -98,8 +98,11 @@ function sizeRoom(spec, nearZ) {
   throw new Error(`Room "${spec.id}" cannot hold ${needed.toFixed(1)} m of hanging`);
 }
 
+// Wider rooms stand taller, but only so far above the top of the tallest work:
+// small pictures under a towering wall look like beads.
 function ceilingFor(width, tallestWork) {
-  return Math.max(MIN_CEILING, CEILING_TO_WIDTH * width, CEILING_TO_TALLEST_WORK * tallestWork);
+  const besideWorks = Math.min(CEILING_TO_WIDTH * width, HANG_CENTER + tallestWork / 2 + MAX_WALL_ABOVE_WORKS);
+  return Math.max(MIN_CEILING, besideWorks, CEILING_TO_TALLEST_WORK * tallestWork);
 }
 
 function walkableAreas(rooms) {

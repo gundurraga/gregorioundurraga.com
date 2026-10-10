@@ -1,26 +1,37 @@
-// The text printed on each label card: title and year, medium, size, place.
-// The card itself is part of the frames mesh and always visible; the text is
-// drawn in the site's typeface only for cards near enough to read, fades in as
-// the visitor approaches, and is freed again when they walk away.
+// Each work's label, lettered straight onto the wall as a museum sets it in
+// vinyl: the title in italics and the year in roman, then medium, size and
+// place, in sentence case, in an ink dark or light to suit the wall. Drawn in
+// the site's typeface only for labels near enough to read, it fades in as the
+// visitor approaches and is freed again when they walk away.
 
-import { CanvasTexture, Mesh, MeshBasicMaterial, PlaneGeometry, SRGBColorSpace } from "../vendor/three/three.module.js";
+import { CanvasTexture, Mesh, MeshBasicMaterial, PlaneGeometry } from "../vendor/three/three.module.js";
 import { yawFacing } from "../plan/focus-pose.js";
 import { ON_THE_WALL } from "./materials.js";
 import {
-  LABEL_WIDTH, LABEL_HEIGHT, LABEL_DEPTH, LABEL_TEXT_START, LABEL_TEXT_FULL, LABEL_TEXT_DROP,
+  LABEL_WIDTH, LABEL_HEIGHT, LABEL_TEXT_START, LABEL_TEXT_FULL, LABEL_TEXT_DROP,
 } from "../constants.js";
 
 const PIXELS_PER_METRE = 4000;
-const PADDING_PX = 40;
-const TITLE_PX = 38;
-const BODY_PX = 31;
+const TEXT_PX = 40; // 1 cm letters, as a museum sets labels read from a step back
 const LINE_HEIGHT = 1.35;
 const TITLE_TO_BODY_GAP = 0.3; // in body lines
 const MAX_NEW_PER_UPDATE = 2;
-const TEXT_LIFT = 0.0005; // the text plane sits just proud of the card
+const TEXT_LIFT = 0.0005; // vinyl lies on the paint
 const OPACITY_STEP = 0.01; // smaller fades are not worth a redraw
 const FONT = '"Roboto Condensed", Helvetica, sans-serif';
-const INK = "#2B2926";
+const DARK_INK = "#2B2926";
+const LIGHT_INK = "#F3F0EA";
+const LIGHT_INK_BELOW = 0.3; // a wall darker than this (relative luminance) takes the light ink
+// Scripts with no italics of their own: their titles stay upright.
+const UPRIGHT_LANGUAGES = ["ja", "ko", "zh"];
+
+function luminance(hex) {
+  const [red, green, blue] = [1, 3, 5].map((start) => {
+    const channel = parseInt(hex.slice(start, start + 2), 16) / 255;
+    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+}
 
 // Words wrap at spaces. A word wider than a line, as whole titles are in
 // Japanese and Chinese, which use no spaces, wraps between its characters.
@@ -45,28 +56,45 @@ function wrapText(context, text, maxWidth) {
   return lines;
 }
 
-function drawText(painting) {
+// The letters as a stencil, white where they are: the label's material lays
+// the ink through it, so their edges blend cleanly into the wall.
+function drawText(painting, titleStyle) {
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(LABEL_WIDTH * PIXELS_PER_METRE);
   canvas.height = Math.round(LABEL_HEIGHT * PIXELS_PER_METRE);
   const context = canvas.getContext("2d");
-  const textWidth = canvas.width - 2 * PADDING_PX;
-  context.fillStyle = INK;
+  context.fillStyle = "#FFFFFF";
   context.textBaseline = "top";
-  let y = PADDING_PX;
-  context.font = `700 ${TITLE_PX}px ${FONT}`;
-  for (const line of wrapText(context, `${painting.title.toUpperCase()}, ${painting.year}`, textWidth)) {
-    context.fillText(line, PADDING_PX, y);
-    y += TITLE_PX * LINE_HEIGHT;
+  const lineHeight = TEXT_PX * LINE_HEIGHT;
+  const roman = `400 ${TEXT_PX}px ${FONT}`;
+  const title = `${titleStyle} 400 ${TEXT_PX}px ${FONT}`;
+  // The title wraps in its own italics; the year follows its last line in roman,
+  // or takes a line of its own when it does not fit there.
+  context.font = title;
+  const titleLines = wrapText(context, `${painting.title},`, canvas.width);
+  const lastWidth = context.measureText(titleLines[titleLines.length - 1]).width;
+  context.font = roman;
+  const year = ` ${painting.year}`;
+  const yearFits = lastWidth + context.measureText(year).width <= canvas.width;
+  let y = 0;
+  context.font = title;
+  for (const line of titleLines) {
+    context.fillText(line, 0, y);
+    y += lineHeight;
   }
-  y += BODY_PX * TITLE_TO_BODY_GAP;
-  context.font = `400 ${BODY_PX}px ${FONT}`;
+  context.font = roman;
+  if (yearFits) context.fillText(year, lastWidth, y - lineHeight);
+  else {
+    context.fillText(year.trimStart(), 0, y);
+    y += lineHeight;
+  }
+  y += TEXT_PX * TITLE_TO_BODY_GAP;
   for (const text of [painting.media, painting.dimensions, painting.location]) {
-    context.fillText(text, PADDING_PX, y);
-    y += BODY_PX * LINE_HEIGHT;
+    context.fillText(text, 0, y);
+    y += lineHeight;
   }
   const texture = new CanvasTexture(canvas);
-  texture.colorSpace = SRGBColorSpace;
+  texture.premultiplyAlpha = true; // so each pixel's coverage lands in the channel the stencil reads
   return texture;
 }
 
@@ -79,39 +107,44 @@ export function createWallLabels(artworks) {
   // Draw once the typeface is in; if it never loads, draw in the fallback font.
   // The label text itself is passed so every script it uses (Cyrillic, accents) loads, not just Latin.
   const labelText = artworks.map(({ painting }) => `${painting.title} ${painting.media} ${painting.location}`).join(" ");
-  Promise.all([`700 ${TITLE_PX}px`, `400 ${BODY_PX}px`].map((size) => document.fonts.load(`${size} ${FONT}`, labelText)))
+  const titleStyle = UPRIGHT_LANGUAGES.some((language) => document.documentElement.lang.startsWith(language)) ? "normal" : "italic";
+  Promise.all([`${titleStyle} 400`, "400"].map((style) => document.fonts.load(`${style} ${TEXT_PX}px ${FONT}`, labelText)))
     .catch((error) => console.error("[gallery] label font failed to load", error))
     .then(() => { canDraw = true; });
 
   const labels = artworks.map((artwork) => {
-    const material = new MeshBasicMaterial({ transparent: true, depthWrite: false, visible: false, opacity: 0, ...ON_THE_WALL });
-    const mesh = new Mesh(new PlaneGeometry(LABEL_WIDTH, LABEL_HEIGHT), material);
-    const lift = LABEL_DEPTH + TEXT_LIFT;
-    mesh.position.set(artwork.label.x + artwork.normal.x * lift, artwork.label.y, artwork.label.z + artwork.normal.z * lift);
+    const ink = luminance(artwork.wallPaint) < LIGHT_INK_BELOW ? LIGHT_INK : DARK_INK;
+    const material = new MeshBasicMaterial({
+      color: ink, transparent: true, depthWrite: false, visible: false, opacity: 0, ...ON_THE_WALL,
+    });
+    const { scale } = artwork.label;
+    const mesh = new Mesh(new PlaneGeometry(LABEL_WIDTH * scale, LABEL_HEIGHT * scale), material);
+    mesh.position.set(artwork.label.x + artwork.normal.x * TEXT_LIFT, artwork.label.y, artwork.label.z + artwork.normal.z * TEXT_LIFT);
     mesh.rotation.y = yawFacing(artwork.normal);
     return { artwork, mesh };
   });
 
   // Returns true when any text appeared, faded or disappeared.
-  // zoom: the lens magnification. A card seen at 4x from 12 m reads as one 3 m
+  // zoom: the lens magnification. A label seen at 4x from 12 m reads as one 3 m
   // away, so its text appears through the zoom just as it does on approach.
   function update(cameraPosition, zoom) {
     if (!canDraw) return false;
     let changed = false;
     let created = 0;
     for (const { artwork, mesh } of labels) {
-      const distance = mesh.position.distanceTo(cameraPosition) / zoom;
+      // Larger letters read from as much further away.
+      const distance = mesh.position.distanceTo(cameraPosition) / (zoom * artwork.label.scale);
       const material = mesh.material;
-      if (!material.map && distance < LABEL_TEXT_START && created < MAX_NEW_PER_UPDATE) {
-        material.map = drawText(artwork.painting);
+      if (!material.alphaMap && distance < LABEL_TEXT_START && created < MAX_NEW_PER_UPDATE) {
+        material.alphaMap = drawText(artwork.painting, titleStyle);
         material.needsUpdate = true;
         created += 1;
-      } else if (material.map && distance > LABEL_TEXT_DROP) {
-        material.map.dispose();
-        material.map = null;
+      } else if (material.alphaMap && distance > LABEL_TEXT_DROP) {
+        material.alphaMap.dispose();
+        material.alphaMap = null;
         material.needsUpdate = true;
       }
-      const opacity = material.map ? opacityAt(distance) : 0;
+      const opacity = material.alphaMap ? opacityAt(distance) : 0;
       const isVisible = opacity > 0;
       if (Math.abs(opacity - material.opacity) > OPACITY_STEP || isVisible !== material.visible) {
         material.opacity = opacity;

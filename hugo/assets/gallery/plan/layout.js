@@ -6,6 +6,7 @@ import { hangRoom, requiredSpan } from "./hanging.js";
 import { frameGeometry } from "./frame-geometry.js";
 import {
   HANG_CENTER, MIN_BOTTOM_EDGE, LABEL_OFFSET, LABEL_WIDTH, LABEL_HEIGHT, LABEL_CENTER, LABEL_STACK_GAP,
+  LABEL_READING_DISTANCE, READING_ASPECT, FOCUS_MARGIN, DEFAULT_VERTICAL_FOV_DEGREES,
   SET_MAX_SIDE_CM, SET_GAP, PANEL_GAP,
 } from "../constants.js";
 
@@ -67,9 +68,22 @@ function pointOn(wall, along) {
   return { x: wall.start.x + wall.direction.x * along, z: wall.start.z + wall.direction.z * along };
 }
 
-// A unit's members side by side; their labels stacked to the right of the unit.
+// How much larger than 1 cm letters a work's label is set, so it reads from
+// where the work is seen whole: a big work is looked at from further back.
+function labelScaleFor(work) {
+  const halfView = Math.tan((DEFAULT_VERTICAL_FOV_DEGREES * Math.PI) / 360);
+  const seenFrom = FOCUS_MARGIN * Math.max(
+    work.frame.outerHeight / (2 * halfView),
+    work.width / (2 * halfView * READING_ASPECT),
+  ) + work.frame.depth;
+  return Math.max(1, seenFrom / LABEL_READING_DISTANCE);
+}
+
+// A unit's members side by side; their labels stacked to the right of the
+// unit, all lettered at the size its largest member needs.
 function placeUnit(unit, wall, along, roomId) {
-  const labelPoint = pointOn(wall, along + unit.width / 2 + LABEL_OFFSET + LABEL_WIDTH / 2);
+  const scale = Math.max(...unit.members.map(labelScaleFor));
+  const labelPoint = pointOn(wall, along + unit.width / 2 + LABEL_OFFSET + (LABEL_WIDTH * scale) / 2);
   const middle = (unit.members.length - 1) / 2;
   let cursor = along - unit.width / 2;
   return unit.members.map((work, index) => {
@@ -83,7 +97,9 @@ function placeUnit(unit, wall, along, roomId) {
       centre: { x: point.x, y: Math.max(HANG_CENTER, work.frame.outerHeight / 2 + MIN_BOTTOM_EDGE), z: point.z },
       normal: wall.normal,
       right: wall.direction,
-      label: { x: labelPoint.x, y: LABEL_CENTER + (middle - index) * (LABEL_HEIGHT + LABEL_STACK_GAP), z: labelPoint.z },
+      label: {
+        x: labelPoint.x, y: LABEL_CENTER + (middle - index) * (LABEL_HEIGHT * scale + LABEL_STACK_GAP), z: labelPoint.z, scale,
+      },
     };
   });
 }
@@ -115,7 +131,7 @@ export function layoutGallery(data) {
     const anchorPlacement = anchor && { slug: anchor.slug, segmentId: planned.anchorSegmentId };
     return hangRoom(units, planned.segments, anchorPlacement).flatMap((placement) =>
       placeUnit(bySlug.get(placement.slug), walls.get(placement.segmentId), placement.along, room.id)
-        .map((artwork) => ({ ...artwork, labelCard: room.card })));
+        .map((artwork) => ({ ...artwork, wallPaint: room.wall })));
   });
 
   return { building, artworks };

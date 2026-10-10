@@ -7,6 +7,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { layoutGallery } from "./layout.js";
 import { gapBetween } from "./hanging.js";
+import { labelReach } from "./focus-pose.js";
 import { LABEL_TAIL, MIN_BOTTOM_EDGE } from "../constants.js";
 
 const page = process.env.GALLERY_PAGE ?? new URL("../../../../docs/gallery/index.html", import.meta.url).pathname;
@@ -42,6 +43,23 @@ test("works and labels stay on their wall and keep their air", () => {
         if (!next || (next.artwork.setId && next.artwork.setId === item.artwork.setId)) return;
         const air = next.centre - next.width / 2 - (item.centre + item.width / 2);
         assert.ok(air >= gapBetween(item.width, next.width) - EPSILON, `${item.artwork.slug} crowds ${next.artwork.slug}`);
+      });
+    }
+  }
+});
+
+test("a label lettered large for a big work still ends before the next work and the wall's end", () => {
+  const LABEL_AIR = 0.05;
+  for (const room of building.rooms) {
+    for (const wall of room.segments) {
+      const onWall = artworks
+        .filter((artwork) => artwork.wallId === wall.id)
+        .sort((left, right) => along(left, wall) - along(right, wall));
+      onWall.forEach((artwork, index) => {
+        const labelEnd = along(artwork, wall) + labelReach(artwork);
+        const next = onWall.slice(index + 1).find((other) => !other.setId || other.setId !== artwork.setId);
+        const limit = next ? along(next, wall) - next.width / 2 - LABEL_AIR : wall.length;
+        assert.ok(labelEnd <= limit + EPSILON, `${artwork.slug}'s label reaches past ${next?.slug ?? wall.id}`);
       });
     }
   }

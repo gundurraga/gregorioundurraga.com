@@ -8,7 +8,7 @@
 {{ $lang := .Site.Language.Lang }}
 {{ $rooms := slice }}
 {{ range hugo.Data.countries.countries }}
-  {{ $rooms = $rooms | append (dict "id" .id "wall" .wall "card" .card) }}
+  {{ $rooms = $rooms | append (dict "id" .id "wall" .wall) }}
 {{ end }}
 
 {{ $paintings := slice }}

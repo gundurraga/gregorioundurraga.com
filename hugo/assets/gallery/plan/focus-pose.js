@@ -1,10 +1,13 @@
 // Where the camera stands to look at one work closely: square to the wall, at
 // the work's centre height, far enough back that frame and label fit the screen
-// with a margin.
+// with a margin. On an upright screen the label beside it would push the work
+// small and the label unreadable, so the view frames the work alone and the
+// visitor slides across to the label.
 
 import { FOCUS_MARGIN, LABEL_WIDTH, EYE_HEIGHT } from "../constants.js";
 
 const MIN_DISTANCE = 0.35;
+const LABEL_IN_VIEW_FROM_ASPECT = 1; // screens at least as wide as tall frame work and label together
 const STANDING_FARTHEST = 2.5;
 const STANDING_NEAREST = 0.8;
 const STANDING_STEP = 0.1;
@@ -18,13 +21,13 @@ export function yawFacing(normal) {
 // beside its work, but a set stacks its labels after the last work.
 export function labelReach(artwork) {
   const { centre, right, label } = artwork;
-  return (label.x - centre.x) * right.x + (label.z - centre.z) * right.z + LABEL_WIDTH / 2;
+  return (label.x - centre.x) * right.x + (label.z - centre.z) * right.z + (LABEL_WIDTH * label.scale) / 2;
 }
 
 export function focusPose(artwork, verticalFov, aspect) {
   const { frame, centre, normal, right } = artwork;
   const leftEdge = -artwork.width / 2;
-  const rightEdge = labelReach(artwork);
+  const rightEdge = aspect >= LABEL_IN_VIEW_FROM_ASPECT ? labelReach(artwork) : artwork.width / 2;
   const width = rightEdge - leftEdge;
   const sideways = (leftEdge + rightEdge) / 2;
   const halfVertical = Math.tan(verticalFov / 2);
@@ -42,8 +45,8 @@ export function focusPose(artwork, verticalFov, aspect) {
   };
 }
 
-// Where a visitor stands to see a work from a comfortable distance: used when
-// they arrive already looking closely (a shared link) and step back.
+// Where a visitor stands to see a work from a comfortable distance: where
+// they step back to after looking closely.
 export function standingPose(artwork, isWalkableAt) {
   const { centre, normal } = artwork;
   for (let distance = STANDING_FARTHEST; distance > STANDING_NEAREST; distance -= STANDING_STEP) {

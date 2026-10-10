@@ -2,7 +2,7 @@
 // a loop that only draws when something changed.
 
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, Raycaster, Vector2, Color, MathUtils,
+  WebGLRenderer, Scene, PerspectiveCamera, Raycaster, Vector2, Vector3, Color, MathUtils,
 } from "./vendor/three/three.module.js";
 import { layoutGallery } from "./plan/layout.js";
 import { createMaterials } from "./scene/materials.js";
@@ -23,6 +23,11 @@ const SKY = "#DCE4E9"; // a soft overcast
 const NEAR_PLANE = 0.1; // the closest view stands 0.35 m back; a nearer plane only costs depth precision
 const FAR_PLANE = 120;
 const MAX_FRAME_SECONDS = 0.1; // after a stall (tab switch, GC), resume instead of leaping
+const SIGHT_TOLERANCE = 0.05; // a painting's own wall and frame never hide it
+
+// The page's loader stays up until this (see site.js): the paintings in the
+// first view have arrived, or the gallery gave up on 3D.
+const announceReady = () => document.dispatchEvent(new Event("page-ready"));
 
 function reportError(detail) {
   console.error(`[gallery] ${detail}`);
@@ -47,7 +52,7 @@ function start() {
   const anisotropy = Math.min(MAX_ANISOTROPY, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new Scene();
-  scene.background = new Color(SKY); // seen only through the lobby's glass
+  scene.background = new Color(SKY); // behind the sky dome, only ever glimpsed past its edge
   const camera = new PerspectiveCamera(DEFAULT_VERTICAL_FOV_DEGREES, 1, NEAR_PLANE, FAR_PLANE);
   const materials = createMaterials(anisotropy);
 
@@ -66,12 +71,21 @@ function start() {
     throw new Error(`gallery hint has ${hintLines.length} lines for ${hintSlots.length} gestures`);
   }
   hintLines.forEach((line, index) => { hintSlots[index].textContent = line; });
-  hint.hidden = false;
-  // Gone at the first move of any kind: a tap or click, a key, a scroll.
-  const hideHint = () => { hint.hidden = true; };
-  canvas.addEventListener("pointerdown", hideHint, { once: true });
-  canvas.addEventListener("wheel", hideHint, { once: true, passive: true });
-  window.addEventListener("keydown", hideHint, { once: true });
+  // Never over a painting looked at closely (a visitor arriving from a link
+  // lands in front of one): it waits until they step back. Gone for good at
+  // the first move of any kind away from a painting: a tap or click, a key, a scroll.
+  let isHintDismissed = false;
+  let isFocused = false;
+  const showHint = () => { hint.hidden = isHintDismissed || isFocused; };
+  const dismissHint = () => {
+    if (isFocused) return;
+    isHintDismissed = true;
+    showHint();
+  };
+  showHint();
+  canvas.addEventListener("pointerdown", dismissHint);
+  canvas.addEventListener("wheel", dismissHint, { passive: true });
+  window.addEventListener("keydown", dismissHint);
 
   const raycaster = new Raycaster();
   const pointer = new Vector2();
@@ -85,6 +99,18 @@ function start() {
     if (hit.object.userData.artwork) return { kind: "painting", artwork: hit.object.userData.artwork };
     if (building.floors.includes(hit.object)) return { kind: "floor", point: { x: hit.point.x, z: hit.point.z } };
     return null;
+  }
+  // Whether a point on a wall is seen from where the camera stands, not hidden
+  // behind another wall.
+  const sightLine = new Vector3();
+  function isInSight(point) {
+    sightLine.subVectors(point, camera.position);
+    const distance = sightLine.length();
+    raycaster.set(camera.position, sightLine.normalize());
+    raycaster.far = distance - SIGHT_TOLERANCE;
+    const isHidden = raycaster.intersectObjects(blockers, false).length > 0;
+    raycaster.far = Infinity;
+    return !isHidden;
   }
 
   // Zoom narrows the lens; the texture tiers see the narrower lens as a closer
@@ -110,12 +136,15 @@ function start() {
   const navigation = createNavigation({
     canvas, camera, plan, pick, zoom,
     onFocusChange: (artwork) => {
+      isFocused = Boolean(artwork);
+      showHint();
       requestRender();
       router?.focusChanged(artwork);
     },
   });
   const textures = createTextureTiers({
-    renderer, paintingMeshes: paintings.meshes, anisotropy, onError: reportError,
+    renderer, paintingMeshes: paintings.meshes, anisotropy, isInSight, onError: reportError,
+    onFirstView: announceReady,
   });
 
   function resize() {
@@ -176,4 +205,5 @@ try {
   document.documentElement.classList.remove("gallery-is-3d");
   document.getElementById("gallery-hint").hidden = true;
   reportError(`start ${error.message}`);
+  announceReady();
 }

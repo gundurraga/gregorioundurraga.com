@@ -8,9 +8,7 @@
   {{ $country := . }}
   {{ $countryIds = $countryIds | append .id }}
   {{ if not (where hugo.Data.paintings.paintings "country" .id) }}{{ errorf "countries.yaml: %q has no paintings, so its room would be empty" .id }}{{ end }}
-  {{ range slice "wall" "card" }}
-    {{ if not (findRE `^#[0-9A-Fa-f]{6}$` (index $country .)) }}{{ errorf "countries.yaml: %q needs a %s colour like \"#A1B2C3\"" $country.id . }}{{ end }}
-  {{ end }}
+  {{ if not (findRE `^#[0-9A-Fa-f]{6}$` $country.wall) }}{{ errorf "countries.yaml: %q needs a wall colour like \"#A1B2C3\"" $country.id }}{{ end }}
 {{ end }}
 {{ $frameIds := slice }}
 {{ range hugo.Data.frames.frames }}{{ $frameIds = $frameIds | append .id }}{{ end }}

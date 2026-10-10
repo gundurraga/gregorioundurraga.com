@@ -6,7 +6,7 @@
 
 {{ define "main" }}
   {{ partial "gallery-data.html" . }}
-  <canvas id="gallery-canvas" aria-hidden="true"></canvas>
+  <canvas id="gallery-canvas" aria-hidden="true" data-holds-reveal></canvas>
   {{/* One line per gesture; the text (one line each, split on newlines) depends on the device. */}}
   <div id="gallery-hint" hidden data-touch="{{ i18n "galleryHintTouch" }}" data-pointer="{{ i18n "galleryHintPointer" }}">
     {{ range slice "footsteps" "painting" "drag" }}

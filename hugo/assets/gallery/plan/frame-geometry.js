@@ -1,12 +1,16 @@
 // A painting's frame, measured the way a framer does, then returned in metres.
 // "tray" is a float frame: the canvas sits inside a shadow gap, no paint hidden.
 // "cassetta" is a flat box frame whose rebate laps over the paint's edge.
+// "mat" floats a work on paper inside a mat, under glass; the mat is wider
+// below, so the paper sits a little above the frame's middle (raise).
 
 import {
   CANVAS_DEPTH_CM, LARGE_CANVAS_DEPTH_CM, LARGE_SIDE_CM,
   TRAY_GAP_CM, TRAY_PROUD_CM, TRAY_BACK_CM,
   CASSETTA_FACE_SHARE, CASSETTA_MIN_FACE_CM, CASSETTA_MAX_FACE_CM,
   CASSETTA_DEPTH_CM, LARGE_CASSETTA_DEPTH_CM, CASSETTA_REBATE_CM, CENTIMETRE,
+  MAT_BORDER_SHARE, MAT_MIN_BORDER_CM, MAT_MAX_BORDER_CM, MAT_BOTTOM_EXTRA_CM, MAT_REVEAL_CM,
+  MAT_THICKNESS_CM, MAT_BACK_CM, MAT_PAPER_RISE_CM, MAT_FRAME_FACE_CM, MAT_FRAME_DEPTH_CM,
 } from "../constants.js";
 
 const SMALL_SIDE_CM = 45;
@@ -44,6 +48,7 @@ export function frameGeometry(geometry, heightCm, widthCm) {
       depth: (TRAY_BACK_CM + canvasDepthCm + TRAY_PROUD_CM) * CENTIMETRE,
       canvasBack: TRAY_BACK_CM * CENTIMETRE,
       canvasFront: (TRAY_BACK_CM + canvasDepthCm) * CENTIMETRE,
+      raise: 0,
       outerWidth: (widthCm + 2 * borderCm) * CENTIMETRE,
       outerHeight: (heightCm + 2 * borderCm) * CENTIMETRE,
     };
@@ -60,8 +65,31 @@ export function frameGeometry(geometry, heightCm, widthCm) {
       depth: depthCm * CENTIMETRE,
       canvasBack: (canvasFrontCm - canvasDepthCm) * CENTIMETRE,
       canvasFront: canvasFrontCm * CENTIMETRE,
+      raise: 0,
       outerWidth: (widthCm + 2 * borderCm) * CENTIMETRE,
       outerHeight: (heightCm + 2 * borderCm) * CENTIMETRE,
+    };
+  }
+
+  if (geometry === "mat") {
+    const borderCm = Math.min(MAT_MAX_BORDER_CM, Math.max(MAT_MIN_BORDER_CM, Math.ceil(longSideCm * MAT_BORDER_SHARE)));
+    const windowWidthCm = widthCm + 2 * MAT_REVEAL_CM;
+    const windowHeightCm = heightCm + 2 * MAT_REVEAL_CM;
+    return {
+      gap: 0,
+      rebate: 0,
+      depth: MAT_FRAME_DEPTH_CM * CENTIMETRE,
+      canvasBack: MAT_BACK_CM * CENTIMETRE,
+      canvasFront: (MAT_BACK_CM + MAT_PAPER_RISE_CM) * CENTIMETRE,
+      raise: (MAT_BOTTOM_EXTRA_CM / 2) * CENTIMETRE,
+      outerWidth: (windowWidthCm + 2 * (borderCm + MAT_FRAME_FACE_CM)) * CENTIMETRE,
+      outerHeight: (windowHeightCm + 2 * (borderCm + MAT_FRAME_FACE_CM) + MAT_BOTTOM_EXTRA_CM) * CENTIMETRE,
+      mat: {
+        face: MAT_FRAME_FACE_CM * CENTIMETRE,
+        windowWidth: windowWidthCm * CENTIMETRE,
+        windowHeight: windowHeightCm * CENTIMETRE,
+        thickness: MAT_THICKNESS_CM * CENTIMETRE,
+      },
     };
   }
 

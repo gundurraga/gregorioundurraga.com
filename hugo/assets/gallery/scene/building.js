@@ -4,15 +4,16 @@
 
 import { Group, Mesh } from "../vendor/three/three.module.js";
 import { createSurfaces, addQuad, addFace, breaks, linearAlbedo, toGeometry } from "./surfaces.js";
-import { wallLight, floorLight, ceilingLight, plasterNoise, FACE_LIGHT } from "../plan/light.js";
-import { glazingOpening, addGlazingFrames, buildGardens } from "./gardens.js";
+import { wallLight, floorLight, ceilingLight, smoothstep, FACE_LIGHT } from "../plan/light.js";
+import { glazingOpening, addGlazingJoints, buildGardens, GLASS_INSET, SLOT_WIDTH, SLOT } from "./gardens.js";
+import { createSky } from "./sky.js";
 import { WALL_THICKNESS, DOOR_WIDTH, DOOR_HEIGHT, LAYLIGHT_FRACTION } from "../constants.js";
 
 const LOBBY_WALL = "#F4F2EE";
 const CEILING = "#F6F5F2";
-const LAYLIGHT = "#FFF6EC";
+const LAYLIGHT = "#F4F4F2"; // neutral, a step above the palest wall as it renders
 const OAK_FLOOR = "#B09B7E";
-const CONCRETE_FLOOR = "#AEAAA2";
+const CONCRETE_FLOOR = "#BCB8B0";
 const STRIP_WIDTH = 0.022;
 const STRIP_HEIGHT = 0.004; // just proud of the floors
 const UP = [0, 1, 0];
@@ -80,16 +81,60 @@ function addSkirting({ surfaces, albedo: tone }, { origin, uAxis, length, ceilin
   run(from, length, joint, ends[1]);
 }
 
+// No corner in a real building is a knife edge: plaster is finished round
+// every outer arris. Lit flat, the two faces of a corner jump from one
+// brightness to the other at a hard line; rounded, the light turns the corner
+// gradually. So within ROUND of an outer edge each face eases to the light
+// both share at the edge, the mean of the two, and the corner reads as one
+// surface bending rather than two meeting. Nothing is brightened.
+const ROUND = 0.004; // a hair: the corner stays crisp, only its hard line softens
+const rounded = (own, edge, distance) => own + (edge - own) * (1 - smoothstep(0, ROUND, distance));
+
+// Breaks either side of an edge, so its rounding is drawn crisp, not smeared over a cell.
+const roundBreaks = (positions) => positions.flatMap((position) => [position - ROUND, position, position + ROUND]);
+
+// The light a vertical outer edge shares: a wall's own, clear of any corner.
+const sideEdgeLight = (v, ceiling) => wallLight(v, ceiling, Infinity);
+// And the one a door head shares with the soffit above it.
+const SOFFIT_LIGHT = 0.7;
+const headEdgeLight = (ceiling) => (wallLight(DOOR_HEIGHT, ceiling, Infinity) + SOFFIT_LIGHT) / 2;
+// And a partition's top with its sides.
+const PARTITION_TOP_LIGHT = 0.95;
+const topEdgeLight = (height) => (wallLight(height, height, Infinity) + PARTITION_TOP_LIGHT) / 2;
+
 // openings: [{ from, to, height }] along the wall, in order: doorways, glazing.
-function addWall(surfaces, { origin, uAxis, length, ceiling, albedo, skirting, openings = [], ends }) {
+// ends: how its two ends meet the next wall; an "outer" end is rounded, and
+// only an inner one darkens as a corner does. freeTop: it stops short of the
+// ceiling (a partition), so its top is rounded too.
+function addWall(surfaces, { origin, uAxis, length, ceiling, albedo, skirting, openings = [], ends, freeTop = false }) {
   if (skirting) addSkirting(skirting, { origin, uAxis, length, ceiling, openings, ends });
+  const outerEnds = [0, length].filter((_, index) => ends?.[index] === "outer");
+  const innerEnds = [0, length].filter((_, index) => ends?.[index] !== "outer");
+  // The nearest outer edge and the light it shares: the wall's outer ends, an
+  // opening's sides and head, a free top.
+  const edgeAt = (u, v) => [
+    ...outerEnds.map((end) => [Math.abs(u - end), sideEdgeLight(v, ceiling)]),
+    ...openings.flatMap((opening) => {
+      const beside = Math.min(Math.abs(u - opening.from), Math.abs(u - opening.to));
+      const isAbove = u > opening.from && u < opening.to;
+      return [
+        [v < opening.height ? beside : Infinity, sideEdgeLight(v, ceiling)],
+        [isAbove && opening.height < ceiling ? Math.abs(v - opening.height) : Infinity, headEdgeLight(ceiling)],
+      ];
+    }),
+    [freeTop ? ceiling - v : Infinity, topEdgeLight(ceiling)],
+  ].reduce((nearest, edge) => (edge[0] < nearest[0] ? edge : nearest), [Infinity, 0]);
   addQuad(surfaces, {
     origin, uAxis, vAxis: UP, albedo,
-    uBreaks: breaks(length, 0.5, [0.15, 0.35, length - 0.15, length - 0.35, ...openings.flatMap(({ from, to }) => [from, to])]),
-    vBreaks: heightBreaks(ceiling, openings),
+    uBreaks: breaks(length, 0.5, [0.15, 0.35, length - 0.15, length - 0.35, ...roundBreaks(outerEnds),
+      ...openings.flatMap(({ from, to }) => roundBreaks([from, to]))]),
+    vBreaks: breaks(ceiling, 1, [...heightBreaks(ceiling, openings), ...roundBreaks(openings.map((opening) => opening.height)), ...(freeTop ? [ceiling - ROUND] : [])]),
     skip: (u, v) => openings.some((opening) => u > opening.from && u < opening.to && v < opening.height),
-    light: (u, v) => wallLight(v, ceiling, Math.min(u, length - u))
-      * plasterNoise(origin[0] + uAxis[0] * u, v, origin[2] + uAxis[2] * u),
+    light: (u, v) => {
+      const [distance, edgeLight] = edgeAt(u, v);
+      const own = wallLight(v, ceiling, Math.min(...innerEnds.map((end) => Math.abs(u - end))));
+      return rounded(own, edgeLight, distance);
+    },
   });
 }
 
@@ -112,14 +157,15 @@ function addPartitions(surfaces, room, albedo, skirting) {
     const west = partition.x - WALL_THICKNESS / 2;
     const east = partition.x + WALL_THICKNESS / 2;
     const length = partition.nearZ - partition.farZ;
-    const common = { ceiling: partition.height, albedo, skirting, ends: ["outer", "outer"] };
+    const common = { ceiling: partition.height, albedo, skirting, ends: ["outer", "outer"], freeTop: true };
     addWall(surfaces, { ...common, origin: [west, 0, partition.farZ], uAxis: [0, 0, 1], length });
     addWall(surfaces, { ...common, origin: [east, 0, partition.nearZ], uAxis: [0, 0, -1], length });
     addWall(surfaces, { ...common, origin: [west, 0, partition.nearZ], uAxis: [1, 0, 0], length: WALL_THICKNESS });
     addWall(surfaces, { ...common, origin: [east, 0, partition.farZ], uAxis: [-1, 0, 0], length: WALL_THICKNESS });
     addQuad(surfaces, {
       origin: [west, partition.height, partition.nearZ], uAxis: [1, 0, 0], vAxis: [0, 0, -1],
-      uBreaks: [0, WALL_THICKNESS], vBreaks: [0, length], albedo, light: () => 0.95,
+      uBreaks: breaks(WALL_THICKNESS, 1, [ROUND, WALL_THICKNESS - ROUND]), vBreaks: breaks(length, 1, [ROUND, length - ROUND]), albedo,
+      light: (u, v) => rounded(PARTITION_TOP_LIGHT, topEdgeLight(partition.height), Math.min(u, WALL_THICKNESS - u, v, length - v)),
     });
   }
 }
@@ -230,9 +276,17 @@ function addFloor(surfaces, room, albedo) {
 // concrete paving ends: each material simply stops, with nothing to cover it.
 function addReveal({ walls, floor, room, wallAlbedo, floorAlbedo, skirting, fromLobby }) {
   const outer = room.nearZ + WALL_THICKNESS;
+  const acrossWall = breaks(WALL_THICKNESS, 1, [ROUND, WALL_THICKNESS - ROUND]);
+  const toFaces = (position) => Math.min(position, WALL_THICKNESS - position);
   const jamb = (origin, uAxis) => addQuad(walls, {
-    origin, uAxis, vAxis: UP, uBreaks: [0, WALL_THICKNESS], vBreaks: breaks(DOOR_HEIGHT, 1, [0.06, 0.22]),
-    albedo: wallAlbedo, light: (u, v) => wallLight(v, REVEAL_CEILING, 0.3),
+    origin, uAxis, vAxis: UP, uBreaks: acrossWall, vBreaks: breaks(DOOR_HEIGHT, 1, [0.06, 0.22, DOOR_HEIGHT - ROUND]),
+    albedo: wallAlbedo, light: (u, v) => {
+      const own = wallLight(v, REVEAL_CEILING, 0.3);
+      const head = DOOR_HEIGHT - v;
+      return head < toFaces(u)
+        ? rounded(own, (own + SOFFIT_LIGHT) / 2, head)
+        : rounded(own, sideEdgeLight(v, room.ceiling), toFaces(u));
+    },
   });
   jamb([-DOOR_WIDTH / 2, 0, outer], [0, 0, -1]);
   jamb([DOOR_WIDTH / 2, 0, room.nearZ], [0, 0, 1]);
@@ -243,7 +297,8 @@ function addReveal({ walls, floor, room, wallAlbedo, floorAlbedo, skirting, from
   addSkirting(skirting, { ...revealSkirting, origin: [DOOR_WIDTH / 2, 0, room.nearZ], uAxis: [0, 0, 1], ends: ["outer", lobbyEnd] });
   addQuad(walls, {
     origin: [-DOOR_WIDTH / 2, DOOR_HEIGHT, room.nearZ], uAxis: [1, 0, 0], vAxis: [0, 0, 1],
-    uBreaks: [0, DOOR_WIDTH], vBreaks: [0, WALL_THICKNESS], albedo: wallAlbedo, light: () => 0.7,
+    uBreaks: breaks(DOOR_WIDTH, 1, [ROUND, DOOR_WIDTH - ROUND]), vBreaks: acrossWall, albedo: wallAlbedo,
+    light: (u, v) => rounded(SOFFIT_LIGHT, headEdgeLight(room.ceiling), Math.min(toFaces(v), u, DOOR_WIDTH - u)),
   });
   const threshold = { origin: [DOOR_WIDTH / 2, 0, outer], uAxis: [0, 0, -1], vAxis: [-1, 0, 0], vBreaks: [0, DOOR_WIDTH] };
   const shade = floorShade(room);
@@ -265,6 +320,53 @@ function addReveal({ walls, floor, room, wallAlbedo, floorAlbedo, skirting, from
   addQuad(floor, { ...edge, origin: [DOOR_WIDTH / 2, 0, outer - STRIP_WIDTH], uAxis: [-1, 0, 0] });
 }
 
+// The lobby's glass stands at the wall's outer face, so the wall's thickness
+// shows as a deep reveal round it: plaster jambs at each end, a soffit at the
+// ceiling, and the concrete floor running on out to the glass. The slot that
+// takes the glass is a band of each of those surfaces, in the slot's colour,
+// never a strip laid over them, which would flicker against them.
+function addGlazingReveal({ walls, floor, room, wallAlbedo, floorAlbedo }) {
+  const { from, to } = glazingOpening(room);
+  const half = room.width / 2;
+  const [nearZ, farZ] = [room.nearZ - from, room.nearZ - to];
+  const slotAlbedo = linearAlbedo(SLOT);
+  const shade = floorShade(room); // the floor's own light, carried on out to the glass
+  for (const side of [-1, 1]) {
+    const glassX = side * (half + WALL_THICKNESS - GLASS_INSET);
+    // A reveal surface laid across the wall from originX along xAxis (+1 or -1),
+    // as three bands: wall, slot, wall. place(quad) gets each band's offset and width.
+    const bands = (originX, xAxis, place) => {
+      const edges = [glassX - SLOT_WIDTH / 2, glassX + SLOT_WIDTH / 2].map((x) => (x - originX) * xAxis).sort((a, b) => a - b);
+      [[0, edges[0], false], [edges[0], edges[1], true], [edges[1], WALL_THICKNESS, false]]
+        .forEach(([start, end, isSlot]) => place(start, end - start, isSlot));
+    };
+    // The x where the reveal starts, for axes running towards -x and +x.
+    const [fromOuter, fromInner] = side > 0 ? [half + WALL_THICKNESS, half] : [-half, -half - WALL_THICKNESS];
+    // The jamb's arris is at the lobby's face; at the glass it meets the slot.
+    for (const [originX, xAxis, z] of [[fromOuter, -1, nearZ], [fromInner, 1, farZ]]) {
+      bands(originX, xAxis, (start, width, isSlot) => {
+        const toLobby = (u) => Math.abs(Math.abs(originX + xAxis * (start + u)) - half);
+        addQuad(walls, {
+          origin: [originX + xAxis * start, 0, z], uAxis: [xAxis, 0, 0], vAxis: UP,
+          uBreaks: breaks(width, 1, [ROUND, width - ROUND]), vBreaks: breaks(room.ceiling, 1, [0.06, 0.22]),
+          albedo: isSlot ? slotAlbedo : wallAlbedo,
+          light: (u, v) => rounded(wallLight(v, room.ceiling, 0.3), sideEdgeLight(v, room.ceiling), toLobby(u)),
+        });
+      });
+    }
+    bands(fromInner, 1, (start, width, isSlot) => addQuad(walls, {
+      origin: [fromInner + start, room.ceiling, farZ], uAxis: [1, 0, 0], vAxis: [0, 0, 1],
+      // Lit as the ceiling is at its edge, so the two read as one plane.
+      uBreaks: [0, width], vBreaks: [0, to - from], albedo: isSlot ? slotAlbedo : linearAlbedo(CEILING), light: () => ceilingLight(0),
+    }));
+    bands(fromOuter, -1, (start, width, isSlot) => addQuad(floor, {
+      origin: [fromOuter - start, 0, nearZ], uAxis: [0, 0, -1], vAxis: [-1, 0, 0],
+      uvOffset: worldFloorUv(fromOuter - start, nearZ), uBreaks: breaks(to - from, 0.5), vBreaks: [0, width],
+      albedo: isSlot ? slotAlbedo : floorAlbedo, light: (u, v) => shade(fromOuter - start - v, nearZ - u),
+    }));
+  }
+}
+
 const luminance = ([red, green, blue]) => 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
 // Oak against pale walls. A dark room is one monochrome volume instead: its
@@ -279,7 +381,7 @@ function skirtingFor(room, { walls, floor, wallAlbedo }) {
   return { surfaces: walls, albedo: wallAlbedo };
 }
 
-// Returns { group, floors } where floors are the meshes a tap can walk onto.
+// Returns the building's meshes and its floors (what a tap walks to).
 export function buildBuilding(plan, materials, anisotropy) {
   const group = new Group();
   const floors = [];
@@ -298,7 +400,8 @@ export function buildBuilding(plan, materials, anisotropy) {
       addReveal({ walls, floor, room, wallAlbedo, floorAlbedo, skirting, fromLobby });
     }
     if (room.isLobby) {
-      addGlazingFrames(walls, room);
+      addGlazingReveal({ walls, floor, room, wallAlbedo, floorAlbedo });
+      addGlazingJoints(walls, room);
       group.add(...buildGardens(room, anisotropy));
     }
 
@@ -306,5 +409,6 @@ export function buildBuilding(plan, materials, anisotropy) {
     floors.push(floorMesh);
     group.add(new Mesh(toGeometry(walls), materials.plain), floorMesh);
   }
+  group.add(createSky(anisotropy));
   return { group, floors };
 }
