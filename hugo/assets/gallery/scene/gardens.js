@@ -366,7 +366,7 @@ export function buildGardens(room, anisotropy) {
     const ground = addMossGround(surfaces.moss, frame, stones, culms);
     for (const stone of stones) addStone(surfaces.stone, groundPoint(frame, stone), stone, stone.height < stone.radius * 0.5 ? STEPPING : BOULDER, next);
     addGrove(surfaces.solid, frame, culms, bounds, next);
-    addFallenLeaves(surfaces.solid, frame, ground, { count: culms.length * 140, culms, stones, next });
+    addFallenLeaves(surfaces.solid, frame, ground, { count: culms.length * 90, culms, stones, next });
   }
   for (const frame of gardens) {
     addEnclosure(surfaces.concrete, frame);

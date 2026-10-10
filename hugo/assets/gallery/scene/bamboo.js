@@ -199,10 +199,10 @@ function addBranch(put, surfaces, { start, heading, length, shade, fits }, next)
   });
   joinRings(surfaces, rings, BRANCH_SIDES);
   // Fans of leaves along the outer part of the branch, the fullest at its tip.
-  for (let along = total * (0.3 + next() * 0.15); along < total; along += 0.06 + next() * 0.05) {
-    addFan(put, surfaces, { at: pointAt(along, total), out, count: 3 + Math.floor(next() * 3), shade, fits }, next);
+  for (let along = total * (0.3 + next() * 0.15); along < total; along += 0.07 + next() * 0.05) {
+    addFan(put, surfaces, { at: pointAt(along, total), out, count: 2 + Math.floor(next() * 3), shade, fits }, next);
   }
-  addFan(put, surfaces, { at: pointAt(total, total), out, count: 5 + Math.floor(next() * 4), shade, fits }, next);
+  addFan(put, surfaces, { at: pointAt(total, total), out, count: 4 + Math.floor(next() * 4), shade, fits }, next);
 }
 
 // Leaves spread from one point, fanned across the branch and hanging down.
