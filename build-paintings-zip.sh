@@ -31,7 +31,7 @@ if gh release view "$TAG" >/dev/null 2>&1; then
 else
   gh release create "$TAG" "$ZIP" \
     --title "All paintings, full resolution" \
-    --notes "Every oil painting by Gregorio Undurraga at full resolution. Public domain (CC0), free to use and download. Rebuilt whenever the collection changes."
+    --notes "Every painting by Gregorio Undurraga at full resolution. Public domain (CC0), free to use and download. Rebuilt whenever the collection changes."
 fi
 
 # The "Download all" dialog states what the visitor is about to get.

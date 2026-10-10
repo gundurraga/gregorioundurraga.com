@@ -37,49 +37,49 @@ disableKinds = ['taxonomy', 'term', 'rss']
     locale = 'en-US'
     weight = 1
     [languages.en.params]
-      description = 'Oil paintings by Gregorio Undurraga. All works released to the public domain, free to download.'
+      description = 'Paintings by Gregorio Undurraga. All works released to the public domain, free to download.'
   [languages.es]
     label = 'Español'
     locale = 'es-ES'
     weight = 2
     [languages.es.params]
-      description = 'Pinturas al óleo de Gregorio Undurraga. Todas las obras son de dominio público, libres para descargar.'
+      description = 'Pinturas de Gregorio Undurraga. Todas las obras son de dominio público, libres para descargar.'
   [languages.fr]
     label = 'Français'
     locale = 'fr-FR'
     weight = 3
     [languages.fr.params]
-      description = 'Peintures à l’huile de Gregorio Undurraga. Toutes les œuvres sont dans le domaine public, libres à télécharger.'
+      description = 'Peintures de Gregorio Undurraga. Toutes les œuvres sont dans le domaine public, libres à télécharger.'
   [languages.de]
     label = 'Deutsch'
     locale = 'de-DE'
     weight = 4
     [languages.de.params]
-      description = 'Ölgemälde von Gregorio Undurraga. Alle Werke sind gemeinfrei und frei herunterladbar.'
+      description = 'Gemälde von Gregorio Undurraga. Alle Werke sind gemeinfrei und frei herunterladbar.'
   [languages.ja]
     label = '日本語'
     locale = 'ja-JP'
     weight = 6
     [languages.ja.params]
-      description = 'グレゴリオ・ウンドゥラガによる油彩画。すべての作品はパブリックドメインで、自由にダウンロードできます。'
+      description = 'グレゴリオ・ウンドゥラガによる絵画。すべての作品はパブリックドメインで、自由にダウンロードできます。'
   [languages.ko]
     label = '한국어'
     locale = 'ko-KR'
     weight = 7
     [languages.ko.params]
-      description = '그레고리오 운두라가의 유화. 모든 작품은 퍼블릭 도메인으로 자유롭게 내려받을 수 있습니다.'
+      description = '그레고리오 운두라가의 그림. 모든 작품은 퍼블릭 도메인으로 자유롭게 내려받을 수 있어요.'
   [languages.ru]
     label = 'Русский'
     locale = 'ru-RU'
     weight = 5
     [languages.ru.params]
-      description = 'Картины маслом Грегорио Ундурраги. Все работы переданы в общественное достояние и свободны для скачивания.'
+      description = 'Картины Грегорио Ундурраги. Все работы переданы в общественное достояние и свободны для скачивания.'
   [languages.zh-hant]
     label = '繁體中文'
     locale = 'zh-Hant'
     weight = 8
     [languages.zh-hant.params]
-      description = '格雷戈里奧・翁杜拉加的油畫。所有作品皆為公有領域，可自由下載。'
+      description = '葛雷戈里歐・翁杜拉加的畫作。所有作品皆為公有領域，可自由下載。'
 
 # Mount the existing repo asset folders instead of copying 648MB into static/.
 # A content adapter runs once per mount-language binding, so each language needs

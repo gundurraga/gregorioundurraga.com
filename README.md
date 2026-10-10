@@ -1,6 +1,6 @@
 # gregorioundurraga.com
 
-The personal gallery of painter Gregorio Undurraga. 88 oil paintings, all released to the public domain (CC0), free for anyone to download and use.
+The personal gallery of painter Gregorio Undurraga. 90 paintings, all released to the public domain (CC0), free for anyone to download and use.
 
 Live at [gregorioundurraga.com](https://gregorioundurraga.com).
 

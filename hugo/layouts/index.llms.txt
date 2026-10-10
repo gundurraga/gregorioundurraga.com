@@ -1,6 +1,6 @@
 # Gregorio Undurraga
 
-> Oil paintings by Gregorio Undurraga (Chilean painter, b. 1993). Every work on this site is released to the public domain (CC0) and free to download at full resolution. This is a personal gallery, not a store.
+> Paintings by Gregorio Undurraga (Chilean painter, b. 1993). Every work on this site is released to the public domain (CC0) and free to download at full resolution. This is a personal gallery, not a store.
 
 ## Paintings
 {{- $pages := sort .Site.RegularPages "Weight" }}
