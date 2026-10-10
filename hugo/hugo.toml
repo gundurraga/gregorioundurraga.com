@@ -157,6 +157,11 @@ disableKinds = ['taxonomy', 'term', 'rss']
   [[module.mounts]]
     source = '../icons'
     target = 'static/icons'
+  # The logo again as an asset, so pages draw it inline (the loader shows it
+  # before anything else has loaded); the favicons are rendered from it.
+  [[module.mounts]]
+    source = '../icons/logo.svg'
+    target = 'assets/logo.svg'
   [[module.mounts]]
     source = '../js/wheelzoom.js'
     target = 'static/js/wheelzoom.js'

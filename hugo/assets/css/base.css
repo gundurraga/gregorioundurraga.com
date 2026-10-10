@@ -1,6 +1,5 @@
 * {
   --logo-firstColor: rgb(0, 59, 92);
-  --logo-secondColor: rgb(255, 255, 255);
   --logoBorder-color: var(--frame-secondColor);
   --background-color: rgb(240, 240, 240);
   --postBackground-color: rgb(235, 235, 235);
@@ -122,7 +121,14 @@ h4 {
   position: relative;
   height: 44vmin;
   width: 44vmin;
-  background-color: rgb(243, 238, 229);
+}
+
+/* The paint's grain, laid over the drawn mark. */
+.loader .logo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
 }
 
 /* The breathing goes on the whole framed unit, never on the canvas alone: the
@@ -158,10 +164,6 @@ h4 {
   .loader {
     transition: opacity 0.2s linear;
   }
-}
-
-.loader .inside-logo {
-  background-color: rgb(168, 182, 207);
 }
 
 .noisy {

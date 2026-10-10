@@ -1,7 +1,7 @@
 <nav id="header">
   {{ if .IsHome }}
   <a class="header-logo" href="{{ .Site.Home.RelPermalink }}">
-    <div class="logo"><div class="inside-logo noisy"></div></div>
+    <div class="logo">{{ partial "logo.html" . }}</div>
     <h1>Gregorio<strong>Undurraga</strong></h1>
   </a>
   {{ else }}

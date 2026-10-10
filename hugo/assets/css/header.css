@@ -44,22 +44,12 @@ nav.scrollUp {
   position: relative;
   height: 28px;
   width: 28px;
-  background-color: var(--logo-secondColor);
 }
 
-.inside-logo {
-  position: relative;
+.logo svg {
   display: block;
-  top: 9%;
-  left: 23%;
-  height: 67%;
-  width: 67%;
-  background-color: var(--logo-firstColor);
-  -moz-transform: rotate(11deg);
-  -webkit-transform: rotate(11deg);
-  -o-transform: rotate(11deg);
-  -ms-transform: rotate(11deg);
-  transform: rotate(11deg);
+  width: 100%;
+  height: 100%;
 }
 
 .header-logo h1 {
