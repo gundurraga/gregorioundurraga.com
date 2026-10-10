@@ -2,8 +2,13 @@
 
 // ---- Reveal. The loader dissolves forward while the gallery rises into place;
 // CSS owns the motion, this only flips the classes. Never leave body hidden.
+// A page that is not ready at load (the 3D gallery, waiting for the paintings
+// in its first view) carries data-holds-reveal and announces "page-ready".
 const MIN_LOADER_MS = 400; // a floor, so a cached load doesn't flash the loader
+const MAX_LOADER_MS = 2500; // fail-safe: if load never fires (cache quirks), reveal anyway
+const MAX_HELD_LOADER_MS = 8000; // the same for a page that holds the reveal
 const bootedAt = performance.now();
+const holdsReveal = document.querySelector("[data-holds-reveal]") !== null;
 let revealed = false;
 
 function revealBody() {
@@ -17,11 +22,12 @@ function revealBody() {
   }
   document.body.classList.add("is-ready");
 }
-window.addEventListener("load", () => {
+function revealAfterFloor() {
   setTimeout(revealBody, Math.max(0, MIN_LOADER_MS - (performance.now() - bootedAt)));
-});
-// Fail-safe: if load never fires (cache quirks), reveal anyway.
-setTimeout(revealBody, 2500);
+}
+if (holdsReveal) document.addEventListener("page-ready", revealAfterFloor, { once: true });
+else window.addEventListener("load", revealAfterFloor);
+setTimeout(revealBody, holdsReveal ? MAX_HELD_LOADER_MS : MAX_LOADER_MS);
 
 // ---- Deep-link back into the gallery (#<slug>), so leaving a
 // painting page returns you to that painting instead of the top. Images stream
