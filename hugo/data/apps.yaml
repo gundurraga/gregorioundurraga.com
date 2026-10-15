@@ -11,7 +11,5 @@ apps:
     name: Trazu
   - slug: skisa
     name: Skisa
-  - slug: mintza
-    name: Mintza
   - slug: kountrain
     name: Kountrain
