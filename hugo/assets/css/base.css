@@ -55,6 +55,13 @@ body {
   letter-spacing: 0.03em; /* Adjust this value as needed */
 }
 
+/* Korean spaces its words, so a line breaks between them, never inside one;
+   a word too long for the line still breaks rather than overflow. */
+:lang(ko) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 /* site.js adds .is-ready once the page has loaded. The content fades in while
    the loader fades out, so the two cross rather than queue. A pure crossfade,
    deliberately: nothing slides or drifts. The work should hang still, the way
