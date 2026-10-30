@@ -1,3 +1,15 @@
+# Secrets: the repo is public, so a committed key is published at once
+.env
+.env.*
+!.env.example
+*.bak
+*.pem
+*.key
+*.p8
+*.p12
+*service-account*.json
+*service_account*.json
+
 # Ignore MacOS system files
 .DS_Store
 
